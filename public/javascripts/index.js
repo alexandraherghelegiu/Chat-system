@@ -55,7 +55,7 @@ function connectToRoom() {
     } else {
         alert('image not specified');
     }
-    //initCanvas(socket, imageUrl);
+
 
 }
 
@@ -75,6 +75,10 @@ function initSocket(){
         let who = userId;
         if (userId === name) who = 'me';
         writeOnHistory('<b>' + who + ':</b> ' + chatText);
+    });
+
+    socket.on('drawing', function (room, userId, cw, ch, x1, y1, x2, y2, color, thick){
+        console.log('drawing some shit')
     });
 }
 
@@ -96,9 +100,6 @@ function writeOnHistory(text) {
 }
 
 
-function addTopicImage(imageUrl){
-
-}
 
 /**
  * it hides the initial form and shows the chat
