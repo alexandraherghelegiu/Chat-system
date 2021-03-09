@@ -37,8 +37,8 @@ function initCanvas(sckt, imageUrl) {
         if (e.type === 'mousemove') {
             if (flag) {
                 drawOnCanvas(ctx, canvas.width, canvas.height, prevX, prevY, currX, currY, color, thickness);
-                // @todo if you draw on the canvas, you may want to let everyone know via socket.io (socket.emit...)  by sending them
                 // room, userId, canvas.width, canvas.height, prevX, prevY, currX, currY, color, thickness
+                socket.emit('draw', roomNo, name, canvas.width, canvas.height, prevX, prevY, currX, currY, color, thickness);
             }
         }
     });
@@ -57,6 +57,12 @@ function initCanvas(sckt, imageUrl) {
     // and then you call
     //     let ctx = canvas[0].getContext('2d');
     //     drawOnCanvas(ctx, canvasWidth, canvasHeight, x1, y21, x2, y2, color, thickness)
+    socket.on('drawing', function(room, userId, cw, ch, x1, y1, x2, y2, color, thick){
+        let ctx = canvas[0].getContext('2d');
+        drawOnCanvas(ctx, cw, ch, x1, y1, x2, y2, color, thick);
+    })
+
+
 
     // this is called when the src of the image is loaded
     // this is an async operation as it may take time

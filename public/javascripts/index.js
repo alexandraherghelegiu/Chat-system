@@ -23,6 +23,7 @@ function init() {
     }
 
     //@todo here is where you should initialise the socket operations as described in teh lectures (room joining, chat message receipt etc.)
+    initSocket();
 }
 
 /**
@@ -54,12 +55,6 @@ function connectToRoom() {
     let imageUrl= document.getElementById('image_url').value;
     if (!name) name = 'Unknown-' + Math.random();
     //@todo join the room
-
-    //Inserting data into the database
-    storeRoomData({"roomid": roomNo, "author": name, "imageUrl" : imageUrl});
-
-    getAllRoomData().then(e => console.log(e));
-
     initCanvas(socket, imageUrl);
     hideLoginInterface(roomNo, name);
 }
