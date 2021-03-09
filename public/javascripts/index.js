@@ -13,6 +13,15 @@ function init() {
     document.getElementById('initial_form').style.display = 'block';
     document.getElementById('chat_interface').style.display = 'none';
 
+    //initialise IndexedDB
+    //check for support
+    if ('indexedDB' in window) {
+        initIDB();
+    }
+    else {
+        console.log('This browser doesn\'t support IndexedDB');
+    }
+
     //@todo here is where you should initialise the socket operations as described in teh lectures (room joining, chat message receipt etc.)
 }
 
