@@ -54,6 +54,10 @@ function connectToRoom() {
     let imageUrl= document.getElementById('image_url').value;
     if (!name) name = 'Unknown-' + Math.random();
     //@todo join the room
+
+    //Inserting data into the database
+    storeRoomData(roomNo, {"roomid": roomNo, "author": name, "imageUrl" : imageUrl});
+
     initCanvas(socket, imageUrl);
     hideLoginInterface(roomNo, name);
 }

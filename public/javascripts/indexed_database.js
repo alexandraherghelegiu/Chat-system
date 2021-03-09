@@ -12,14 +12,13 @@ const STORE_NAME = "store_chats";
  */
 async function initIDB(){
     if (!db) {
-        db = await idb.openDB(INDEXED_DB_NAME, 2, {
+        db = await idb.openDB(INDEXED_DB_NAME, 1, {
             upgrade(upgradeDb, oldVersion, newVersion) {
                 if (!upgradeDb.objectStoreNames.contains(STORE_NAME)) {
                     let chatIDB = upgradeDb.createObjectStore(STORE_NAME, {
-                        keyPath: 'id',
                         autoIncrement: true
                     });
-                    chatIDB.createIndex('roomid', 'roomid', {unique: false, multiEntry: true});
+                    chatIDB.createIndex('rooms', 'roomid', {unique: false, multiEntry: true});
                 }
             }
         });
@@ -27,3 +26,25 @@ async function initIDB(){
     }
 }
 window.initIDB= initIDB;
+
+
+async function storeRoomData(roomid, data){
+    console.log('inserting: '+ roomid + ", " +JSON.stringify(data));
+    if (!db)
+        await initIDB();
+    if (db) {
+        try{
+            let tx = await db.transaction(STORE_NAME, 'readwrite');
+            let store = await tx.objectStore(STORE_NAME);
+
+            await store.put(data);
+            await  tx.complete;
+            console.log('added item to the store! '+ JSON.stringify(data));
+        } catch(error) {
+            console.log("Error in storing data: "+ error);
+            localStorage.setItem(roomid, JSON.stringify(data));
+        };
+    }
+    else localStorage.setItem(roomid, JSON.stringify(data));
+}
+window.storeRoomData= storeRoomData;
