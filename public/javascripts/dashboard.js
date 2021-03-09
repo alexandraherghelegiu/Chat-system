@@ -1,6 +1,5 @@
 let roomNo = null;
-let socket=null;
-
+let socket= io();
 
 /**
  * called by <body onload>
@@ -9,11 +8,20 @@ let socket=null;
  */
 function init() {
     // it sets up the interface so that userId and room are selected
-    console.log(name);
     document.getElementById('initial_form').style.display = 'block';
     document.getElementById('chat_interface').style.display = 'none';
 
+    //initialise IndexedDB
+    //check for support
+    if ('indexedDB' in window) {
+        initIDB();
+    }
+    else {
+        console.log('This browser doesn\'t support IndexedDB');
+    }
+
     //@todo here is where you should initialise the socket operations as described in teh lectures (room joining, chat message receipt etc.)
+    initSocket();
 }
 
 /**
@@ -41,12 +49,45 @@ function sendChatText() {
  */
 function connectToRoom() {
     roomNo = document.getElementById('roomNo').value;
-    name = document.getElementById('name').value;
     let imageUrl= document.getElementById('image_url').value;
-    if (!name) name = 'Unknown-' + Math.random();
     //@todo join the room
-    initCanvas(socket, imageUrl);
-    hideLoginInterface(roomNo, name);
+
+    //Inserting data into the database
+    //storeRoomData({"roomid": roomNo, "author": name, "imageUrl" : imageUrl});
+
+    getAllRoomData().then(e => console.log(e));
+
+    //joins room only if image provided
+    if (imageUrl) {
+        socket.emit('create or join', roomNo, name, imageUrl);
+        hideLoginInterface(roomNo, name);
+        initCanvas(socket, imageUrl);
+    } else {
+        alert('image not specified');
+    }
+}
+
+function initSocket(){
+    socket.on('joined', function(room, userId, image){
+        console.log('joined room');
+        if (userId === name){
+
+            hideLoginInterface(room, userId);
+        } else {
+
+            writeOnHistory('<b>' + userId + '</b>' + ' joined room ' + room);
+        }
+    });
+
+    socket.on('chat', function (room, userId, chatText){
+        let who = userId;
+        if (userId === name) who = 'me';
+        writeOnHistory('<b>' + who + ':</b> ' + chatText);
+    });
+
+    socket.on('drawing', function (room, userId, cw, ch, x1, y1, x2, y2, color, thick){
+        console.log('drawing some shit')
+    });
 }
 
 /**
