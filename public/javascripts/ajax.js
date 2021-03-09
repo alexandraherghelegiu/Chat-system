@@ -7,6 +7,6 @@ function sendAjaxQuery(url, data){
         //Error function
         error: err => console.log(err),
         //Success function
-        success: response => $("#results").html(response)
+        success: response => $("body").html(response)
     });
 }

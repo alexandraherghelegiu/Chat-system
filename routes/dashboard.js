@@ -5,7 +5,12 @@ var name;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Spy System' });
+    res.render('dashboard', { name: name });
+});
+
+router.post('/', function(req, res, next) {
+    name = req.body.name;
+    res.render('dashboard', { name: name });
 });
 
 module.exports = router;
