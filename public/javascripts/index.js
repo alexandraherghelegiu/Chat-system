@@ -56,7 +56,9 @@ function connectToRoom() {
     //@todo join the room
 
     //Inserting data into the database
-    storeRoomData(roomNo, {"roomid": roomNo, "author": name, "imageUrl" : imageUrl});
+    storeRoomData({"roomid": roomNo, "author": name, "imageUrl" : imageUrl});
+
+    getAllRoomData().then(e => console.log(e));
 
     initCanvas(socket, imageUrl);
     hideLoginInterface(roomNo, name);

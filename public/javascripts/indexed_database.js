@@ -27,9 +27,13 @@ async function initIDB(){
 }
 window.initIDB= initIDB;
 
-
-async function storeRoomData(roomid, data){
-    console.log('inserting: '+ roomid + ", " +JSON.stringify(data));
+/**
+ * Stores the specified room data in the IndexedDB
+ * @param data the room object
+ *
+ */
+async function storeRoomData(data){
+    console.log('inserting: ' + JSON.stringify(data));
     if (!db)
         await initIDB();
     if (db) {
@@ -42,9 +46,44 @@ async function storeRoomData(roomid, data){
             console.log('added item to the store! '+ JSON.stringify(data));
         } catch(error) {
             console.log("Error in storing data: "+ error);
-            localStorage.setItem(roomid, JSON.stringify(data));
+            localStorage.setItem(data.roomid, JSON.stringify(data));
         };
     }
-    else localStorage.setItem(roomid, JSON.stringify(data));
+    else localStorage.setItem(data.roomid, JSON.stringify(data));
 }
 window.storeRoomData= storeRoomData;
+
+/**
+ * Fetching all the room data from IndexedDB
+ *
+ */
+async function getAllRoomData() {
+    if(!db) {
+        console.log("There is no data in the IndexedDB");
+    }
+
+    if(db) {
+        try {
+            console.log('fetching: all room data');
+            let tx = await db.transaction(STORE_NAME, 'readonly');
+            let store = await tx.objectStore(STORE_NAME);
+            let index = await store.index('rooms');
+            let readingsList = await index.getAll();
+            await tx.complete;
+            let finalResults = [];
+            if (readingsList && readingsList.length > 0) {
+
+                for(let r of readingsList){
+                    finalResults.push(r);
+                }
+
+                return finalResults;
+            } else {
+                console.log("No readings found");
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+window.getAllRoomData= getAllRoomData;
