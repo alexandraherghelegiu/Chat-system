@@ -1,6 +1,6 @@
 let name = null;
 let roomNo = null;
-let socket=null;
+let socket=io();
 
 
 /**
@@ -55,8 +55,43 @@ function connectToRoom() {
     let imageUrl= document.getElementById('image_url').value;
     if (!name) name = 'Unknown-' + Math.random();
     //@todo join the room
-    initCanvas(socket, imageUrl);
-    hideLoginInterface(roomNo, name);
+
+    //Inserting data into the database
+    storeRoomData({"roomid": roomNo, "author": name, "imageUrl" : imageUrl});
+
+    getAllRoomData().then(e => console.log(e));
+
+    //joins room only if image provided
+    if (imageUrl) {
+        socket.emit('create or join', roomNo, name, imageUrl);
+        hideLoginInterface(roomNo, name);
+        initCanvas(socket, imageUrl);
+    } else {
+        alert('image not specified');
+    }
+}
+
+function initSocket(){
+    socket.on('joined', function(room, userId, image){
+        console.log('joined room');
+        if (userId === name){
+
+            hideLoginInterface(room, userId);
+        } else {
+
+            writeOnHistory('<b>' + userId + '</b>' + ' joined room ' + room);
+        }
+    });
+
+    socket.on('chat', function (room, userId, chatText){
+        let who = userId;
+        if (userId === name) who = 'me';
+        writeOnHistory('<b>' + who + ':</b> ' + chatText);
+    });
+
+    socket.on('drawing', function (room, userId, cw, ch, x1, y1, x2, y2, color, thick){
+        console.log('drawing some shit')
+    });
 }
 
 /**
