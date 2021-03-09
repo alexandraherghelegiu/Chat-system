@@ -1,6 +1,7 @@
 let roomNo = null;
 let socket= io();
 
+window.onload = init();
 /**
  * called by <body onload>
  * it initialises the interface and the expected socket messages
@@ -11,6 +12,7 @@ function init() {
     document.getElementById('initial_form').style.display = 'block';
     document.getElementById('chat_interface').style.display = 'none';
 
+
     //initialise IndexedDB
     //check for support
     if ('indexedDB' in window) {
@@ -20,7 +22,6 @@ function init() {
         console.log('This browser doesn\'t support IndexedDB');
     }
 
-    //@todo here is where you should initialise the socket operations as described in teh lectures (room joining, chat message receipt etc.)
     initSocket();
 }
 
@@ -41,6 +42,7 @@ function generateRoom() {
 function sendChatText() {
     let chatText = document.getElementById('chat_input').value;
     // @todo send the chat message
+    socket.emit('chat', roomNo, name, chatText);
 }
 
 /**
@@ -69,7 +71,6 @@ function connectToRoom() {
 
 function initSocket(){
     socket.on('joined', function(room, userId, image){
-        console.log('joined room');
         if (userId === name){
 
             hideLoginInterface(room, userId);
@@ -83,10 +84,6 @@ function initSocket(){
         let who = userId;
         if (userId === name) who = 'me';
         writeOnHistory('<b>' + who + ':</b> ' + chatText);
-    });
-
-    socket.on('drawing', function (room, userId, cw, ch, x1, y1, x2, y2, color, thick){
-        console.log('drawing some shit')
     });
 }
 
