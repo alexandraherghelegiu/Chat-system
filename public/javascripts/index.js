@@ -1,6 +1,6 @@
 let name = null;
 let roomNo = null;
-let socket=null;
+let socket= io();
 
 
 /**
@@ -14,6 +14,7 @@ function init() {
     document.getElementById('chat_interface').style.display = 'none';
 
     //@todo here is where you should initialise the socket operations as described in teh lectures (room joining, chat message receipt etc.)
+    initSocket();
 }
 
 /**
@@ -33,6 +34,7 @@ function generateRoom() {
 function sendChatText() {
     let chatText = document.getElementById('chat_input').value;
     // @todo send the chat message
+    socket.emit('chat', roomNo, name, chatText);
 }
 
 /**
@@ -44,10 +46,38 @@ function connectToRoom() {
     name = document.getElementById('name').value;
     let imageUrl= document.getElementById('image_url').value;
     if (!name) name = 'Unknown-' + Math.random();
-    //@todo join the room
-    initCanvas(socket, imageUrl);
-    hideLoginInterface(roomNo, name);
+
+    //joins room only if image provided
+    if (imageUrl) {
+        socket.emit('create or join', roomNo, name, imageUrl);
+        hideLoginInterface(roomNo, name);
+        initCanvas(socket, imageUrl);
+    } else {
+        alert('image not specified');
+    }
+    //initCanvas(socket, imageUrl);
+
 }
+
+function initSocket(){
+    socket.on('joined', function(room, userId, image){
+        console.log('joined room');
+        if (userId === name){
+
+            hideLoginInterface(room, userId);
+        } else {
+
+            writeOnHistory('<b>' + userId + '</b>' + ' joined room ' + room);
+        }
+    });
+
+    socket.on('chat', function (room, userId, chatText){
+        let who = userId;
+        if (userId === name) who = 'me';
+        writeOnHistory('<b>' + who + ':</b> ' + chatText);
+    });
+}
+
 
 /**
  * it appends the given html text to the history div
@@ -63,6 +93,11 @@ function writeOnHistory(text) {
     // scroll to the last element
     history.scrollTop = history.scrollHeight;
     document.getElementById('chat_input').value = '';
+}
+
+
+function addTopicImage(imageUrl){
+
 }
 
 /**

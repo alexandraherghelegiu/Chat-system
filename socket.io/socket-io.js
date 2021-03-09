@@ -1,21 +1,17 @@
 
 exports.init = function(io) {
 
-  const chat = io
-      .of('/chat')
-      .on('connection', function (socket) {
+  /**
+   * created chat namespace, in case more namespaces are required later on
+   */
+  io.sockets.on('connection', function (socket) {
     try {
       /**
        * creates room
        */
-      socket.on('create', function(room, userId, image){
+      socket.on('create or join', function(room, userId, image){
         socket.join(room);
-        chat.to(room).emit('created', room, userId, image);
-      });
-
-      socket.on('join', function(room, userId){
-        socket.join(room);
-        chat.to(room).emit('joined', room, userId);
+        io.to(room).emit('joined', room, userId, image);
       });
 
       socket.on('chat', function(room, userId, chatText){
