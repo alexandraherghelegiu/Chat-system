@@ -55,9 +55,9 @@ function connectToRoom() {
     //@todo join the room
 
     //Inserting data into the database
-    //storeRoomData({"roomid": roomNo, "author": name, "imageUrl" : imageUrl});
+    storeRoomData({"roomid": roomNo, "author": name, "imageUrl" : imageUrl, "canvas": "", "messages": []});
 
-    getAllRoomData().then(e => console.log(e));
+    // getAllRoomData().then(e => console.log(e));
 
     //joins room only if image provided
     if (imageUrl) {
