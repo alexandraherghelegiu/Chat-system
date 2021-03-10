@@ -45,10 +45,12 @@ function initCanvas(sckt, imageUrl) {
     });
 
     // this is code left in case you need to  provide a button clearing the canvas (it is suggested that you implement it)
-    $('.canvas-clear').on('click', function (e) {
-        let c_width = canvas.width();
-        let c_height = canvas.height();
+    $('#canvas-clear').on('click', function (e) {
+        let c_width = canvas.width;
+        let c_height = canvas.height;
         ctx.clearRect(0, 0, c_width, c_height);
+        let img = document.getElementById('image');
+        drawImageScaled(img, canvas, ctx);
         // @todo if you clear the canvas, you want to let everyone know via socket.io (socket.emit...)
 
     });
@@ -68,6 +70,7 @@ function initCanvas(sckt, imageUrl) {
     // this is called when the src of the image is loaded
     // this is an async operation as it may take time
     img.addEventListener('load', () => {
+        console.log('drawing image with size ' + img.width + ' by ' + img.height );
         // it takes time before the image size is computed and made available
         // here we wait until the height is set, then we resize the canvas based on the size of the image
         let poll = setInterval(function () {
@@ -89,6 +92,7 @@ function initCanvas(sckt, imageUrl) {
                 drawImageScaled(img, cvx, ctx);
                 // hide the image element as it is not needed
                 img.style.display = 'none';
+
             }
         }, 10);
     });
@@ -150,7 +154,7 @@ function downloadDrawing(){
     canvas = document.getElementById('canvas');
     var link = document.createElement('a');
     link.download = 'download.png';
-    link.href = canvas.toDataURL()
+    link.href = canvas.toDataURL();
     link.click();
     link.delete;
 

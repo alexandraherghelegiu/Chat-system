@@ -115,3 +115,6 @@ function hideLoginInterface(room, userId) {
     document.getElementById('in_room').innerHTML= ' '+room;
 }
 
+function takePicture(){
+
+}

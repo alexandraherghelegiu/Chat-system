@@ -20,6 +20,7 @@
         </p>
         <p style=" width: 100%"><label for="image_url"> Image (URL) </label><input type="text" id="image_url" name="image_url"></p>
         <button id="connect" onclick="connectToRoom()">Connect</button>
+        <button id="takePicture">Take Picture!</button>
     </form>
 </div>
 <div id="chat_interface" style="display: none">
@@ -31,6 +32,7 @@
         <img id="image" height="100%" >
         <canvas  id="canvas" ></canvas>
         <button id="download_button" onclick="downloadDrawing()">Download</button>
+        <button id="canvas-clear">Clear Canvas</button>
     </div>
     <!--    </div>-->
     <div id="history" style="height: 35vh" class="boxed scrolling" ></div>
@@ -40,6 +42,7 @@
                 <label for="name"> chat: </label>
                 <input type="text" id="chat_input" name="chat_input" style="width: 80%">
                 <button id="chat_send" onclick="sendChatText()">Send</button>
+
             </p>
         </form>
     </div>
