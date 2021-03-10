@@ -63,7 +63,7 @@ function initCanvas(sckt, imageUrl) {
     socket.on('drawing', function(room, userId, cw, ch, x1, y1, x2, y2, color, thick){
         let ctx = canvas[0].getContext('2d');
         drawOnCanvas(ctx, cw, ch, x1, y1, x2, y2, color, thick);
-    })
+    });
 
 
 

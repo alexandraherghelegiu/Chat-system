@@ -20,7 +20,7 @@
         </p>
         <p style=" width: 100%"><label for="image_url"> Image (URL) </label><input type="text" id="image_url" name="image_url"></p>
         <button id="connect" onclick="connectToRoom()">Connect</button>
-        <button id="takePicture">Take Picture!</button>
+        <button id="takePicture" onclick="setupCamera()">Take Picture Instead</button>
     </form>
 </div>
 <div id="chat_interface" style="display: none">
@@ -45,6 +45,25 @@
 
             </p>
         </form>
+    </div>
+
+
+</div><br><br>
+<!-- DIV CAMERA -->
+<div id="cameraInterface" style="display: none">
+    <div>
+        <button onclick="closeCamera()">Close Camera</button>
+        <button id="retake" style="display: none">Retake</button>
+        <button id="confirm" style="display: none">Confirm</button>
+    </div><br>
+    <div class="camera" >
+        <video id="video">Video stream not available.</video>
+        <button id="shutter">Take photo</button>
+    </div>
+    <canvas id="preview">
+    </canvas>
+    <div id="output">
+        <img id="photoTaken" alt="photo will appear here">
     </div>
 </div>
 </body>

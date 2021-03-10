@@ -35,3 +35,8 @@ a {
     position:absolute; top:0px; left:0px;
     background-color: rgba(255,0,0,.1);
 }
+
+#cameraInterface{
+    width:50%;
+    height:50%;
+}
