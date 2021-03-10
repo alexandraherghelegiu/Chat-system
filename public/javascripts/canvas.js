@@ -39,6 +39,7 @@ function initCanvas(sckt, imageUrl) {
                 drawOnCanvas(ctx, canvas.width, canvas.height, prevX, prevY, currX, currY, color, thickness);
                 // room, userId, canvas.width, canvas.height, prevX, prevY, currX, currY, color, thickness
                 socket.emit('draw', roomNo, name, canvas.width, canvas.height, prevX, prevY, currX, currY, color, thickness);
+
             }
         }
     });
@@ -143,4 +144,14 @@ function drawOnCanvas(ctx, canvasWidth, canvasHeight, prevX, prevY, currX, currY
     ctx.lineWidth = thickness;
     ctx.stroke();
     ctx.closePath();
+}
+
+function downloadDrawing(){
+    canvas = document.getElementById('canvas');
+    var link = document.createElement('a');
+    link.download = 'download.png';
+    link.href = canvas.toDataURL()
+    link.click();
+    link.delete;
+
 }

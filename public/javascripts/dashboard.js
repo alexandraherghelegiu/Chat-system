@@ -114,3 +114,4 @@ function hideLoginInterface(room, userId) {
     document.getElementById('who_you_are').innerHTML= userId;
     document.getElementById('in_room').innerHTML= ' '+room;
 }
+
