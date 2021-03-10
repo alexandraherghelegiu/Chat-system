@@ -55,19 +55,27 @@ function connectToRoom() {
     let imageUrl= document.getElementById('image_url').value;
     //@todo join the room
 
-    //Inserting data into the database
-    storeRoomData({"roomid": roomNo, "author": name, "imageUrl" : imageUrl, "canvas": "", "messages": []});
-
-    // getAllRoomData().then(e => console.log(e));
-
-    //joins room only if image provided
-    if (imageUrl) {
-        socket.emit('create or join', roomNo, name, imageUrl);
-        hideLoginInterface(roomNo, name);
-        initCanvas(socket, imageUrl);
-    } else {
-        alert('image not specified');
-    }
+    //Checking the database
+    getRoomData(roomNo, "imageUrl").then(result => {
+        //If room doesn't exist, insert
+        if(!result){
+            storeRoomData({"roomid": roomNo, "author": name, "imageUrl" : imageUrl, "canvas": "", "messages": []});
+        }
+        //Check for matching/existent url
+        else{
+            if(!imageUrl){
+                alert('Image not specified');
+            }
+            else if(imageUrl != result){
+                alert("This room is already allocated to another image!");
+            }
+            else {
+                socket.emit('create or join', roomNo, name, imageUrl);
+                hideLoginInterface(roomNo, name);
+                initCanvas(socket, imageUrl);
+            }
+        }
+    });
 }
 
 function initSocket(){
@@ -84,6 +92,21 @@ function initSocket(){
     socket.on('chat', function (room, userId, chatText){
         let who = userId;
         if (userId === name) who = 'me';
+        console.log(room, userId, chatText);
+
+        //Storing message in IndexedDB
+        getRoomData(room, "messages").then(data => {
+            var newObj = {
+                date: Date(),
+                user: userId,
+                message: chatText
+            }
+            data.push(newObj);
+            updateField(room, "messages", data);
+        });
+
+
+
         writeOnHistory('<b>' + who + ':</b> ' + chatText);
     });
 }

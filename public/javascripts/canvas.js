@@ -21,6 +21,7 @@ function initCanvas(sckt, imageUrl) {
     let ctx = cvx.getContext('2d');
     img.src = imageUrl;
 
+
     // event on the canvas when the mouse is on it
     canvas.on('mousemove mousedown mouseup mouseout', function (e) {
         prevX = currX;
@@ -151,7 +152,8 @@ function drawOnCanvas(ctx, canvasWidth, canvasHeight, prevX, prevY, currX, currY
 }
 
 function downloadDrawing(){
-    canvas = document.getElementById('canvas');
+    canvas = document.getElementById('canvas')
+    console.log(canvas.toDataURL("image/png"));
     var link = document.createElement('a');
     link.download = 'download.png';
     link.href = canvas.toDataURL();
