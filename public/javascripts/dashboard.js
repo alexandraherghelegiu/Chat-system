@@ -83,6 +83,21 @@ function initSocket(){
     socket.on('chat', function (room, userId, chatText){
         let who = userId;
         if (userId === name) who = 'me';
+        console.log(room, userId, chatText);
+
+        //Storing message in IndexedDB
+        getRoomData(room, "messages").then(data => {
+            var newObj = {
+                date: Date(),
+                user: userId,
+                message: chatText
+            }
+            data.push(newObj);
+            updateField(room, "messages", data);
+        });
+
+
+
         writeOnHistory('<b>' + who + ':</b> ' + chatText);
     });
 }

@@ -88,6 +88,35 @@ window.getAllRoomData= getAllRoomData;
 
 
 /**
+ * Returns the value of the specified field from a room
+ * @param roomid The roomNo/roomName
+ * @param field The field we are retrieving
+ * @returns {Promise<*>}
+ */
+async function getRoomData(roomid, field) {
+    if(!db){
+        initIDB();
+    }
+
+    if(db){
+        try{
+            let tx = await db.transaction(STORE_NAME, 'readwrite');
+            let store = await tx.objectStore(STORE_NAME);
+            let index = await store.index('rooms');
+
+            //Get field value
+            const roomObj = await index.get(IDBKeyRange.only(roomid));
+            console.log(roomObj[field]);
+            return roomObj[field];
+        }
+        catch (error){
+            console.log("Error in retrieving data: "+error);
+        }
+    }
+}
+window.getRoomData= getRoomData;
+
+/**
  * Updates the specified field in the rooms store
  * @param roomid The current roomNo/roomName
  * @param field The property we want to update
