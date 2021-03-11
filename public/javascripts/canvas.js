@@ -50,10 +50,9 @@ function initCanvas(sckt, imageUrl) {
         let c_width = canvas.width;
         let c_height = canvas.height;
         ctx.clearRect(0, 0, c_width, c_height);
-        let img = document.getElementById('image');
         drawImageScaled(img, canvas, ctx);
         // @todo if you clear the canvas, you want to let everyone know via socket.io (socket.emit...)
-
+        
     });
 
     // @todo here you want to capture the event on the socket when someone else is drawing on their canvas (socket.on...)
@@ -71,7 +70,6 @@ function initCanvas(sckt, imageUrl) {
     // this is called when the src of the image is loaded
     // this is an async operation as it may take time
     img.addEventListener('load', () => {
-        console.log('drawing image with size ' + img.width + ' by ' + img.height );
         // it takes time before the image size is computed and made available
         // here we wait until the height is set, then we resize the canvas based on the size of the image
         let poll = setInterval(function () {
@@ -108,6 +106,8 @@ function initCanvas(sckt, imageUrl) {
  */
 function drawImageScaled(img, canvas, ctx) {
     // get the scale
+    console.log('drawing image with size ' + img.width + ' by ' + img.height );
+
     let scale = Math.min(canvas.width / img.width, canvas.height / img.height);
     // get the top left position of the image
     ctx.clearRect(0, 0, canvas.width, canvas.height);
