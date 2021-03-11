@@ -20,10 +20,14 @@
             <button id="roomNoGenerator" onclick="generateRoom()">Generate Room</button>
         </p>
         <p style=" width: 100%"><label for="image_url"> Image (URL) </label><input type="text" id="image_url" name="image_url"></p>
-        <button id="connect" onclick="connectToRoom()">Connect</button>
+        <button id="connect" onclick="connectToRoom(roomNo.value, image_url.value)">Connect</button>
         <button id="takePicture" onclick="setupCamera()">Take Picture Instead</button>
     </form>
+
+    <div id="roomTileList">
+    </div>
 </div>
+
 <div id="chat_interface" style="display: none">
     <div>
         <p><div id="who_you_are" style="display: inline" style="height: 10vh"></div>, you are in room: <div id="in_room" style="display: inline"></div>

@@ -13,14 +13,31 @@ function init() {
     document.getElementById('chat_interface').style.display = 'none';
 
 
-    //initialise IndexedDB
-    //check for support
-    if ('indexedDB' in window) {
-        initIDB();
-    }
-    else {
-        console.log('This browser doesn\'t support IndexedDB');
-    }
+    //Display all room data stored in the indexedDB
+    getAllRoomData().then(result => {
+        let wrapper = document.getElementById('roomTileList');
+
+        for(let room of result){
+            let tile = document.createElement('div');
+            tile.className = "tile";
+            tile.style.border = "solid black";
+
+            let entry = document.createElement('p');
+            entry.innerHTML = room.roomid + ", created by " + room.author;
+
+            let img = document.createElement('img');
+            img.className = "thumbnail";
+            img.src = room.imageUrl;
+            tile.append(entry, img);
+
+            tile.addEventListener("click", () => {
+                //Join the room
+                connectToRoom(room.roomid, room.imageUrl);
+            })
+
+            wrapper.appendChild(tile);
+        }
+    });
 
     initSocket();
 
@@ -50,9 +67,9 @@ function sendChatText() {
  * used to connect to a room. It gets the user name and room number from the
  * interface
  */
-function connectToRoom() {
-    roomNo = document.getElementById('roomNo').value;
-    let imageUrl= document.getElementById('image_url').value;
+function connectToRoom(roomNo, imageUrl) {
+    //roomNo = document.getElementById('roomNo').value;
+    //let imageUrl= document.getElementById('image_url').value;
 
     //Checking the database
     getRoomData(roomNo, "imageUrl").then(result => {
