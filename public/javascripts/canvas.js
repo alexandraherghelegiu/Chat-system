@@ -46,13 +46,21 @@ function initCanvas(sckt, imageUrl) {
     });
 
     // this is code left in case you need to  provide a button clearing the canvas (it is suggested that you implement it)
-    $('#canvas-clear').on('click', function (e) {
+    
+    $('#canvas-clear').on('click', function(){
+        socket.emit('clear', roomNo, userId);
+    });
+    function clearCanvas() {
         let c_width = canvas.width;
         let c_height = canvas.height;
         ctx.clearRect(0, 0, c_width, c_height);
         drawImageScaled(img, canvas, ctx);
         // @todo if you clear the canvas, you want to let everyone know via socket.io (socket.emit...)
-        
+
+    };
+
+    socket.on('clear', function () {
+        clearCanvas();
     });
 
     // @todo here you want to capture the event on the socket when someone else is drawing on their canvas (socket.on...)
@@ -106,8 +114,6 @@ function initCanvas(sckt, imageUrl) {
  */
 function drawImageScaled(img, canvas, ctx) {
     // get the scale
-    console.log('drawing image with size ' + img.width + ' by ' + img.height );
-
     let scale = Math.min(canvas.width / img.width, canvas.height / img.height);
     // get the top left position of the image
     ctx.clearRect(0, 0, canvas.width, canvas.height);

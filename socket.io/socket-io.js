@@ -19,7 +19,9 @@ exports.init = function(io) {
         io.to(room).emit('drawing', room, userId, cw, ch, x1, y1, x2, y2, color, thick);
       });
 
-
+      socket.on('clear', function(room, userId){
+        io.to(room).emit('clear', userId);
+      })
     } catch (e) {
       console.log(e);
     }
