@@ -7,6 +7,11 @@ function sendAjaxQuery(url, data){
         //Error function
         error: err => console.log(err),
         //Success function
-        success: response => $("body").html(response)
+        // success: response => $("body").html(response)
+        success: response => {
+            console.log("Successful request");
+            //Redirect
+            location = url;
+        }
     });
 }

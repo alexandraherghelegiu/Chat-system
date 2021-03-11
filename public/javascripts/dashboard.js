@@ -1,7 +1,8 @@
 let roomNo = null;
+let name;
 let socket= io();
 
-window.onload = init();
+
 /**
  * called by <body onload>
  * it initialises the interface and the expected socket messages
@@ -12,35 +13,45 @@ function init() {
     document.getElementById('initial_form').style.display = 'block';
     document.getElementById('chat_interface').style.display = 'none';
 
+    //Initialise the name of the user
+    name = document.getElementById("who_you_are").textContent;
 
-    //Display all room data stored in the indexedDB
-    getAllRoomData().then(result => {
-        let wrapper = document.getElementById('roomTileList');
+    //Initialise IndexedDB
+    if ('indexedDB' in window) {
+        initIDB().then(() => {
+            //Display all room data stored in the indexedDB
+            getAllRoomData().then(result => {
+                let wrapper = document.getElementById('roomTileList');
 
-        for(let room of result){
-            let tile = document.createElement('div');
-            tile.className = "tile";
-            tile.style.border = "solid black";
+                for(let room of result){
+                    let tile = document.createElement('div');
+                    tile.className = "tile";
+                    tile.style.border = "solid black";
 
-            let entry = document.createElement('p');
-            entry.innerHTML = room.roomid + ", created by " + room.author;
+                    let entry = document.createElement('p');
+                    entry.innerHTML = room.roomid + ", created by " + room.author;
 
-            let img = document.createElement('img');
-            img.className = "thumbnail";
-            img.src = room.imageUrl;
-            tile.append(entry, img);
+                    let img = document.createElement('img');
+                    img.className = "thumbnail";
+                    img.src = room.imageUrl;
+                    tile.append(entry, img);
 
-            tile.addEventListener("click", () => {
-                //Join the room
-                connectToRoom(room.roomid, room.imageUrl);
-            })
+                    tile.addEventListener("click", () => {
+                        //Join the room
+                        connectToRoom(room.roomid, room.imageUrl);
+                    })
 
-            wrapper.appendChild(tile);
-        }
-    });
+                    wrapper.appendChild(tile);
+                }
+            });
+        });
+    }
+    else {
+        console.log('This browser doesn\'t support IndexedDB');
+    }
 
+    //Initialise socket.io
     initSocket();
-
 }
 
 /**
@@ -67,8 +78,8 @@ function sendChatText() {
  * used to connect to a room. It gets the user name and room number from the
  * interface
  */
-function connectToRoom(roomNo, imageUrl) {
-    //roomNo = document.getElementById('roomNo').value;
+function connectToRoom(roomNr, imageUrl) {
+    roomNo = roomNr;
     //let imageUrl= document.getElementById('image_url').value;
 
     //Checking the database
@@ -97,7 +108,7 @@ function connectToRoom(roomNo, imageUrl) {
 function initSocket(){
     socket.on('joined', function(room, userId, image){
         if (userId === name){
-
+            console.log(name);
             hideLoginInterface(room, userId);
         } else {
 
@@ -108,7 +119,7 @@ function initSocket(){
     socket.on('chat', function (room, userId, chatText){
         let who = userId;
         if (userId === name) who = 'me';
-        console.log(room, userId, chatText);
+        let canvasUrl = document.getElementById('canvas').toDataURL();
 
         //Storing message in IndexedDB
         getRoomData(room, "messages").then(data => {
@@ -120,7 +131,7 @@ function initSocket(){
             data.push(newObj);
             updateField(room, "messages", data);
         });
-
+        updateField(room, "canvas", canvasUrl);
 
 
         writeOnHistory('<b>' + who + ':</b> ' + chatText);
@@ -151,7 +162,6 @@ function writeOnHistory(text) {
 function hideLoginInterface(room, userId) {
     document.getElementById('initial_form').style.display = 'none';
     document.getElementById('chat_interface').style.display = 'block';
-    document.getElementById('who_you_are').innerHTML= userId;
     document.getElementById('in_room').innerHTML= ' '+room;
 }
 

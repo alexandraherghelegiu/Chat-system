@@ -19,6 +19,7 @@ function initCanvas(sckt, imageUrl) {
     let cvx = document.getElementById('canvas');
     let img = document.getElementById('image');
     let ctx = cvx.getContext('2d');
+    img.crossOrigin = "anonymous";
     img.src = imageUrl;
 
 
@@ -61,6 +62,10 @@ function initCanvas(sckt, imageUrl) {
 
     socket.on('clear', function () {
         clearCanvas();
+
+        //Update indexedDB
+        let clearCanvasUrl = document.getElementById("canvas").toDataURL();
+        updateField(roomNo, "canvas", clearCanvasUrl);
     });
 
     // @todo here you want to capture the event on the socket when someone else is drawing on their canvas (socket.on...)
@@ -71,6 +76,10 @@ function initCanvas(sckt, imageUrl) {
     socket.on('drawing', function(room, userId, cw, ch, x1, y1, x2, y2, color, thick){
         let ctx = canvas[0].getContext('2d');
         drawOnCanvas(ctx, cw, ch, x1, y1, x2, y2, color, thick);
+
+        //Update indexedDB
+        let canvasUrl = document.getElementById("canvas").toDataURL();
+        updateField(roomNo, "canvas", canvasUrl);
     });
 
 
