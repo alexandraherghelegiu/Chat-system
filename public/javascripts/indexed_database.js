@@ -106,8 +106,12 @@ async function getRoomData(roomid, field) {
 
             //Get field value
             const roomObj = await index.get(IDBKeyRange.only(roomid));
-            console.log(roomObj[field]);
-            return roomObj[field];
+
+            //If object found, return it
+            if(roomObj){
+                return roomObj[field];
+            }
+
         }
         catch (error){
             console.log("Error in retrieving data: "+error);
@@ -141,8 +145,6 @@ async function updateField(roomid, field, newValue) {
             //Update idb
             store.put(roomObj, roomid);
             tx.complete;
-
-            console.log("Successful update!" + roomid);
         }
         catch (error){
             console.log(error);

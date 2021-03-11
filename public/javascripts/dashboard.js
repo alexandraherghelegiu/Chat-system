@@ -53,26 +53,27 @@ function sendChatText() {
 function connectToRoom() {
     roomNo = document.getElementById('roomNo').value;
     let imageUrl= document.getElementById('image_url').value;
+
     //Checking the database
     getRoomData(roomNo, "imageUrl").then(result => {
-        //If room doesn't exist, insert
-        if(!result){
-            storeRoomData({"roomid": roomNo, "author": name, "imageUrl" : imageUrl, "canvas": "", "messages": []});
-        }
-        //Check for matching/existent url
-        else{
-            if(!imageUrl){
-                alert('Image not specified');
+            if(!result){
+                //If it is a new room
+                if(!imageUrl){
+                    alert('Image not specified');
+                }
+                else{
+                    storeRoomData({"roomid": roomNo, "author": name, "imageUrl" : imageUrl, "canvas": "", "messages": []});
+                    socket.emit('create or join', roomNo, name, imageUrl);
+                    hideLoginInterface(roomNo, name);
+                    initCanvas(socket, imageUrl);
+                }
             }
-            else if(imageUrl != result){
-                alert("This room is already allocated to another image!");
-            }
-            else {
-                socket.emit('create or join', roomNo, name, imageUrl);
+            else{
+                //If room already exists
+                socket.emit('create or join', roomNo, name, result);
                 hideLoginInterface(roomNo, name);
-                initCanvas(socket, imageUrl);
+                initCanvas(socket, result);
             }
-        }
     });
 }
 

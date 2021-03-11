@@ -89,6 +89,6 @@ function closeCamera(){
 
 function uploadTakenImage(){
     let photo = $('#photoTaken').attr('src');
-    $('#image_url').val(photo)
-    connectToRoom()
+    $('#image_url').val(photo);
+    connectToRoom();
 }
