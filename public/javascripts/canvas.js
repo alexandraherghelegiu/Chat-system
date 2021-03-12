@@ -11,7 +11,7 @@ let color = 'red', thickness = 4;
  * @param sckt the open socket to register events on
  * @param imageUrl the image url to download
  */
-function initCanvas(sckt, imageUrl) {
+function initCanvas(sckt, originalImageUrl, canvasUrl) {
     socket = sckt;
     let flag = false,
         prevX, prevY, currX, currY = 0;
@@ -20,7 +20,15 @@ function initCanvas(sckt, imageUrl) {
     let img = document.getElementById('image');
     let ctx = cvx.getContext('2d');
     img.crossOrigin = "anonymous";
-    img.src = imageUrl;
+
+    //Load annotations if they exist
+    if(canvasUrl != ""){
+        img.src = canvasUrl;
+    }
+    else{
+        img.src = originalImageUrl;
+    }
+
 
 
     // event on the canvas when the mouse is on it
@@ -51,21 +59,33 @@ function initCanvas(sckt, imageUrl) {
     $('#canvas-clear').on('click', function(){
         socket.emit('clear', roomNo, userId);
     });
-    function clearCanvas() {
-        let c_width = canvas.width;
-        let c_height = canvas.height;
-        ctx.clearRect(0, 0, c_width, c_height);
-        drawImageScaled(img, canvas, ctx);
-        // @todo if you clear the canvas, you want to let everyone know via socket.io (socket.emit...)
 
+    /**
+     * Resets the canvas to its original state and
+     * updates indexedDB
+     */
+    function clearCanvas() {
+        //Clear canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        //Create new image with original url
+        let image = new Image();
+        image.crossOrigin= "anonymous";
+        image.src = originalImageUrl;
+
+        //Load the new image and update indexedDB
+        image.onload = () => {
+            drawImageScaled(image, canvas, ctx);
+            let clearedCanvas = document.getElementById("canvas");
+
+            //Update indexedDB
+            let clearCanvasUrl = clearedCanvas.toDataURL();
+            updateField(roomNo, "canvas", clearCanvasUrl);
+        };
     };
 
     socket.on('clear', function () {
         clearCanvas();
-
-        //Update indexedDB
-        let clearCanvasUrl = document.getElementById("canvas").toDataURL();
-        updateField(roomNo, "canvas", clearCanvasUrl);
     });
 
     // @todo here you want to capture the event on the socket when someone else is drawing on their canvas (socket.on...)
@@ -128,6 +148,7 @@ function drawImageScaled(img, canvas, ctx) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     let x = (canvas.width / 2) - (img.width / 2) * scale;
     let y = (canvas.height / 2) - (img.height / 2) * scale;
+
     ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
 
 

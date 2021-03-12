@@ -94,19 +94,19 @@ function connectToRoom(roomNr, imageUrl) {
                     storeRoomData({"roomid": roomNo, "author": name, "imageUrl" : imageUrl, "canvas": "", "messages": []});
                     socket.emit('create or join', roomNo, name, imageUrl);
                     hideLoginInterface(roomNo, name);
-                    initCanvas(socket, imageUrl);
+                    initCanvas(socket, imageUrl, result.canvas);
                 }
             }
             //If room already exists
             else{
                 socket.emit('create or join', roomNo, name, result.imageUrl);
                 hideLoginInterface(roomNo, name);
-                initCanvas(socket, result.imageUrl);
+                initCanvas(socket, result.imageUrl, result.canvas);
 
-                //If canvas/annotation already exists
-                if(result.canvas != ""){
-                    refreshCanvas(result.canvas);
-                }
+                // //If canvas/annotation already exists
+                // if(result.canvas != ""){
+                //     refreshCanvas(result.canvas);
+                // }
             }
     });
 }
