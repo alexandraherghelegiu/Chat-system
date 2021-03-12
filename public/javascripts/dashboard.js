@@ -209,10 +209,8 @@ function hideLoginInterface(room, userId) {
 }
 
 function disconnectFromRoom(){
-    socket.disconnect();
-    console.log(socket.rooms);
-    $('#chat_interface').hide();
-    $('#initial_form').show();
+    //Load dashboard
+    sendAjaxQuery('https://localhost:3000/dashboard', JSON.stringify({name: name}));
 }
 
 

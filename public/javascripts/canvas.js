@@ -29,8 +29,6 @@ function initCanvas(sckt, originalImageUrl, canvasUrl) {
         img.src = originalImageUrl;
     }
 
-    console.log(cvx);
-
     // event on the canvas when the mouse is on it
     canvas.on('mousemove mousedown mouseup mouseout', function (e) {
         prevX = currX;
@@ -150,7 +148,6 @@ function drawImageScaled(img, canvas, ctx) {
     let y = (canvas.height / 2) - (img.height / 2) * scale;
 
     ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
-
 
 }
 
