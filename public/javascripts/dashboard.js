@@ -156,6 +156,7 @@ function initSocket(){
         })
     });
 
+    //Sending chat in room
     socket.on('chat', function (room, userId, chatText){
         let who = userId;
         if (userId === name) who = 'Me';
@@ -176,6 +177,8 @@ function initSocket(){
 
         writeOnHistory('<b>' + who + ':</b> ' + chatText);
     });
+
+
 }
 
 /**
@@ -205,7 +208,12 @@ function hideLoginInterface(room, userId) {
     document.getElementById('in_room').innerHTML= ' '+room;
 }
 
-
+function disconnectFromRoom(){
+    socket.disconnect();
+    console.log(socket.rooms);
+    $('#chat_interface').hide();
+    $('#initial_form').show();
+}
 
 
 

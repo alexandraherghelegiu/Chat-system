@@ -29,7 +29,7 @@ function initCanvas(sckt, originalImageUrl, canvasUrl) {
         img.src = originalImageUrl;
     }
 
-
+    console.log(cvx);
 
     // event on the canvas when the mouse is on it
     canvas.on('mousemove mousedown mouseup mouseout', function (e) {
@@ -197,3 +197,4 @@ function downloadDrawing(){
     link.delete;
 
 }
+

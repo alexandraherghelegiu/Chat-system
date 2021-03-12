@@ -22,6 +22,11 @@ exports.init = function(io) {
       socket.on('clear', function(room, userId){
         io.to(room).emit('clear', userId);
       })
+
+      socket.on('logging-out', function(room) {
+        socket.leave(room);
+        console.log('disconnecting from room');
+      })
     } catch (e) {
       console.log(e);
     }
