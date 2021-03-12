@@ -93,7 +93,7 @@ window.getAllRoomData= getAllRoomData;
  * @param field The field we are retrieving
  * @returns {Promise<*>}
  */
-async function getRoomData(roomid, field) {
+async function getRoomFieldData(roomid, field) {
     if(!db){
         initIDB();
     }
@@ -114,6 +114,35 @@ async function getRoomData(roomid, field) {
 
         }
         catch (error){
+            console.log("Error in retrieving data: "+error);
+        }
+    }
+}
+window.getRoomFieldData= getRoomFieldData;
+
+/**
+ * Gets the room object associated with the supplied id from the IndexedDB
+ * @param roomid The room id
+ * @returns {Promise<*>}
+ */
+async function getRoomData(roomid){
+    if(!db){
+        initIDB();
+    }
+
+    if(db){
+        try{
+            let tx = await db.transaction(STORE_NAME, 'readwrite');
+            let store = await tx.objectStore(STORE_NAME);
+            let index = await store.index('rooms');
+
+            let roomObj = await index.get(IDBKeyRange.only(roomid));
+
+            if(roomObj){
+                return roomObj;
+            }
+        }
+        catch (error) {
             console.log("Error in retrieving data: "+error);
         }
     }

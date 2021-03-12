@@ -39,8 +39,9 @@ function init() {
                     tile.addEventListener("click", () => {
                         //Join the room
                         connectToRoom(room.roomid, room.imageUrl);
-                    })
+                    });
 
+                    //Adding tile to wrapper
                     wrapper.appendChild(tile);
                 }
             });
@@ -83,7 +84,7 @@ function connectToRoom(roomNr, imageUrl) {
     //let imageUrl= document.getElementById('image_url').value;
 
     //Checking the database
-    getRoomData(roomNo, "imageUrl").then(result => {
+    getRoomData(roomNo).then(result => {
             if(!result){
                 //If it is a new room
                 if(!imageUrl){
@@ -96,33 +97,91 @@ function connectToRoom(roomNr, imageUrl) {
                     initCanvas(socket, imageUrl);
                 }
             }
+            //If room already exists
             else{
-                //If room already exists
-                socket.emit('create or join', roomNo, name, result);
+                socket.emit('create or join', roomNo, name, result.imageUrl);
                 hideLoginInterface(roomNo, name);
-                initCanvas(socket, result);
+                initCanvas(socket, result.imageUrl);
+
+                //If canvas/annotation already exists
+                if(result.canvas != ""){
+                    refreshCanvas(result.canvas);
+                }
             }
     });
 }
 
-function initSocket(){
-    socket.on('joined', function(room, userId, image){
-        if (userId === name){
-            console.log(name);
-            hideLoginInterface(room, userId);
-        } else {
+//REFRESH
+function refreshCanvas(url){
+    let img = new Image();
+    let canvas = document.getElementById("canvas");
+    let ctx = canvas.getContext("2d");
 
-            writeOnHistory('<b>' + userId + '</b>' + ' joined room ' + room);
+    //Clear canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    img.onload = () => {
+        ctx.drawImage(img, 0, 0);
+    };
+
+    //IT TAKES LESS TIME THAN THE ORIGINAL IMAGE TO LOAD!!!!
+    img.src = url;
+}
+
+
+/**
+ * Displays the loaded messages on the history
+ * @param messageList List of message objects
+ */
+function displayLoadedMessages(messageList){
+    let history = document.getElementById('history');
+
+    for(let m of messageList){
+        let paragraph = document.createElement('p');
+
+        //If user the current user
+        if(m.user.trim() === name.trim()){
+            paragraph.innerHTML = '<b>Me:</b> ' + m.message;
         }
+        else{
+            paragraph.innerHTML = '<b>' + m.user + ':</b> ' + m.message;
+        }
+
+        //Append to the history
+        history.appendChild(paragraph);
+    }
+
+    //Scroll to the last element
+    history.scrollTop = history.scrollHeight;
+    document.getElementById('chat_input').value = '';
+}
+
+function initSocket(){
+    //Joining a room
+    socket.on('joined', function(room, userId, image){
+        getRoomData(room).then(result => {
+            //If data exists in IndexedDB
+            if(result){
+                //Load messages from indexedDB
+                displayLoadedMessages(result.messages);
+            }
+
+            if(userId != name){
+                writeOnHistory('<b>' + userId + '</b>' + ' joined room ' + room);
+            }
+
+            //Hide login interface
+            hideLoginInterface(room, userId);
+        })
     });
 
     socket.on('chat', function (room, userId, chatText){
         let who = userId;
-        if (userId === name) who = 'me';
+        if (userId === name) who = 'Me';
         let canvasUrl = document.getElementById('canvas').toDataURL();
 
         //Storing message in IndexedDB
-        getRoomData(room, "messages").then(data => {
+        getRoomFieldData(room, "messages").then(data => {
             var newObj = {
                 date: Date(),
                 user: userId,
