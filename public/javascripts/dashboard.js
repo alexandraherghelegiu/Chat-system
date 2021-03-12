@@ -33,7 +33,10 @@ function init() {
 
                     let img = document.createElement('img');
                     img.className = "thumbnail";
-                    img.src = room.imageUrl;
+                    //Checking whether annotations exist
+                    if(room.canvas != "") img.src = room.canvas;
+                    else img.src = room.imageUrl;
+
                     tile.append(entry, img);
 
                     tile.addEventListener("click", () => {
@@ -94,7 +97,7 @@ function connectToRoom(roomNr, imageUrl) {
                     storeRoomData({"roomid": roomNo, "author": name, "imageUrl" : imageUrl, "canvas": "", "messages": []});
                     socket.emit('create or join', roomNo, name, imageUrl);
                     hideLoginInterface(roomNo, name);
-                    initCanvas(socket, imageUrl, result.canvas);
+                    initCanvas(socket, imageUrl, "");
                 }
             }
             //If room already exists
@@ -102,30 +105,8 @@ function connectToRoom(roomNr, imageUrl) {
                 socket.emit('create or join', roomNo, name, result.imageUrl);
                 hideLoginInterface(roomNo, name);
                 initCanvas(socket, result.imageUrl, result.canvas);
-
-                // //If canvas/annotation already exists
-                // if(result.canvas != ""){
-                //     refreshCanvas(result.canvas);
-                // }
             }
     });
-}
-
-//REFRESH
-function refreshCanvas(url){
-    let img = new Image();
-    let canvas = document.getElementById("canvas");
-    let ctx = canvas.getContext("2d");
-
-    //Clear canvas
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    img.onload = () => {
-        ctx.drawImage(img, 0, 0);
-    };
-
-    //IT TAKES LESS TIME THAN THE ORIGINAL IMAGE TO LOAD!!!!
-    img.src = url;
 }
 
 
