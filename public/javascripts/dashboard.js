@@ -26,33 +26,13 @@ function init() {
                     wrapper.className = "container-fluid row";
 
                     for(let room of result) {
-                        let tile = document.createElement('div');
-                        tile.className = "col-12 col-sm-6 col-md-4 col-lg-2 card tile";
-
-                        let cardBody = document.createElement('div');
-                        cardBody.className = "card-body";
-
-                        let cardTitle = document.createElement('h5');
-                        cardTitle.className = "card-title";
-                        cardTitle.innerHTML = "Room name: " + room.roomid;
-
-                        let cardAuthor = document.createElement('p');
-                        cardAuthor.className = "card-text";
-                        cardAuthor.innerHTML = "Author: " + room.author;
-
-                        let img = document.createElement('img');
-                        img.className = "card-img-top";
                         //Checking whether annotations exist
-                        if (room.canvas != "") img.src = room.canvas;
-                        else img.src = room.imageUrl;
+                        let url;
+                        if (room.canvas != "") url = room.canvas;
+                        else url = room.imageUrl;
 
-                        cardBody.append(cardTitle, cardAuthor);
-                        tile.append(img, cardBody);
-
-                        tile.addEventListener("click", () => {
-                            //Join the room
-                            connectToRoom(room.roomid, room.imageUrl);
-                        });
+                        //Create the tile
+                        let tile = createTile(url, room.roomid, room.author);
 
                         //Adding tile to wrapper
                         wrapper.appendChild(tile);
@@ -219,10 +199,79 @@ function hideLoginInterface(room, userId) {
     document.getElementById('in_room').innerHTML= ' '+room;
 }
 
+/**
+ * Disconnects from a room by sending a request to /dashboard
+ */
 function disconnectFromRoom(){
     //Load dashboard
     sendAjaxQuery('https://localhost:3000/dashboard', JSON.stringify({name: name}));
 }
 
+/**
+ * Filters the tiles according to its parameter
+ * @param authorString The author's name
+ */
+function filterTiles(authorString){
+    //Display all room data stored in the indexedDB
+    getAllRoomData().then(result => {
+        if(result){
+            result = result.filter(e => e.author.toUpperCase().includes(authorString.toUpperCase()));
+            let wrapper = document.getElementById('roomTileList');
+            wrapper.className = "container-fluid row";
+            //Clear tiles
+            wrapper.innerHTML = "";
+
+            for(let room of result) {
+                //Checking whether annotations exist
+                let url;
+                if (room.canvas != "") url = room.canvas;
+                else url = room.imageUrl;
+
+                //Creating tile
+                let tile = createTile(url, room.roomid, room.author);
+
+                //Adding tile to wrapper
+                wrapper.appendChild(tile);
+            }
+        }
+    });
+}
+
+/**
+ * Creates a tile containing an image, roomId and an author
+ * @param imageUrl The image URL
+ * @param roomId The room ID/name
+ * @param author The author of the room
+ * @returns {HTMLDivElement} A div HTML element
+ */
+function createTile(imageUrl, roomId, author){
+    let tile = document.createElement('div');
+    tile.className = "col-12 col-sm-6 col-md-4 col-lg-2 card tile";
+
+    let cardBody = document.createElement('div');
+    cardBody.className = "card-body";
+
+    let cardTitle = document.createElement('h5');
+    cardTitle.className = "card-title";
+    cardTitle.innerHTML = "Room name: " + roomId;
+
+    let cardAuthor = document.createElement('p');
+    cardAuthor.className = "card-text";
+    cardAuthor.innerHTML = "Author: " + author;
+
+    let img = document.createElement('img');
+    img.className = "card-img-top";
+    img.src = imageUrl;
+
+    cardBody.append(cardTitle, cardAuthor);
+    tile.append(img, cardBody);
+
+    tile.addEventListener("click", () => {
+        //Join the room
+        connectToRoom(room.roomid, room.imageUrl);
+    });
+
+    return tile;
+}
 
 

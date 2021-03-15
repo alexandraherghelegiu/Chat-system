@@ -54,6 +54,13 @@ a {
 }
 /*Enter-join form end*/
 
+/*Filter input group*/
+#filter-input-group{
+    width: 50vw;
+    margin: 10px;
+}
+/*Filter input group end*/
+
 /*Tiles basic styling*/
 .tile{
     cursor: pointer;
