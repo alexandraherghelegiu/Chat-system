@@ -3,6 +3,7 @@
 <head>
     <script src="/socket.io/socket.io.js"></script>
     <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link rel='stylesheet' href="/stylesheets/bootstrap.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="/javascripts/dashboard.js"></script>
     <script type="module" src="/javascripts/indexed_database.js"></script>
@@ -14,32 +15,40 @@
 <div id="initial_form" style="display: block">
     <h1>Welcome, <%= name %> !</h1>
     <p>Please insert the id of the Room you want to Join, if you do not have a room id, click Generate Room</p>
-    <form onsubmit="return false;">
-        <p>
-            <label for="roomNo"> Your room </label>
-            <input type="text" id="roomNo" name="roomNo">
-            <button id="roomNoGenerator" onclick="generateRoom()">Generate Room</button>
-        </p>
-        <p style=" width: 100%"><label for="image_url"> Image (URL) </label><input type="text" id="image_url" name="image_url"></p>
-        <button id="connect" onclick="connectToRoom(roomNo.value, image_url.value)">Connect</button>
-        <button id="takePicture" onclick="setupCamera()">Take Picture Instead</button>
+    <form id="enter-join-form" onsubmit="return false;">
+        <label for="roomNo" class="form-label"> Your room </label>
+        <div class="row mb-3">
+            <div class="col">
+                <input type="text" id="roomNo" name="roomNo" class="form-control">
+            </div>
+            <div class="col-auto">
+                <button id="roomNoGenerator" onclick="generateRoom()" class="btn btn-secondary">Generate Room</button>
+            </div>
+        </div>
+        <div class="form-group mb-3">
+            <label for="image_url" class="form-label"> Image (URL) </label>
+            <input type="text" id="image_url" name="image_url" class="form-control">
+        </div>
+
+        <button id="connect" onclick="connectToRoom(roomNo.value, image_url.value)" class="btn btn-primary">Connect</button>
+        <button id="takePicture" onclick="setupCamera()" class="btn btn-secondary">Take Picture Instead</button>
     </form>
 
-    <div id="roomTileList">
+    <div id="roomTileList" class="row">
     </div>
 </div>
 
 <div id="chat_interface" style="display: none">
     <div>
         <p><div id="who_you_are" style="display: inline" style="height: 10vh"> <%= name %></div>, you are in room: <div id="in_room" style="display: inline"></div>
-        <button id="leave_room" onclick="disconnectFromRoom()">Leave Room</button>
+        <button id="leave_room" onclick="disconnectFromRoom()" class="btn btn-primary">Leave Room</button>
     </div>
     </p>
     <div style="height: 50%; ">
         <img id="image" style="width: 20%;" crossorigin="anonymous">
         <canvas  id="canvas"></canvas><br>
-        <button id="download_button" onclick="downloadDrawing()">Download</button>
-        <button id="canvas-clear">Clear Canvas</button>
+        <button id="download_button" onclick="downloadDrawing()" class="btn btn-secondary">Download</button>
+        <button id="canvas-clear" class="btn btn-secondary">Clear Canvas</button>
     </div>
     <!--    </div>-->
     <div id="history" style="height: 35vh" class="boxed scrolling" ></div>
@@ -48,7 +57,7 @@
             <p>
                 <label for="name"> chat: </label>
                 <input type="text" id="chat_input" name="chat_input" style="width: 80%">
-                <button id="chat_send" onclick="sendChatText()">Send</button>
+                <button id="chat_send" onclick="sendChatText()" class="btn btn-primary">Send</button>
 
             </p>
         </form>

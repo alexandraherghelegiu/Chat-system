@@ -21,31 +21,42 @@ function init() {
         initIDB().then(() => {
             //Display all room data stored in the indexedDB
             getAllRoomData().then(result => {
-                let wrapper = document.getElementById('roomTileList');
+                if(result){
+                    let wrapper = document.getElementById('roomTileList');
+                    wrapper.className = "container-fluid row";
 
-                for(let room of result){
-                    let tile = document.createElement('div');
-                    tile.className = "tile";
-                    tile.style.border = "solid black";
+                    for(let room of result) {
+                        let tile = document.createElement('div');
+                        tile.className = "col-12 col-sm-6 col-md-4 col-lg-2 card tile";
 
-                    let entry = document.createElement('p');
-                    entry.innerHTML = room.roomid + ", created by " + room.author;
+                        let cardBody = document.createElement('div');
+                        cardBody.className = "card-body";
 
-                    let img = document.createElement('img');
-                    img.className = "thumbnail";
-                    //Checking whether annotations exist
-                    if(room.canvas != "") img.src = room.canvas;
-                    else img.src = room.imageUrl;
+                        let cardTitle = document.createElement('h5');
+                        cardTitle.className = "card-title";
+                        cardTitle.innerHTML = "Room name: " + room.roomid;
 
-                    tile.append(entry, img);
+                        let cardAuthor = document.createElement('p');
+                        cardAuthor.className = "card-text";
+                        cardAuthor.innerHTML = "Author: " + room.author;
 
-                    tile.addEventListener("click", () => {
-                        //Join the room
-                        connectToRoom(room.roomid, room.imageUrl);
-                    });
+                        let img = document.createElement('img');
+                        img.className = "card-img-top";
+                        //Checking whether annotations exist
+                        if (room.canvas != "") img.src = room.canvas;
+                        else img.src = room.imageUrl;
 
-                    //Adding tile to wrapper
-                    wrapper.appendChild(tile);
+                        cardBody.append(cardTitle, cardAuthor);
+                        tile.append(img, cardBody);
+
+                        tile.addEventListener("click", () => {
+                            //Join the room
+                            connectToRoom(room.roomid, room.imageUrl);
+                        });
+
+                        //Adding tile to wrapper
+                        wrapper.appendChild(tile);
+                    }
                 }
             });
         });

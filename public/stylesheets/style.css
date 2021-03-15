@@ -41,16 +41,28 @@ a {
     height:50%;
 }
 
+/*Login form*/
+#login-form{
+    margin: 25vh 5vh 0 5vh;
+}
+/*Login form end*/
+
+/*Enter-join form*/
+#enter-join-form{
+    margin: 10px 0 10px 10px;
+    width: 25vw;
+}
+/*Enter-join form end*/
+
 /*Tiles basic styling*/
 .tile{
-    width: 250px;
-    margin: 10px;
     cursor: pointer;
+    padding: 10px;
+    transition: 0.5s;
 }
-.thumbnail{
-    width: 80%;
-}
-#roomTileList{
-    display: flex;
+.tile:hover {
+    transition: 0.5s;
+    background-color: #062c33;
+    color: white;
 }
 /*Tiles basic styling end*/

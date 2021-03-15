@@ -3,6 +3,7 @@
 <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link rel='stylesheet' href="/stylesheets/bootstrap.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="/javascripts/index.js"></script>
     <script type='module' src="/javascripts/indexed_database.js"></script>
@@ -12,12 +13,19 @@
 </head>
 <body onload="init()">
 <div id="initial_form" style="display: block">
-    <h1><%= title %></h1>
-    <form onsubmit="return false;">
-        <p><label for="name"> What's your name? </label>
-            <input type="text" id="name" name="name">
-        </p>
-        <button id="Enter" onclick="enterSystem()">Enter System</button>
+    <!--    Banner   -->
+    <div class="jumbotron">
+        <h1 class="display-4"><%= title %></h1>
+    </div>
+
+    <!--  Form  -->
+    <form id="login-form" onsubmit="return false;">
+        <div class="input-group input-group-lg">
+            <input type="text" class="form-control" placeholder="Recipient's username" id="name" name="name">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" onclick="enterSystem()">Enter System</button>
+            </div>
+        </div>
     </form>
 </div>
 </body>
