@@ -268,7 +268,7 @@ function createTile(imageUrl, roomId, author){
 
     tile.addEventListener("click", () => {
         //Join the room
-        connectToRoom(room.roomid, room.imageUrl);
+        connectToRoom(roomId, imageUrl);
     });
 
     return tile;
