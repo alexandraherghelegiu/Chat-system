@@ -34,6 +34,13 @@ function init() {
                         //Create the tile
                         let tile = createTile(url, room.roomid, room.author);
 
+                        //Add tooltip if description exists
+                        if(room.imageDesc){
+                            $(tile).attr("data-toggle", "tooltip");
+                            $(tile).attr("title", "Description: "+room.imageDesc);
+                            $(tile).tooltip();
+                        }
+
                         //Adding tile to wrapper
                         wrapper.appendChild(tile);
                     }
@@ -83,9 +90,24 @@ function connectToRoom(roomNr, imageUrl) {
                 //If it is a new room
                 if(!imageUrl){
                     alert('Image not specified');
+                    return;
+                }
+                if(!roomNr){
+                    alert('Room name not specified');
+                    return;
                 }
                 else{
-                    storeRoomData({"roomid": roomNo, "author": name, "imageUrl" : imageUrl, "canvas": "", "messages": []});
+                    let title = document.getElementById("img_title").value;
+                    let desc = document.getElementById("img_description").value;
+                    storeRoomData({
+                        "roomid": roomNo,
+                        "author": name,
+                        "imageUrl" : imageUrl,
+                        "imageTitle" : title,
+                        "imageDesc" : desc,
+                        "canvas": "",
+                        "messages": []
+                    });
                     socket.emit('create or join', roomNo, name, imageUrl);
                     hideLoginInterface(roomNo, name);
                     initCanvas(socket, imageUrl, "");
@@ -215,7 +237,9 @@ function filterTiles(authorString){
     //Display all room data stored in the indexedDB
     getAllRoomData().then(result => {
         if(result){
+            //Filter results
             result = result.filter(e => e.author.toUpperCase().includes(authorString.toUpperCase()));
+
             let wrapper = document.getElementById('roomTileList');
             wrapper.className = "container-fluid row";
             //Clear tiles

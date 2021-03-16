@@ -1,3 +1,5 @@
+var videoStream;
+
 function setupCamera(){
     //document.getElementById('initial_form').style.display = 'none';
     document.getElementById('cameraInterface').style.display = 'block';
@@ -13,6 +15,7 @@ function setupCamera(){
 
     navigator.mediaDevices.getUserMedia({video: true, audio: false})
         .then(function (stream) {
+            videoStream = stream;
             video.srcObject = stream;
             video.play();
         })
@@ -34,6 +37,7 @@ function setupCamera(){
 
     shutter.addEventListener('click', function(e){
         takePicture();
+        $('#previewGroup').show();
         $('.camera').hide();
         $('#preview').hide();
         $('#retake').show();
@@ -81,15 +85,26 @@ function setupCamera(){
 }
 
 function closeCamera(){
+    //Stopping the stream
+    stopStream(videoStream);
     //document.getElementById('initial_form').style.display = 'block';
     document.getElementById('cameraInterface').style.display = 'none';
 
+}
+
+/**
+ * Function for closing the video stream
+ * @param stream The video stream
+ */
+function stopStream(stream) {
+    stream.getTracks()[0].stop();
 }
 
 
 function uploadTakenImage(){
     let photo = $('#photoTaken').attr('src');
     $('#image_url').val(photo);
+    //Stopping the stream
+    stopStream(videoStream);
     $('#cameraInterface').hide();
-    connectToRoom();
 }

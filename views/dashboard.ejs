@@ -5,6 +5,7 @@
     <link rel='stylesheet' href='/stylesheets/style.css'/>
     <link rel='stylesheet' href="/stylesheets/bootstrap.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/javascripts/bootstrap.bundle.js"></script>
     <script src="/javascripts/dashboard.js"></script>
     <script type="module" src="/javascripts/indexed_database.js"></script>
     <script src="/javascripts/canvas.js"></script>
@@ -16,25 +17,86 @@
         <h1>Welcome, <%= name %> !</h1>
         <p>Please insert the id of the Room you want to Join, if you do not have a room id, click Generate Room</p>
 
-        <!--    Create/join room form    -->
-        <form id="enter-join-form" onsubmit="return false;">
-            <label for="roomNo" class="form-label"> Your room </label>
-            <div class="row mb-3">
-                <div class="col">
-                    <input type="text" id="roomNo" name="roomNo" class="form-control">
-                </div>
-                <div class="col-auto">
-                    <button id="roomNoGenerator" onclick="generateRoom()" class="btn btn-secondary">Generate Room</button>
-                </div>
-            </div>
-            <div class="form-group mb-3">
-                <label for="image_url" class="form-label"> Image (URL) </label>
-                <input type="text" id="image_url" name="image_url" class="form-control">
-            </div>
+        <div class="row">
+            <div class="col">
+                <!--    Create/join room form    -->
+                <form id="enter-join-form" onsubmit="return false;">
+                    <label for="roomNo" class="form-label"> Your room </label>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <input type="text" id="roomNo" name="roomNo" class="form-control">
+                        </div>
+                        <div class="col-auto">
+                            <button id="roomNoGenerator" onclick="generateRoom()" class="btn btn-secondary">Generate Room</button>
+                        </div>
+                    </div>
+                    <label for="image_url" class="form-label"> Image (URL) </label>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <input type="text" id="image_url" name="image_url" class="form-control">
+                        </div>
+                        <div class="col-auto">
+                            <button id="takePicture" onclick="setupCamera()" class="btn btn-secondary">Take Picture</button>
+                        </div>
+                    </div>
 
-            <button id="connect" onclick="connectToRoom(roomNo.value, image_url.value)" class="btn btn-primary">Connect</button>
-            <button id="takePicture" onclick="setupCamera()" class="btn btn-secondary">Take Picture Instead</button>
-        </form>
+                    <!-- Image title -->
+                    <div class="mb-3">
+                        <label class="form-label">Image title</label>
+                        <input id="img_title" name="img_title" class="form-control">
+                    </div>
+
+                    <!-- Image description -->
+                    <div class="mb-3">
+                        <label class="form-label">Image description</label>
+                        <textarea id="img_description" name="img_description" class="form-control" aria-label="Image description"></textarea>
+                    </div>
+
+
+                    <button id="connect" onclick="connectToRoom(roomNo.value, image_url.value)" class="btn btn-primary">Connect</button>
+                </form>
+            </div>
+            <div class="col">
+                <!-- DIV CAMERA -->
+                <div id="cameraInterface" style="display: none" class="row mb-3">
+                    <!-- Camera -->
+                    <div class="col">
+                        <div class="camera" >
+                            <video id="video">Video stream not available.</video>
+                            <!-- Buttons -->
+                            <div class="row">
+                                <div class="col">
+                                    <button id="shutter" class="btn btn-primary">Take photo</button>
+                                </div>
+                                <div class="col text-right">
+                                    <button onclick="closeCamera()" class="btn btn-secondary">Close Camera</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- Preview -->
+                    <div class="col" id="previewGroup" style="display: none;">
+                        <canvas id="preview">
+                        </canvas>
+                        <div id="output">
+                            <img id="photoTaken" alt="photo will appear here">
+                        </div>
+                        <!-- Buttons -->
+                        <div class="row mb-3">
+                            <div class="col">
+                                <button id="confirm" style="display: none" onclick="uploadTakenImage()" class="btn btn-primary">Confirm</button>
+                            </div>
+                            <div class="col text-right">
+                                <button id="retake" style="display: none" class="btn btn-secondary">Retake</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
 
         <!--   Filter     -->
         <div id="filter-input-group">
@@ -86,22 +148,6 @@
         </div>
     </div><br><br>
 
-    <!-- DIV CAMERA -->
-    <div id="cameraInterface" style="display: none">
-        <div>
-            <button onclick="closeCamera()">Close Camera</button>
-            <button id="retake" style="display: none">Retake</button>
-            <button id="confirm" style="display: none" onclick="uploadTakenImage()">Confirm and connect</button>
-        </div><br>
-        <div class="camera" >
-            <video id="video">Video stream not available.</video>
-            <button id="shutter">Take photo</button>
-        </div>
-        <canvas id="preview">
-        </canvas>
-        <div id="output">
-            <img id="photoTaken" alt="photo will appear here">
-        </div>
-    </div>
+
 </body>
 </html>
