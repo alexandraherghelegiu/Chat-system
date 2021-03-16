@@ -1,5 +1,6 @@
 body {
   font: 12px "Lucida Grande", Helvetica, Arial, sans-serif;
+    margin: 5px;
 }
 
 a {
@@ -73,3 +74,39 @@ a {
     color: white;
 }
 /*Tiles basic styling end*/
+
+
+.square {
+    height: 30px;
+    width: 30px;
+    margin:5px;
+}
+
+.square:hover {
+    transition: 0.3s;
+    color: white;
+}
+.pink {
+    background-color:pink ;
+}
+.red {
+    background-color:red ;
+}
+.blue {
+    background-color: blue ;
+}
+.green {
+    background-color: green;
+}
+.orange {
+    background-color: orange;
+}
+.white {
+    background-color: white;
+}
+.yellow {
+    background-color: yellow;
+}
+.black {
+    background-color: black;
+}

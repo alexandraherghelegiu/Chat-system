@@ -3,7 +3,7 @@
  */
 let room;
 let userId;
-let color = 'red', thickness = 4;
+var color = 'red', thickness = 4;
 
 /**
  * it inits the image canvas to draw on. It sets up the events to respond to (click, mouse on, etc.)
@@ -13,6 +13,8 @@ let color = 'red', thickness = 4;
  */
 function initCanvas(sckt, originalImageUrl, canvasUrl) {
     socket = sckt;
+    changeColor();
+
     let flag = false,
         prevX, prevY, currX, currY = 0;
     let canvas = $('#canvas');
@@ -130,6 +132,7 @@ function initCanvas(sckt, originalImageUrl, canvasUrl) {
             }
         }, 10);
     });
+
 }
 
 /**
@@ -195,3 +198,14 @@ function downloadDrawing(){
 
 }
 
+function changeColor(){
+    $('#pink-box').click(()=>{color='pink'});
+    $('#blue-box').click(()=>{color='blue'});
+    $('#red-box').click(()=>{color='red'});
+    $('#orange-box').click(()=>{color='orange'});
+    $('#green-box').click(()=>{color='green'});
+    $('#white-box').click(()=>{color='white'});
+    $('#black-box').click(()=>{color='black'});
+    $('#yellow-box').click(()=>{color='yellow'});
+
+}
