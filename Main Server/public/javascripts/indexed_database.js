@@ -1,6 +1,6 @@
 ////////////////// DATABASE //////////////////
 // the database receives from the server the following structure
-import * as idb from './idb';
+import * as idb from '/javascripts/idb/index.js';
 
 let db;
 const INDEXED_DB_NAME = "chats_db";
