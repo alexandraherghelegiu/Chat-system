@@ -94,6 +94,9 @@ function connectToRoom(roomNr, imageUrl) {
             //If room already exists
             else{
                 socket.emit('create or join', roomNo, name, result.imageUrl);
+                //Load data from indexedDB
+                displayLoadedMessages(result.messages);
+
                 hideLoginInterface(roomNo, name);
                 initCanvas(socket, result.imageUrl, result.canvas);
             }
@@ -131,20 +134,9 @@ function displayLoadedMessages(messageList){
 function initSocket(){
     //Joining a room
     socket.on('joined', function(room, userId, image){
-        getRoomData(room).then(result => {
-            //If data exists in IndexedDB
-            if(result){
-                //Load messages from indexedDB
-                displayLoadedMessages(result.messages);
-            }
-
             if(userId != name){
                 writeOnHistory('<b>' + userId + '</b>' + ' joined room ' + room);
             }
-
-            //Hide login interface
-            hideLoginInterface(room, userId);
-        })
     });
 
     //Sending chat in room
