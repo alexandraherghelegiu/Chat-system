@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="/socket.io/socket.io.js"></script>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link rel='stylesheet' href="/stylesheets/bootstrap.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/javascripts/bootstrap.bundle.js"></script>
+    <script src="/javascripts/dashboard.js"></script>
+    <script type="module" src="/javascripts/indexed_database.js"></script>
+    <script src="/javascripts/canvas.js"></script>
+    <script src="/javascripts/camera.js"></script>
+    <script src="/javascripts/ajax.js"></script>
+</head>
+<body onload="init()">
+    <div id="initial_form" style="display: block">
+        <h1>Welcome, <%= name %> !</h1>
+        <p>Please insert the id of the Room you want to Join, if you do not have a room id, click Generate Room</p>
+
+        <div class="row">
+            <div class="col">
+                <!--    Create/join room form    -->
+                <form id="enter-join-form" onsubmit="return false;">
+                    <label for="roomNo" class="form-label"> Your room </label>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <input type="text" id="roomNo" name="roomNo" class="form-control">
+                        </div>
+                        <div class="col-auto">
+                            <button id="roomNoGenerator" onclick="generateRoom()" class="btn btn-secondary">Generate Room</button>
+                        </div>
+                    </div>
+                    <label for="image_url" class="form-label"> Image (URL) </label>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <input type="text" id="image_url" name="image_url" class="form-control">
+                        </div>
+                        <div class="col-auto">
+                            <button id="takePicture" onclick="setupCamera()" class="btn btn-secondary">Take Picture</button>
+                        </div>
+                    </div>
+
+                    <!-- Image title -->
+                    <div class="mb-3">
+                        <label class="form-label">Image title</label>
+                        <input id="img_title" name="img_title" class="form-control">
+                    </div>
+
+                    <!-- Image description -->
+                    <div class="mb-3">
+                        <label class="form-label">Image description</label>
+                        <textarea id="img_description" name="img_description" class="form-control" aria-label="Image description"></textarea>
+                    </div>
+
+
+                    <button id="connect" onclick="connectToRoom(roomNo.value, image_url.value)" class="btn btn-primary">Connect</button>
+                </form>
+            </div>
+            <div class="col">
+                <!-- DIV CAMERA -->
+                <div id="cameraInterface" style="display: none" class="row mb-3">
+                    <!-- Camera -->
+                    <div class="col">
+                        <div class="camera" >
+                            <video id="video">Video stream not available.</video>
+                            <!-- Buttons -->
+                            <div class="row">
+                                <div class="col">
+                                    <button id="shutter" class="btn btn-primary">Take photo</button>
+                                </div>
+                                <div class="col text-right">
+                                    <button onclick="closeCamera()" class="btn btn-secondary">Close Camera</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- Preview -->
+                    <div class="col" id="previewGroup" style="display: none;">
+                        <canvas id="preview">
+                        </canvas>
+                        <div id="output">
+                            <img id="photoTaken" alt="photo will appear here">
+                        </div>
+                        <!-- Buttons -->
+                        <div class="row mb-3">
+                            <div class="col">
+                                <button id="confirm" style="display: none" onclick="uploadTakenImage()" class="btn btn-primary">Confirm</button>
+                            </div>
+                            <div class="col text-right">
+                                <button id="retake" style="display: none" class="btn btn-secondary">Retake</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!--   Filter     -->
+        <div id="filter-input-group">
+            <label class="form-label">Filter:</label>
+            <input class="form-control" id="authorFilter" name="authorFilter" onkeyup="filterTiles(authorFilter.value)">
+        </div>
+
+        <!--   Room tiles     -->
+        <div id="roomTileList" class="row">
+        </div>
+    </div>
+
+    <div id="chat_interface" style="display: none">
+        <div>
+            <p><div id="who_you_are" style="display: inline" style="height: 10vh"> <%= name %></div>, you are in room: <div id="in_room" style="display: inline"></div>
+            <button id="leave_room" onclick="disconnectFromRoom()" class="btn btn-primary">Leave Room</button>
+        </div>
+        </p>
+        <div style="height: 50%; ">
+            <img id="image" style="width: 20%;" crossorigin="anonymous">
+            <canvas  id="canvas"></canvas><br>
+            <div class="row" style="display: inline-flex">
+                <div id='pink-box' class="col-xs-6 col-sm-4 col-md-2 pink square"></div>
+                <div id='blue-box' class="col-xs-6 col-sm-4 col-md-2 blue square"></div>
+                <div id='red-box' class="col-xs-6 col-sm-4 col-md-2 red square"></div>
+                <div id='orange-box' class="col-xs-6 col-sm-4 col-md-2 orange square"></div>
+                <div id='green-box' class="col-xs-6 col-sm-4 col-md-2 green square"></div>
+                <div id='white-box' class="col-xs-6 col-sm-4 col-md-2 white square"></div>
+                <div id='black-box' class="col-xs-6 col-sm-4 col-md-2 black square"></div>
+                <div id='yellow-box' class="col-xs-6 col-sm-4 col-md-2 yellow square"></div>
+
+            </div>
+
+            <br>
+            <button id="download_button" onclick="downloadDrawing()" class="btn btn-secondary">Download</button>
+            <button id="canvas-clear" class="btn btn-secondary">Clear Canvas</button>
+        </div>
+        <!--    </div>-->
+        <div id="history" style="height: 35vh" class="boxed scrolling" ></div>
+        <div id="input" style="height: 5vh" class=" boxed">
+            <form onsubmit="return false;" style="width: 100%">
+                <p>
+                    <label for="name"> chat: </label>
+                    <input type="text" id="chat_input" name="chat_input" style="width: 80%">
+                    <button id="chat_send" onclick="sendChatText()" class="btn btn-primary">Send</button>
+
+                </p>
+            </form>
+        </div>
+    </div><br><br>
+
+
+</body>
+</html>
