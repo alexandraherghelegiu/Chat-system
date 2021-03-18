@@ -1,4 +1,5 @@
 const Chat_room = require('../models/chat-rooms');
+const imageToBase64 = require('image-to-base64');
 
 // insert a chat room
 // and export it so that it can be used outside the module
@@ -48,3 +49,42 @@ exports.insert = function (req, res) {
     }
 }
 
+// get all rooms, with all the image info associated with each room
+exports.getAllRooms = function (req, res) {
+    let userData = req.body;
+    if (userData == null) {
+        res.status(403).send('No data sent!')
+    }
+    try {
+        Chat_room.find({},
+            'room_id image_path image_author image_title image_description',
+            function (err, rooms) {
+                if (err)
+                    res.status(500).send('Invalid data!');
+                let info = [];
+                if (rooms.length > 0) {
+                    for (room of rooms) {
+                        let image = imageToBase64("path/to/file.jpg");
+                        let room_info = {
+                            room_id: room.room_id,
+                            image: image,
+                            img_author: room.image_author,
+                            img_title: room.image_title,
+                            img_description: room.image_description
+                        };
+                        info.push(room_info);
+                    }
+                    res.setHeader('Content-Type', 'application/json');
+                    res.send(JSON.stringify(info));
+                }
+                // what if database is empty:
+                else{
+                    console.log("MongoDB is empty");
+                    res.setHeader('Content-Type', 'application/json');
+                    res.send(JSON.stringify(null));
+                }
+            });
+    } catch (e) {
+        res.status(500).send('error ' + e);
+    }
+}
