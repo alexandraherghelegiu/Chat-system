@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="f32f66fa-046e-47f8-903b-db21fa5041a6" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="ProjectId" id="1pUXHk9EhFs5Ij6xgmnOakcXjH8" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Main Server" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="restartRequiresConfirmation" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\IntelliJ_Projects\Chat-system\public\certificate" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Main Node" type="NodeJSConfigurationType" path-to-js-file="bin/www" working-dir="$PROJECT_DIR$/Main Server">
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f32f66fa-046e-47f8-903b-db21fa5041a6" name="Default Changelist" comment="" />
+      <created>1615238557136</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1615238557136</updated>
+      <workItem from="1615238561438" duration="205000" />
+      <workItem from="1615238782378" duration="1053000" />
+      <workItem from="1615335546094" duration="3641000" />
+      <workItem from="1615384897662" duration="5960000" />
+      <workItem from="1615391086704" duration="924000" />
+      <workItem from="1615419778757" duration="3030000" />
+      <workItem from="1615489071542" duration="11462000" />
+      <workItem from="1615507739066" duration="6579000" />
+      <workItem from="1615539840915" duration="6885000" />
+      <workItem from="1615559825062" duration="4313000" />
+      <workItem from="1615745949472" duration="991000" />
+      <workItem from="1615810217265" duration="984000" />
+      <workItem from="1615826829874" duration="11803000" />
+      <workItem from="1615986993537" duration="1567000" />
+      <workItem from="1615988737731" duration="898000" />
+      <workItem from="1616009113885" duration="1175000" />
+      <workItem from="1616059424416" duration="6143000" />
+    </task>
+    <task id="LOCAL-00001" summary="ajax.js added with basic functionality">
+      <created>1615239782665</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1615239782665</updated>
+    </task>
+    <task id="LOCAL-00002" summary="updateField is added to indexed_database">
+      <created>1615339156740</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1615339156740</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Messages are now stored in the IndexedDB">
+      <created>1615390865026</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1615390865026</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Upon joining a room it now checks for matching image url in the IndexedDB">
+      <created>1615392007354</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1615392007354</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Connect to room bugs fixed">
+      <created>1615421731588</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1615421731588</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Added tiles for all the rooms stored in the indexeddb">
+      <created>1615493448687</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1615493448687</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Solved routing issue, solved socket.io issue">
+      <created>1615503510142</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1615503510142</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Chat messages are now loaded from IndexedDB">
+      <created>1615514324130</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1615514324130</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Loading/saving image works!">
+      <created>1615546024875</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1615546024875</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Minor bugs fixed with image loading">
+      <created>1615546363108</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1615546363108</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Leave room error fixed with ajax request">
+      <created>1615563970168</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1615563970168</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Bootstrap added, certificate files moved, some styling added">
+      <created>1615835910580</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1615835910580</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Filter added, dashboard.js reorganised slightly">
+      <created>1615838429652</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1615838429652</updated>
+    </task>
+    <task id="LOCAL-00014" summary="quick bugfix">
+      <created>1615838876640</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1615838876640</updated>
+    </task>
+    <task id="LOCAL-00015" summary="offline message loading added">
+      <created>1615987077150</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1615987077150</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Image upload functionality added">
+      <created>1616069721533</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1616069721533</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="ajax.js added with basic functionality" />
+    <MESSAGE value="updateField is added to indexed_database" />
+    <MESSAGE value="Messages are now stored in the IndexedDB" />
+    <MESSAGE value="Upon joining a room it now checks for matching image url in the IndexedDB" />
+    <MESSAGE value="Connect to room bugs fixed" />
+    <MESSAGE value="Added tiles for all the rooms stored in the indexeddb" />
+    <MESSAGE value="Solved routing issue, solved socket.io issue" />
+    <MESSAGE value="Chat messages are now loaded from IndexedDB" />
+    <MESSAGE value="Loading/saving image works!" />
+    <MESSAGE value="Minor bugs fixed with image loading" />
+    <MESSAGE value="Leave room error fixed with ajax request" />
+    <MESSAGE value="Bootstrap added, certificate files moved, some styling added" />
+    <MESSAGE value="Filter added, dashboard.js reorganised slightly" />
+    <MESSAGE value="quick bugfix" />
+    <MESSAGE value="offline message loading added" />
+    <MESSAGE value="Image upload functionality added" />
+    <option name="LAST_COMMIT_MESSAGE" value="Image upload functionality added" />
+  </component>
+</project>
