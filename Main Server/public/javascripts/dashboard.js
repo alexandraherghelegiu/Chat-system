@@ -81,7 +81,10 @@ function sendChatText() {
  * interface
  */
 function connectToRoom(roomNr, imageUrl) {
+    //sendAjaxQuery('https://localhost:3000/dashboard', JSON.stringify({name: name}));
+
     roomNo = roomNr;
+    console.log('connecting to ' + roomNr);
     //let imageUrl= document.getElementById('image_url').value;
 
     //Checking the database
@@ -307,5 +310,17 @@ function uploadImg(file){
 
 function fillRoomNo(){
     $('#roomNoDD').val(roomNo);
+}
+
+function generateRoomLink(){
+    let room = $('#roomNoDD').val();
+    let image_url = $('#new_image_url').val();
+    let image_title = $('#new_img_title').val();
+    let current_input = $('#chat_input').val();
+    if (room === roomNo)
+        room = room + '+' + Math.floor(Math.random() * 100);
+    $('#chat_input').val(current_input + (`<button onclick="connectToRoom('${room}', '${image_url}')">${image_title}</button>`));
+    //initCanvas();
+    //sendAjaxQuery('https://localhost:3000/dashboard', JSON.stringify({name: name}));
 }
 
