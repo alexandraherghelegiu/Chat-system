@@ -125,8 +125,8 @@
             <div class="row d-flex align-items-stretch">
 
                 <div class="column flex-fill flex-column">
-                    <img id="image" crossorigin="anonymous">
-                    <canvas  id="canvas"></canvas><br>
+                    <img id="image" style="width: 33%;" crossorigin="anonymous">
+                    <canvas id="canvas"></canvas><br>
                     <div class="row" style="display: inline-flex">
                         <div id='pink-box' class="col-xs-6 col-sm-4 col-md-2 pink square"></div>
                         <div id='blue-box' class="col-xs-6 col-sm-4 col-md-2 blue square"></div>
@@ -152,14 +152,14 @@
                                     <input type="text" class="form-control" id="roomNoDD" >
                                 </div>
                                 <div class="form-group">
-                                    <label for="image_url">Image Url</label>
-                                    <input type="text" class="form-control" id="image_url">
+                                    <label for="new_image_url">Image Url</label>
+                                    <input type="text" class="form-control" id="new_image_url">
                                 </div>
                                 <div class="form-group">
-                                    <label for="img_title">Image Title</label>
-                                    <input type="text" class="form-control" id="img_title" name="img_title">
+                                    <label for="new_img_title">Image Title</label>
+                                    <input type="text" class="form-control" id="new_img_title" name="img_title">
                                 </div>
-                                <button id="create_room_link">Generate room link</button>
+                                <button id="create_room_link" onclick="generateRoomLink()">Generate room link</button>
                             </form>
 
                         </div>
@@ -172,7 +172,7 @@
                         <form onsubmit="return false;" style="width: 100%">
                             <p>
                                 <label for="name"> chat: </label>
-                                <input type="text" id="chat_input" name="chat_input">
+                                <input type="text" id="chat_input" name="chat_input" >
                                 <button id="chat_send" onclick="sendChatText()" class="btn btn-primary">Send</button>
 
                             </p>
