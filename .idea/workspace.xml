@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="f32f66fa-046e-47f8-903b-db21fa5041a6" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main Server/public/javascripts/canvas.js" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/public/javascripts/canvas.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main Server/public/javascripts/dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/public/javascripts/dashboard.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main Server/views/dashboard.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/views/dashboard.ejs" afterDir="false" />
     </list>
@@ -82,7 +83,7 @@
       <workItem from="1615988737731" duration="898000" />
       <workItem from="1616009113885" duration="1175000" />
       <workItem from="1616059424416" duration="6289000" />
-      <workItem from="1616081521035" duration="2740000" />
+      <workItem from="1616081521035" duration="11165000" />
     </task>
     <task id="LOCAL-00001" summary="ajax.js added with basic functionality">
       <created>1615239782665</created>
@@ -203,7 +204,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616071729221</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="changed uploadImg to take another parameter">
+      <created>1616088928267</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1616088928267</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -239,6 +247,7 @@
     <MESSAGE value="quick bugfix" />
     <MESSAGE value="offline message loading added" />
     <MESSAGE value="Image upload functionality added" />
-    <option name="LAST_COMMIT_MESSAGE" value="Image upload functionality added" />
+    <MESSAGE value="changed uploadImg to take another parameter" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed uploadImg to take another parameter" />
   </component>
 </project>

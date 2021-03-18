@@ -144,12 +144,12 @@
                     <button id="canvas-clear" class="btn btn-secondary">Clear Canvas</button>
                     <br>
                     <div class="dropdown" >
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="create-room-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="fillRoomNo()">Create room link</button>
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="create-room-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="fillRoomNo(roomNoDD)">Create room link</button>
                         <div class="dropdown-menu">
                             <form class="px-4 py-3" onsubmit="return false;">
                                 <div class="form-group">
                                     <label for="roomNoDD">Room Name</label>
-                                    <input type="text" class="form-control" id="roomNoDD" >
+                                    <input type="text" class="form-control" id="roomNoDD" disabled>
                                 </div>
                                 <div class="form-group">
                                     <label for="new_image_url">Image Url</label>
@@ -159,7 +159,7 @@
                                     <label for="new_img_title">Image Title</label>
                                     <input type="text" class="form-control" id="new_img_title" name="img_title">
                                 </div>
-                                <button id="create_room_link" onclick="generateRoomLink()">Generate room link</button>
+                                <button id="create_room_link" onclick="generateRoomLink()" class="btn btn-primary">Generate room link</button>
                             </form>
 
                         </div>
@@ -173,7 +173,7 @@
                             <p>
                                 <label for="name"> chat: </label>
                                 <input type="text" id="chat_input" name="chat_input" >
-                                <button id="chat_send" onclick="sendChatText()" class="btn btn-primary">Send</button>
+                                <button id="chat_send" onclick="sendChatText(chat_input.value)" class="btn btn-primary">Send</button>
 
                             </p>
                         </form>
