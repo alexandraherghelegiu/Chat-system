@@ -305,3 +305,7 @@ function uploadImg(file){
 }
 
 
+function fillRoomNo(){
+    $('#roomNoDD').val(roomNo);
+}
+

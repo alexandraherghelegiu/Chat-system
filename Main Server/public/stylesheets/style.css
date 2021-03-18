@@ -1,6 +1,7 @@
 body {
   font: 12px "Lucida Grande", Helvetica, Arial, sans-serif;
     margin: 5px;
+    overflow-x: hidden;
 }
 
 a {
@@ -17,8 +18,11 @@ a {
   width: 90%;
 }
 .scrolling {
-    overflow: scroll;
-    max-height: 40vh;
+    overflow-y: scroll;
+    overflow-wrap: break-word;
+    max-height: 80vh;
+    max-width: 30vw;
+
 }
 .outsideWrapper{
     width:256px; height:256px;
@@ -111,3 +115,4 @@ a {
 .black {
     background-color: black;
 }
+
