@@ -295,11 +295,11 @@ function createTile(imageUrl, roomId, author){
  * image in base 64 format
  * @param file The image file
  */
-function uploadImg(file){
+function uploadImg(file, target){
     var reader = new FileReader();
     reader.onloadend = function() {
-        let textField = document.getElementById("image_url");
-        textField.value = reader.result;
+        // let textField = document.getElementById("image_url");
+        target.value = reader.result;
     }
     reader.readAsDataURL(file);
 }

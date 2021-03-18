@@ -36,7 +36,7 @@
                             <input type="text" id="image_url" name="image_url" class="form-control">
                         </div>
                         <div class="col-auto">
-                            <input id="img_upload" type="file" accept="image/jpeg" onchange="uploadImg(img_upload.files[0])" style="display: none;">
+                            <input id="img_upload" type="file" accept="image/jpeg, image/png" onchange="uploadImg(img_upload.files[0], document.getElementById('image_url'))" style="display: none;">
                             <button onclick="document.getElementById('img_upload').click()" class="btn btn-secondary">Upload</button>
                         </div>
                         <div class="col-auto">
