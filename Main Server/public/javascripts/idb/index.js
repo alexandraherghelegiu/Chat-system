@@ -28,6 +28,8 @@ function openDB(name, version, { blocked, upgrade, blocking, terminated } = {}) 
     catch(() => {});
     return openPromise;
 }
+
+
 /**
  * Delete a database.
  *
@@ -40,9 +42,11 @@ function deleteDB(name, { blocked } = {}) {
     return wrap(request).then(() => undefined);
 }
 
+
 const readMethods = ['get', 'getKey', 'getAll', 'getAllKeys', 'count'];
 const writeMethods = ['put', 'add', 'delete', 'clear'];
 const cachedMethods = new Map();
+
 function getMethod(target, prop) {
     if (!(target instanceof IDBDatabase &&
         !(prop in target) &&
@@ -79,6 +83,8 @@ function getMethod(target, prop) {
     cachedMethods.set(prop, method);
     return method;
 }
+
+
 replaceTraps(oldTraps => ({
     ...oldTraps,
     get: (target, prop, receiver) => getMethod(target, prop) || oldTraps.get(target, prop, receiver),

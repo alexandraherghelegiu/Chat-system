@@ -2,6 +2,8 @@ const instanceOfAny = (object, constructors) => constructors.some((c) => object 
 
 let idbProxyableTypes;
 let cursorAdvanceMethods;
+
+
 // This is a function to prevent it throwing up in node environments.
 function getIdbProxyableTypes() {
     return (idbProxyableTypes ||
@@ -13,6 +15,8 @@ function getIdbProxyableTypes() {
             IDBTransaction,
         ]));
 }
+
+
 // This is a function to prevent it throwing up in node environments.
 function getCursorAdvanceMethods() {
     return (cursorAdvanceMethods ||
@@ -22,11 +26,15 @@ function getCursorAdvanceMethods() {
             IDBCursor.prototype.continuePrimaryKey,
         ]));
 }
+
+
 const cursorRequestMap = new WeakMap();
 const transactionDoneMap = new WeakMap();
 const transactionStoreNamesMap = new WeakMap();
 const transformCache = new WeakMap();
 const reverseTransformCache = new WeakMap();
+
+
 function promisifyRequest(request) {
     const promise = new Promise((resolve, reject) => {
         const unlisten = () => {
@@ -59,6 +67,8 @@ function promisifyRequest(request) {
     reverseTransformCache.set(promise, request);
     return promise;
 }
+
+
 function cacheDonePromiseForTransaction(tx) {
     // Early bail if we've already created a done promise for this transaction.
     if (transactionDoneMap.has(tx))
@@ -84,6 +94,8 @@ function cacheDonePromiseForTransaction(tx) {
     // Cache it for later retrieval.
     transactionDoneMap.set(tx, done);
 }
+
+
 let idbProxyTraps = {
     get(target, prop, receiver) {
         if (target instanceof IDBTransaction) {
@@ -116,9 +128,13 @@ let idbProxyTraps = {
         return prop in target;
     },
 };
+
+
 function replaceTraps(callback) {
     idbProxyTraps = callback(idbProxyTraps);
 }
+
+
 function wrapFunction(func) {
     // Due to expected object equality (which is enforced by the caching in `wrap`), we
     // only create one new func per func.
@@ -150,6 +166,8 @@ function wrapFunction(func) {
         return wrap(func.apply(unwrap(this), args));
     };
 }
+
+
 function transformCachableValue(value) {
     if (typeof value === 'function')
         return wrapFunction(value);
@@ -162,6 +180,8 @@ function transformCachableValue(value) {
     // Return the same value back if we're not going to transform it.
     return value;
 }
+
+
 function wrap(value) {
     // We sometimes generate multiple promises from a single IDBRequest (eg when cursoring), because
     // IDB is weird and a single IDBRequest can yield many responses, so these can't be cached.
