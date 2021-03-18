@@ -75,15 +75,17 @@ a {
 /*Tiles basic styling end*/
 
 
-.square {
+.square{
+    cursor: pointer;
     height: 30px;
     width: 30px;
     margin:5px;
+    transition: 0.3s;
 }
 
 .square:hover {
     transition: 0.3s;
-    color: white;
+    transform: scale(1.2);
 }
 .pink {
     background-color:pink ;

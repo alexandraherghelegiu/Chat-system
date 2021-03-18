@@ -290,4 +290,18 @@ function createTile(imageUrl, roomId, author){
     return tile;
 }
 
+/**
+ * This function uploads an image and sets the image_url to the
+ * image in base 64 format
+ * @param file The image file
+ */
+function uploadImg(file){
+    var reader = new FileReader();
+    reader.onloadend = function() {
+        let textField = document.getElementById("image_url");
+        textField.value = reader.result;
+    }
+    reader.readAsDataURL(file);
+}
+
 
