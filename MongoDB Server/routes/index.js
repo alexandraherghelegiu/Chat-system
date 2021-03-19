@@ -6,13 +6,13 @@ const initDB= require('../controllers/init');
 initDB.init();
 
 
+router.get('/getAllRooms', chat_room.getAllRooms);
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
 router.post('/insert', chat_room.insert);
-
-router.post('/getAllRooms', chat_room.getAllRooms);
 
 module.exports = router;

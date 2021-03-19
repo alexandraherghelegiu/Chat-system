@@ -10,6 +10,7 @@ var indexRouter = require('./routes');
 var usersRouter = require('./routes/users');
 var dashboardRouter = require('./routes/dashboard');
 var insertMongoRouter = require('./routes/insertMongo');
+var getAllMongoRouter = require('./routes/getAllMongo');
 
 var app = express();
 
@@ -29,6 +30,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/insertMongo', insertMongoRouter);
+app.use('/getAllMongo', getAllMongoRouter);
 app.use('/dashboard', dashboardRouter);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

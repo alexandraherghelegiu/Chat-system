@@ -22,12 +22,12 @@ exports.insert = function (req, res) {
         let imageBlob = roomData.imageBlob.replace(/^data:image\/\w+;base64,/, "");
         let buf = new Buffer(imageBlob, 'base64');
 
-        fs.writeFile(targetDirectory + roomData.img_title + '.jpeg', buf, function(err, result) {
+        fs.writeFile(targetDirectory + roomData.room_id + '.jpeg', buf, function(err, result) {
                 if(err) console.log('error', err);
             });
 
         // get the file path
-        let filepath = targetDirectory + roomData.img_title;
+        let filepath = targetDirectory + roomData.room_id + ".jpeg";
 
         // create database entry for the new chat room
         let chat_room = new Chat_room({
@@ -72,16 +72,19 @@ exports.getAllRooms = function (req, res) {
                     res.status(500).send('Invalid data!');
                 let info = [];
                 if (rooms.length > 0) {
-                    for (room of rooms) {
-                        let image = imageToBase64("path/to/file.jpg");
-                        let room_info = {
-                            room_id: room.room_id,
-                            image: image,
-                            img_author: room.image_author,
-                            img_title: room.image_title,
-                            img_description: room.image_description
-                        };
-                        info.push(room_info);
+                    for (let room of rooms) {
+                        console.log(room.image_path);
+                        imageToBase64(room.image_path).then(image=>{
+                            let room_info = {
+                                room_id: room.room_id,
+                                image: image,
+                                img_author: room.image_author,
+                                img_title: room.image_title,
+                                img_description: room.image_description
+                            };
+                            info.push(room_info);
+                        })
+                            .catch(err=>console.log(err));
                     }
                     res.setHeader('Content-Type', 'application/json');
                     res.send(JSON.stringify(info));
@@ -90,7 +93,7 @@ exports.getAllRooms = function (req, res) {
                 else{
                     console.log("MongoDB is empty");
                     res.setHeader('Content-Type', 'application/json');
-                    res.send(JSON.stringify(null));
+                    res.send(JSON.stringify(info));
                 }
             });
     } catch (e) {
