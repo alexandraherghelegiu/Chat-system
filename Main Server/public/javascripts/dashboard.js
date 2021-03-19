@@ -73,8 +73,11 @@ function sendChatText(text) {
     socket.emit('chat', roomNo, name, text);
 }
 
-
-function createRoom(roomNr, imageUrl){
+/**
+ * stores a newly created room in MongoDB
+ * opens up the new room via connectToRoom method
+ */
+function createRoom(roomNr, imageUrl, title, desc){
     if(!imageUrl){
         alert('Image not specified');
         return;
@@ -85,20 +88,22 @@ function createRoom(roomNr, imageUrl){
     }
     roomNo = roomNr;
     console.log('connecting to ' + roomNr);
-    //let imageUrl= document.getElementById('image_url').value;
-    let title = document.getElementById("img_title").value;
-    let desc = document.getElementById("img_description").value;
 
-    //TODO check if data is in base64 format, dont store linked images
-    let mongoData = {
-        "room_id": roomNo,
-        "img_author": name,
-        "img_title": title,
-        "img_description": desc,
-        "imageBlob" : imageUrl
+    // check if image loaded or linked, only store in MongoDB if uploaded (if in base64 format)
+    const base64regx = new RegExp("^data:image\\/(?:gif|png|jpeg|bmp|webp)(?:;charset=utf-8)?;" +
+        "base64,(?:[A-Za-z0-9]|[+/])+={0,2}");
+    if (base64regx.test(imageUrl)){
+        let mongoData = {
+            "room_id": roomNo,
+            "img_author": name,
+            "img_title": title,
+            "img_description": desc,
+            "imageBlob" : imageUrl
+        }
+        let url = 'https://localhost:3000/insertMongo';
+        sendInsertAjaxQueryToMongoDB(url, JSON.stringify(mongoData));
+
     }
-    let url = 'https://localhost:3000/insertMongo';
-    sendInsertAjaxQueryToMongoDB(url, JSON.stringify(mongoData));
 
     connectToRoom(roomNo, imageUrl, title, desc);
 }
@@ -364,11 +369,13 @@ function generateRoomLink(){
     let current_input = $('#chat_input').val();
 
     //Sends a button link to the new room to the chat
-    let messageLink = `<button class="btn btn-primary" onclick="connectToRoom('${room}', '${image_url}')">Connect to room ${room}</button>`;
+    let messageLink = `<button class="btn btn-primary" onclick="connectToRoom('${room}', 
+                            '${image_url}')">Connect to room ${room}</button>`;
     sendChatText(messageLink);
 
     //Redirects the current user
-    connectToRoom(room, image_url);
+    // TODO: add image description (change form)
+    createRoom(room, image_url, image_title, "");
 
     //Toggle menu
     $('#create-room-dropdown').click();
