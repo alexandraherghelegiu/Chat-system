@@ -4,7 +4,9 @@
     <list default="true" id="f32f66fa-046e-47f8-903b-db21fa5041a6" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main Server/public/javascripts/camera.js" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/public/javascripts/camera.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main Server/public/javascripts/canvas.js" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/public/javascripts/canvas.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main Server/public/javascripts/dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/public/javascripts/dashboard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main Server/public/javascripts/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/public/javascripts/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main Server/views/dashboard.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/views/dashboard.ejs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -47,6 +49,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/Main Server" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -84,7 +87,10 @@
       <workItem from="1616009113885" duration="1175000" />
       <workItem from="1616059424416" duration="6289000" />
       <workItem from="1616081521035" duration="11277000" />
-      <workItem from="1616112065825" duration="4293000" />
+      <workItem from="1616112065825" duration="5002000" />
+      <workItem from="1616121680523" duration="37000" />
+      <workItem from="1616144346742" duration="374000" />
+      <workItem from="1616144738952" duration="9603000" />
     </task>
     <task id="LOCAL-00001" summary="ajax.js added with basic functionality">
       <created>1615239782665</created>
@@ -219,7 +225,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616107359521</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Camera take a picture functionality now is in a modal window">
+      <created>1616117388636</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1616117388636</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -257,6 +270,7 @@
     <MESSAGE value="Image upload functionality added" />
     <MESSAGE value="changed uploadImg to take another parameter" />
     <MESSAGE value="Added room-linking functionality, fixed canvas issues" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added room-linking functionality, fixed canvas issues" />
+    <MESSAGE value="Camera take a picture functionality now is in a modal window" />
+    <option name="LAST_COMMIT_MESSAGE" value="Camera take a picture functionality now is in a modal window" />
   </component>
 </project>

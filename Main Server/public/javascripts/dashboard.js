@@ -13,7 +13,7 @@ function init() {
     document.getElementById('chat_interface').style.display = 'none';
 
     //Initialise the name of the user
-    name = document.getElementById("who_you_are").textContent;
+    name = window.localStorage.getItem("name");
 
     //Initialise IndexedDB
     if ('indexedDB' in window) {
@@ -123,7 +123,8 @@ function connectToRoom(roomNr, imageUrl, title, desc) {
                 //If it is a new room
                 storeRoomData({
                     "roomid": roomNo,
-                    "author": name,
+                    "author": name, //TO BE PASSED FROM IMG,
+                    "accessedBy": name,
                     "imageUrl" : imageUrl,
                     "imageTitle" : title,
                     "imageDesc" : desc,
@@ -132,7 +133,7 @@ function connectToRoom(roomNr, imageUrl, title, desc) {
                 });
 
                 socket.emit('create or join', roomNo, name, imageUrl);
-                console.log(imageUrl);
+                displayLoadedMessages([]);
                 hideLoginInterface(roomNo, name);
                 initCanvas(socket, imageUrl, "");
             }
@@ -366,17 +367,22 @@ function generateRoomLink(){
     let room = $('#roomNoDD').val();
     let image_url = $('#new_image_url').val();
     let image_title = $('#new_img_title').val();
-    let current_input = $('#chat_input').val();
+    let image_desc = $('#new_img_desc').val();
 
-    //Sends a button link to the new room to the chat
-    let messageLink = `<button class="btn btn-primary" onclick="connectToRoom('${room}', 
+    //Field validation
+    if(!image_url || !image_title || !image_desc){
+        alert("Fill out the missing fields of the form!");
+    }
+    else{
+        //Sends a button link to the new room to the chat
+        let messageLink = `<button class="btn btn-primary" onclick="connectToRoom('${room}', 
                             '${image_url}')">Connect to room ${room}</button>`;
-    sendChatText(messageLink);
+        sendChatText(messageLink);
 
-    //Redirects the current user
-    // TODO: add image description (change form)
-    createRoom(room, image_url, image_title, "");
+        //Redirects the current user
+        createRoom(room, image_url, image_title, image_desc);
 
-    //Toggle menu
-    $('#create-room-dropdown').click();
+        //Toggle menu
+        $('#create-room-dropdown').click();
+    }
 }

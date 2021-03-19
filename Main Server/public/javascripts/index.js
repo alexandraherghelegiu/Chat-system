@@ -15,6 +15,10 @@ function enterSystem() {
     name = document.getElementById('name').value;
     if (!name) name = 'Unknown-' + Math.random();
     const data = {name: name};
+
+    //Set local storage
+    window.localStorage.setItem("name", name);
+
     sendAjaxQuery('https://localhost:3000/dashboard', JSON.stringify(data));
     event.preventDefault();
 }

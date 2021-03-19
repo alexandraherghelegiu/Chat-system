@@ -94,6 +94,7 @@ function initCanvas(sckt, originalImageUrl, canvasUrl) {
     //     let ctx = canvas[0].getContext('2d');
     //     drawOnCanvas(ctx, canvasWidth, canvasHeight, x1, y21, x2, y2, color, thickness)
     socket.on('drawing', function(room, userId, cw, ch, x1, y1, x2, y2, color, thick){
+        //Draw on canvas
         drawOnCanvas(ctx, cw, ch, x1, y1, x2, y2, color, thick);
 
         //Update indexedDB
@@ -125,11 +126,11 @@ function initCanvas(sckt, originalImageUrl, canvasUrl) {
                     ratioY= img.clientHeight/window.innerHeight;
                 let ratio= Math.min(ratioX, ratioY);
                 // resize the canvas to fit the screen and the image
-                cvx.width  = img.clientWidth*ratio;
-                cvx.height  = img.clientHeight*ratio;
+                cvx.width  = canvas.width = img.clientWidth*ratio;
+                cvx.height  = canvas.height = img.clientHeight*ratio;
 
                 // draw the image onto the canvas
-                drawImageScaled(img, cvx, ctx);
+                drawImageScaled(img, canvas, ctx);
 
                 // hide the image element as it is not needed
                 img.style.display = 'none';
