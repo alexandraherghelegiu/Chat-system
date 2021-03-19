@@ -31,7 +31,6 @@ window.initIDB= initIDB;
  *
  */
 async function storeRoomData(data){
-    console.log('inserting: ' + JSON.stringify(data));
     if (!db)
         await initIDB();
     if (db) {
@@ -41,7 +40,6 @@ async function storeRoomData(data){
 
             await store.put(data, data.roomid);
             await  tx.complete;
-            console.log('added item to the store! '+ JSON.stringify(data));
         } catch(error) {
             console.log("Error in storing data: "+ error);
             localStorage.setItem(data.roomid, JSON.stringify(data));

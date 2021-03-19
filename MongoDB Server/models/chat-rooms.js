@@ -8,13 +8,13 @@ let Chat_room = new Schema(
         image_path: {type: String, required: true},
         image_author: {type: String, required: true},
         image_title: {type: String},
-        image_description: {type: String},
-        whatever: {type: String} //any other field
+        image_description: {type: String}
+        //whatever: {type: String} //any other field
     }
 );
 
-Chat_room.set('toObject', {getters: true});
+Chat_room.set('toObject', {}, 'bufferCommands: false');
 
-let chatroomModel = mongoose.model('Chat Room', Chat_room);
+let chatroomModel = mongoose.model('Chat_room', Chat_room);
 
 module.exports = chatroomModel;

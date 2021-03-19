@@ -7,6 +7,8 @@
 var app = require('../app');
 var debug = require('debug')('mongodb-server:server');
 var http = require('http');
+var database= require('../databases/chat-rooms');
+
 
 /**
  * Get port from environment and store in Express.

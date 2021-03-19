@@ -2,7 +2,6 @@ let roomNo = null;
 let name;
 let socket= io();
 
-
 /**
  * called by <body onload>
  * it initialises the interface and the expected socket messages
@@ -76,53 +75,70 @@ function sendChatText() {
     socket.emit('chat', roomNo, name, chatText);
 }
 
+
+function createRoom(roomNr, imageUrl){
+    if(!imageUrl){
+        alert('Image not specified');
+        return;
+    }
+    if(!roomNr){
+        alert('Room name not specified');
+        return;
+    }
+    roomNo = roomNr;
+    console.log('connecting to ' + roomNr);
+    //let imageUrl= document.getElementById('image_url').value;
+    let title = document.getElementById("img_title").value;
+    let desc = document.getElementById("img_description").value;
+
+    //TODO check if data is in base64 format, dont store linked images
+    let mongoData = {
+        "room_id": roomNo,
+        "img_author": name,
+        "img_title": title,
+        "img_description": desc,
+        "imageBlob" : imageUrl
+    }
+    let url = 'https://localhost:3000/insertMongo';
+    sendInsertAjaxQueryToMongoDB(url, JSON.stringify(mongoData));
+
+    connectToRoom(roomNo, imageUrl, title, desc);
+}
+
 /**
  * used to connect to a room. It gets the user name and room number from the
  * interface
  */
-function connectToRoom(roomNr, imageUrl) {
-    //
+function connectToRoom(roomNr, imageUrl, title, desc) {
 
     roomNo = roomNr;
     console.log('connecting to ' + roomNr);
-    //let imageUrl= document.getElementById('image_url').value;
 
     //Checking the database
     getRoomData(roomNo).then(result => {
             if(!result){
                 //If it is a new room
-                if(!imageUrl){
-                    alert('Image not specified');
-                    return;
-                }
-                if(!roomNr){
-                    alert('Room name not specified');
-                    return;
-                }
-                else{
-                    let title = document.getElementById("img_title").value;
-                    let desc = document.getElementById("img_description").value;
-                    storeRoomData({
-                        "roomid": roomNo,
-                        "author": name,
-                        "imageUrl" : imageUrl,
-                        "imageTitle" : title,
-                        "imageDesc" : desc,
-                        "canvas": "",
-                        "messages": []
-                    });
-                    socket.emit('create or join', roomNo, name, imageUrl);
-                    console.log(imageUrl);
-                    hideLoginInterface(roomNo, name);
-                    initCanvas(socket, imageUrl, "");
-                }
+                storeRoomData({
+                    "roomid": roomNo,
+                    "author": name,
+                    "imageUrl" : imageUrl,
+                    "imageTitle" : title,
+                    "imageDesc" : desc,
+                    "canvas": "",
+                    "messages": []
+                });
+
+                socket.emit('create or join', roomNo, name, imageUrl);
+                console.log(imageUrl);
+                hideLoginInterface(roomNo, name);
+                initCanvas(socket, imageUrl, "");
             }
+
             //If room already exists
             else{
                 socket.emit('create or join', roomNo, name, result.imageUrl);
                 //Load data from indexedDB
                 displayLoadedMessages(result.messages);
-
                 hideLoginInterface(roomNo, name);
                 initCanvas(socket, result.imageUrl, result.canvas);
             }

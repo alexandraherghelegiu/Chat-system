@@ -4,9 +4,9 @@ const chatrooms = require('../models/chat-rooms');
 
 exports.init= function() {
     // uncomment if you need to drop the database
-    chatrooms.remove({}, function(err) {
-        console.log('collection removed')
-    });
+//    chatrooms.remove({}, function(err) {
+//        console.log('collection removed')
+//    });
 
     // const dob=new Date(1908, 12, 1).getFullYear();
     // var character = new Character({

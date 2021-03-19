@@ -4,12 +4,16 @@ var path = require('path');
 var cors = require('cors');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var bodyParser = require('body-parser');
 
 var indexRouter = require('./routes');
 var usersRouter = require('./routes/users');
 var dashboardRouter = require('./routes/dashboard');
+var insertMongoRouter = require('./routes/insertMongo');
 
 var app = express();
+
+app.use(bodyParser({limit: '50mb'}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -24,6 +28,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/insertMongo', insertMongoRouter);
 app.use('/dashboard', dashboardRouter);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

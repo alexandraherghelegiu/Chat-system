@@ -108,3 +108,4 @@ function uploadTakenImage(){
     stopStream(videoStream);
     $('#cameraInterface').hide();
 }
+
