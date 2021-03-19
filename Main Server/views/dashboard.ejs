@@ -42,6 +42,9 @@
                         <div class="col-auto">
                             <button id="takePicture" data-toggle="modal" data-target="#cameraModal" onclick="setupCamera()" class="btn btn-secondary">Take Picture</button>
                         </div>
+                        <div class="col-auto">
+                            <button id="pickImage" data-toggle="modal" data-target="#imageSelectorModal" onclick="" class="btn btn-secondary">Select from uploaded images</button>
+                        </div>
                     </div>
 
                     <!-- Image title -->
@@ -75,7 +78,7 @@
         </div>
     </div>
 
-
+    <!-- #####################CHAT INTERFACE#################### -->
     <div id="chat_interface" style="display: none;">
         <div>
             <div id="who_you_are" style="display: inline" style="height: 10vh"> <%= name %></div>, you are in room: <div id="in_room" style="display: inline"></div>
@@ -154,7 +157,9 @@
 
     </div>
 
-    <!-- Modal -->
+    <!-- ######################MODALS############################ -->
+
+    <!--  Camera Modal  -->
     <div class="modal fade" id="cameraModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -193,6 +198,27 @@
                     <!--                                <div class="col text-right">-->
                     <button id="retake" style="display: none" class="btn btn-secondary">Retake</button>
                     <!--                                </div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--  Image Selector Modal  -->
+    <div class="modal fade" id="imageSelectorModal" tabindex="-1" role="dialog" aria-labelledby="imageSelectorModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="imageSelectorModalLongTitle">Image Selector</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <!-- Buttons -->
+                <div class="modal-footer">
+                    <button id="selectImage" class="btn btn-primary">Select image</button>
                 </div>
             </div>
         </div>

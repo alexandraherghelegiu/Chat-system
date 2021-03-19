@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="f32f66fa-046e-47f8-903b-db21fa5041a6" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main Server/public/javascripts/indexed_database.js" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/public/javascripts/indexed_database.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main Server/public/javascripts/dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/public/javascripts/dashboard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main Server/views/dashboard.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/views/dashboard.ejs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,6 +54,17 @@
     </key>
   </component>
   <component name="RunManager" selected="Node.js.Main Node">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Main Node" type="NodeJSConfigurationType" path-to-js-file="bin/www" working-dir="$PROJECT_DIR$/Main Server">
       <method v="2" />
     </configuration>
@@ -87,7 +99,7 @@
       <workItem from="1616121680523" duration="37000" />
       <workItem from="1616144346742" duration="374000" />
       <workItem from="1616144738952" duration="10242000" />
-      <workItem from="1616165225738" duration="308000" />
+      <workItem from="1616165225738" duration="5529000" />
     </task>
     <task id="LOCAL-00001" summary="ajax.js added with basic functionality">
       <created>1615239782665</created>
@@ -236,7 +248,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616159657485</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="IndexedDB now only lists rooms that have been accessedBy the specific person">
+      <created>1616165973913</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1616165973913</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -276,6 +295,7 @@
     <MESSAGE value="Added room-linking functionality, fixed canvas issues" />
     <MESSAGE value="Camera take a picture functionality now is in a modal window" />
     <MESSAGE value="Fixed canvas bugs, fixed room-generating form" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed canvas bugs, fixed room-generating form" />
+    <MESSAGE value="IndexedDB now only lists rooms that have been accessedBy the specific person" />
+    <option name="LAST_COMMIT_MESSAGE" value="IndexedDB now only lists rooms that have been accessedBy the specific person" />
   </component>
 </project>

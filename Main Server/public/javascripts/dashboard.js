@@ -33,14 +33,7 @@ function init() {
                         else url = room.imageUrl;
 
                         //Create the tile
-                        let tile = createTile(url, room.roomid, room.author);
-
-                        //Add tooltip if description exists
-                        if(room.imageDesc){
-                            $(tile).attr("data-toggle", "tooltip");
-                            $(tile).attr("title", "Description: "+room.imageDesc);
-                            $(tile).tooltip();
-                        }
+                        let tile = createTile(url, room.imageTitle, room.imageDesc, room.author, true, room.roomid);
 
                         //Adding tile to wrapper
                         wrapper.appendChild(tile);
@@ -255,7 +248,7 @@ function disconnectFromRoom(){
  */
 function filterTiles(authorString){
     //Display all room data stored in the indexedDB
-    getAllRoomData().then(result => {
+    getAllRoomData(name).then(result => {
         if(result){
             //Filter results
             result = result.filter(e => e.author.toUpperCase().includes(authorString.toUpperCase()));
@@ -272,7 +265,7 @@ function filterTiles(authorString){
                 else url = room.imageUrl;
 
                 //Creating tile
-                let tile = createTile(url, room.roomid, room.author);
+                let tile = createTile(url, room.imageTitle, room.imageDesc, room.author, true, room.roomid);
 
                 //Adding tile to wrapper
                 wrapper.appendChild(tile);
@@ -284,20 +277,32 @@ function filterTiles(authorString){
 /**
  * Creates a tile containing an image, roomId and an author
  * @param imageUrl The image URL
- * @param roomId The room ID/name
+ * @param title of the image
  * @param author The author of the room
+ * @param isRoom {Boolean} True if it is a room tile, false otherwise
+ * @param roomId The room ID/name if isRoom is set to true
  * @returns {HTMLDivElement} A div HTML element
  */
-function createTile(imageUrl, roomId, author){
+function createTile(imageUrl, title, description, author, isRoom, roomId){
     let tile = document.createElement('div');
     tile.className = "col-12 col-sm-6 col-md-4 col-lg-2 card tile";
+    tile.setAttribute("data-toggle", "tooltip");
+    tile.setAttribute("title", "Description: " + description);
+    $(tile).tooltip();
 
     let cardBody = document.createElement('div');
     cardBody.className = "card-body";
 
     let cardTitle = document.createElement('h5');
     cardTitle.className = "card-title";
-    cardTitle.innerHTML = "Room name: " + roomId;
+    cardTitle.innerHTML = "Title: " + title;
+
+    let cardRoom = document.createElement('p');
+    cardRoom.className = "card-text";
+
+    if(typeof roomId !== "undefined"){
+        cardRoom.innerHTML = "Room name: " + roomId;
+    }
 
     let cardAuthor = document.createElement('p');
     cardAuthor.className = "card-text";
@@ -307,13 +312,20 @@ function createTile(imageUrl, roomId, author){
     img.className = "card-img-top";
     img.src = imageUrl;
 
-    cardBody.append(cardTitle, cardAuthor);
+    cardBody.append(cardTitle, cardRoom, cardAuthor);
     tile.append(img, cardBody);
 
-    tile.addEventListener("click", () => {
-        //Join the room
-        connectToRoom(roomId, imageUrl);
-    });
+    //If it is a room
+    if(isRoom){
+        tile.addEventListener("click", () => {
+            //Join the room
+            connectToRoom(roomId, imageUrl);
+        });
+    }
+    //If it is an image
+    else{
+        tile.setAttribute('tabindex', '0');
+    }
 
     return tile;
 }
