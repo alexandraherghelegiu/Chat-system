@@ -69,10 +69,8 @@ function generateRoom() {
  * called when the Send button is pressed. It gets the text to send from the interface
  * and sends the message via  socket
  */
-function sendChatText() {
-    let chatText = document.getElementById('chat_input').value;
-    // @todo send the chat message
-    socket.emit('chat', roomNo, name, chatText);
+function sendChatText(text) {
+    socket.emit('chat', roomNo, name, text);
 }
 
 
@@ -152,6 +150,8 @@ function connectToRoom(roomNr, imageUrl, title, desc) {
  */
 function displayLoadedMessages(messageList){
     let history = document.getElementById('history');
+    //Clear history
+    history.innerHTML = "";
 
     for(let m of messageList){
         let paragraph = document.createElement('p');
@@ -315,32 +315,61 @@ function createTile(imageUrl, roomId, author){
  * image in base 64 format
  * @param file The image file
  */
-function uploadImg(file){
+function uploadImg(file, target){
     var reader = new FileReader();
     reader.onloadend = function() {
-        let textField = document.getElementById("image_url");
-        textField.value = reader.result;
+        target.value = reader.result;
     }
     reader.readAsDataURL(file);
 }
 
+/**
+ * Generates a new room version
+ * @param inputField HTML input field that displays the new room name
+ */
+function fillRoomNo(inputField){
+    let newRoom = "";
 
-function fillRoomNo(){
-    $('#roomNoDD').val(roomNo);
+    //Room already a continued version of another
+    if(roomNo.lastIndexOf("-")>-1){
+        let currentVersion =  roomNo.substr(roomNo.lastIndexOf("-")+1,roomNo.length+1);
+        let roomWithoutVersion =  roomNo.substr(0,roomNo.lastIndexOf("-")+1);
+
+        //If the string after "-" is a number
+        if(!isNaN(parseFloat(currentVersion))){
+            newRoom = roomWithoutVersion + (parseFloat(currentVersion)+1);
+        }
+        else{
+            newRoom = roomWithoutVersion + "2";
+        }
+    }
+    //Current room is the first room of the sequence
+    else{
+        newRoom = roomNo + "-2";
+    }
+
+    //Setting the value of the input field
+    inputField.value = newRoom;
 }
 
+
+/**
+ * Generates a link to the new room, and takes the user immediately to
+ * the newly created room
+ */
 function generateRoomLink(){
     let room = $('#roomNoDD').val();
     let image_url = $('#new_image_url').val();
     let image_title = $('#new_img_title').val();
     let current_input = $('#chat_input').val();
-    if (room === roomNo)
-        room = room + '+' + Math.floor(Math.random() * 100);
-    //sendAjaxQuery('https://localhost:3000/dashboard', JSON.stringify({name: name}));
-    $('#chat_input').val(current_input + (`<button onclick="refreshChatInterface();connectToRoom('${room}', '${image_url}')">${image_title}</button>`));
-}
 
-function refreshChatInterface(){
-    //$("#chat_interface").load(" #chat_interface > *");
-    $('#history').empty();
+    //Sends a button link to the new room to the chat
+    let messageLink = `<button class="btn btn-primary" onclick="connectToRoom('${room}', '${image_url}')">Connect to room ${room}</button>`;
+    sendChatText(messageLink);
+
+    //Redirects the current user
+    connectToRoom(room, image_url);
+
+    //Toggle menu
+    $('#create-room-dropdown').click();
 }

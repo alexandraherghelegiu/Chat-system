@@ -94,11 +94,10 @@ function initCanvas(sckt, originalImageUrl, canvasUrl) {
     //     let ctx = canvas[0].getContext('2d');
     //     drawOnCanvas(ctx, canvasWidth, canvasHeight, x1, y21, x2, y2, color, thickness)
     socket.on('drawing', function(room, userId, cw, ch, x1, y1, x2, y2, color, thick){
-        let ctx = canvas[0].getContext('2d');
         drawOnCanvas(ctx, cw, ch, x1, y1, x2, y2, color, thick);
 
         //Update indexedDB
-        let canvasUrl = document.getElementById("canvas").toDataURL();
+        let canvasUrl = cvx.toDataURL();
         updateField(roomNo, "canvas", canvasUrl);
     });
 
@@ -112,6 +111,10 @@ function initCanvas(sckt, originalImageUrl, canvasUrl) {
         let poll = setInterval(function () {
             if (img.naturalHeight) {
                 clearInterval(poll);
+
+                //To ensure client width and height
+                img.style.display = "block";
+
                 // resize the canvas
                 let ratioX=1;
                 let ratioY=1;
@@ -122,13 +125,14 @@ function initCanvas(sckt, originalImageUrl, canvasUrl) {
                     ratioY= img.clientHeight/window.innerHeight;
                 let ratio= Math.min(ratioX, ratioY);
                 // resize the canvas to fit the screen and the image
-                cvx.width = canvas.width = img.clientWidth*ratio;
-                cvx.height = canvas.height = img.clientHeight*ratio;
+                cvx.width  = img.clientWidth*ratio;
+                cvx.height  = img.clientHeight*ratio;
+
                 // draw the image onto the canvas
                 drawImageScaled(img, cvx, ctx);
+
                 // hide the image element as it is not needed
                 img.style.display = 'none';
-
             }
         }, 10);
     });
@@ -151,7 +155,6 @@ function drawImageScaled(img, canvas, ctx) {
     let y = (canvas.height / 2) - (img.height / 2) * scale;
 
     ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
-
 }
 
 
