@@ -302,7 +302,6 @@ function createTile(imageUrl, roomId, author){
 function uploadImg(file, target){
     var reader = new FileReader();
     reader.onloadend = function() {
-        // let textField = document.getElementById("image_url");
         target.value = reader.result;
     }
     reader.readAsDataURL(file);

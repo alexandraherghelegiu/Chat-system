@@ -40,7 +40,7 @@
                             <button onclick="document.getElementById('img_upload').click()" class="btn btn-secondary">Upload</button>
                         </div>
                         <div class="col-auto">
-                            <button id="takePicture" onclick="setupCamera()" class="btn btn-secondary">Take Picture</button>
+                            <button id="takePicture" data-toggle="modal" data-target="#cameraModal" onclick="setupCamera()" class="btn btn-secondary">Take Picture</button>
                         </div>
                     </div>
 
@@ -61,42 +61,42 @@
                 </form>
             </div>
             <div class="col">
-                <!-- DIV CAMERA -->
-                <div id="cameraInterface" style="display: none" class="row mb-3">
-                    <!-- Camera -->
-                    <div class="col">
-                        <div class="camera" >
-                            <video id="video">Video stream not available.</video>
-                            <!-- Buttons -->
-                            <div class="row">
-                                <div class="col">
-                                    <button id="shutter" class="btn btn-primary">Take photo</button>
-                                </div>
-                                <div class="col text-right">
-                                    <button onclick="closeCamera()" class="btn btn-secondary">Close Camera</button>
-                                </div>
-                            </div>
+<!--                &lt;!&ndash; DIV CAMERA &ndash;&gt;-->
+<!--                <div id="cameraInterface" style="display: none" class="row mb-3">-->
+<!--                    &lt;!&ndash; Camera &ndash;&gt;-->
+<!--                    <div class="col">-->
+<!--                        <div class="camera" >-->
+<!--                            <video id="video">Video stream not available.</video>-->
+<!--                            &lt;!&ndash; Buttons &ndash;&gt;-->
+<!--                            <div class="row">-->
+<!--                                <div class="col">-->
+<!--                                    <button id="shutter" class="btn btn-primary">Take photo</button>-->
+<!--                                </div>-->
+<!--                                <div class="col text-right">-->
+<!--                                    <button onclick="closeCamera()" class="btn btn-secondary">Close Camera</button>-->
+<!--                                </div>-->
+<!--                            </div>-->
 
-                        </div>
-                    </div>
-                    <!-- Preview -->
-                    <div class="col" id="previewGroup" style="display: none;">
-                        <canvas id="preview">
-                        </canvas>
-                        <div id="output">
-                            <img id="photoTaken" alt="photo will appear here">
-                        </div>
-                        <!-- Buttons -->
-                        <div class="row mb-3">
-                            <div class="col">
-                                <button id="confirm" style="display: none" onclick="uploadTakenImage()" class="btn btn-primary">Confirm</button>
-                            </div>
-                            <div class="col text-right">
-                                <button id="retake" style="display: none" class="btn btn-secondary">Retake</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    &lt;!&ndash; Preview &ndash;&gt;-->
+<!--                    <div class="col" id="previewGroup" style="display: none;">-->
+<!--                        <canvas id="preview">-->
+<!--                        </canvas>-->
+<!--                        <div id="output">-->
+<!--                            <img id="photoTaken" alt="photo will appear here">-->
+<!--                        </div>-->
+<!--                        &lt;!&ndash; Buttons &ndash;&gt;-->
+<!--                        <div class="row mb-3">-->
+<!--                            <div class="col">-->
+<!--                                <button id="confirm" style="display: none" onclick="uploadTakenImage()" class="btn btn-primary">Confirm</button>-->
+<!--                            </div>-->
+<!--                            <div class="col text-right">-->
+<!--                                <button id="retake" style="display: none" class="btn btn-secondary">Retake</button>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
             </div>
         </div>
 
@@ -188,6 +188,49 @@
 
     </div>
 
+    <!-- Modal -->
+    <div class="modal fade" id="cameraModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Camera</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="closeCamera()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- DIV CAMERA -->
+                    <div id="cameraInterface" style="display: none" class="mb-3">
+                        <!-- Camera -->
+                        <div class="camera" >
+                            <video id="video">Video stream not available.</video>
+                            <!-- Buttons -->
+                        </div>
+
+                        <!-- Preview -->
+                        <div id="previewGroup" style="display: none;">
+                            <canvas id="preview"></canvas>
+                            <div id="output">
+                                <img id="photoTaken" alt="photo will appear here">
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- Buttons -->
+                <div class="modal-footer">
+                    <button id="shutter" class="btn btn-primary">Take photo</button>
+
+                    <!--                                <div class="col">-->
+                    <button id="confirm" style="display: none" onclick="uploadTakenImage()" data-dismiss="modal" class="btn btn-primary">Confirm</button>
+                    <!--                                </div>-->
+                    <!--                                <div class="col text-right">-->
+                    <button id="retake" style="display: none" class="btn btn-secondary">Retake</button>
+                    <!--                                </div>-->
+                </div>
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>

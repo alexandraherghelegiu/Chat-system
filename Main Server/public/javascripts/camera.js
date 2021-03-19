@@ -38,6 +38,7 @@ function setupCamera(){
     shutter.addEventListener('click', function(e){
         takePicture();
         $('#previewGroup').show();
+        $('#shutter').hide();
         $('.camera').hide();
         $('#preview').hide();
         $('#retake').show();
@@ -51,7 +52,7 @@ function setupCamera(){
     retake.addEventListener('click', function(e){
         clearPhoto();
         $('.camera').show();
-        //$('#preview').show();
+        $('#shutter').show();
         $('#photoTaken').hide();
         $('#retake').hide();
         $('#confirm').hide();
