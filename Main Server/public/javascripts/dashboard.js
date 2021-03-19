@@ -21,7 +21,7 @@ function init() {
     if ('indexedDB' in window) {
         initIDB().then(() => {
             //Display all room data stored in the indexedDB
-            getAllRoomData().then(result => {
+            getAllRoomData(name).then(result => {
                 if(result){
                     let wrapper = document.getElementById('roomTileList');
                     wrapper.className = "container-fluid row";
@@ -89,7 +89,7 @@ function createRoom(roomNr, imageUrl, title, desc){
         return;
     }
     roomNo = roomNr;
-    console.log('connecting to ' + roomNr);
+
 
     // check if image loaded or linked, only store in MongoDB if uploaded (if in base64 format)
     const base64regx = new RegExp("^data:image\\/(?:gif|png|jpeg|bmp|webp)(?:;charset=utf-8)?;" +
@@ -104,9 +104,9 @@ function createRoom(roomNr, imageUrl, title, desc){
         }
         let url = 'https://localhost:3000/insertMongo';
         sendInsertAjaxQueryToMongoDB(url, JSON.stringify(mongoData));
-
     }
 
+    console.log('connecting to ' + roomNr);
     connectToRoom(roomNo, imageUrl, title, desc);
 }
 

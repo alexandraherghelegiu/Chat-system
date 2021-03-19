@@ -50,10 +50,11 @@ async function storeRoomData(data){
 window.storeRoomData= storeRoomData;
 
 /**
- * Fetching all the room data from IndexedDB
+ * Fetching all the room data associated with the specified
+ * username from IndexedDB
  *
  */
-async function getAllRoomData() {
+async function getAllRoomData(name) {
     if(!db) {
         console.log("There is no data in the IndexedDB");
     }
@@ -70,7 +71,10 @@ async function getAllRoomData() {
             if (readingsList && readingsList.length > 0) {
 
                 for(let r of readingsList){
-                    finalResults.push(r);
+                    //Check if the current user accessed the room before
+                    if(r.accessedBy === name && r.accessedBy != null){
+                        finalResults.push(r);
+                    }
                 }
 
                 return finalResults;
