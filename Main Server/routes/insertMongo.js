@@ -11,7 +11,8 @@ router.post('/', function(req, res, next) {
         body: JSON.stringify(data),
         headers: {'Content-Type': 'application/json'},
     })
-        .then (res => console.log(res))
+        .then (res => res.text())
+        .then (data=> console.log(data))
         .catch(err =>
             console.log(err))
 });

@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
-const chatrooms = require('../models/chat-rooms');
+const images = require('../models/images');
 
 
 exports.init= function() {
     // uncomment if you need to drop the database
-    chatrooms.remove({}, function(err) {
+    images.remove({}, function(err) {
         console.log('collection removed')
     });
 

@@ -89,7 +89,6 @@ function createRoom(roomNr, imageUrl, title, desc){
         "base64,(?:[A-Za-z0-9]|[+/])+={0,2}");
     if (base64regx.test(imageUrl)){
         let mongoData = {
-            "room_id": roomNo,
             "img_author": name,
             "img_title": title,
             "img_description": desc,
