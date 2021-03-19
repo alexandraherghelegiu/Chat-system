@@ -29,18 +29,17 @@ function sendInsertAjaxQueryToMongoDB(url, data){
     });
 }
 
-function sendGetAllAjaxQueryToMongoDB(url, data){
+function sendGetAllAjaxQueryToMongoDB(url){
     $.ajax({
         url: url,
-        type: "POST",
-        data: data,
+        type: "GET",
         contentType: 'application/json',
         //Error function
         error: err => console.log(err),
         //Success function
         success: response => {
             // change to display results
-            console.log("insert request succeeded");
+            console.log("Get all request succeeded");
         }
     });
 }
