@@ -100,14 +100,14 @@ function createRoom(roomNr, imageUrl, title, desc){
     }
 
     console.log('connecting to ' + roomNr);
-    connectToRoom(roomNo, imageUrl, title, desc);
+    connectToRoom(roomNo, imageUrl, title, desc, name);
 }
 
 /**
  * used to connect to a room. It gets the user name and room number from the
  * interface
  */
-function connectToRoom(roomNr, imageUrl, title, desc) {
+function connectToRoom(roomNr, imageUrl, title, desc, author) {
 
     roomNo = roomNr;
     console.log('connecting to ' + roomNr);
@@ -118,7 +118,7 @@ function connectToRoom(roomNr, imageUrl, title, desc) {
                 //If it is a new room
                 storeRoomData({
                     "roomid": roomNo,
-                    "author": name, //TO BE PASSED FROM IMG,
+                    "author": author,
                     "accessedBy": name,
                     "imageUrl" : imageUrl,
                     "imageTitle" : title,
@@ -277,7 +277,8 @@ function filterTiles(authorString){
 /**
  * Creates a tile containing an image, roomId and an author
  * @param imageUrl The image URL
- * @param title of the image
+ * @param title Title of the image
+ * @param description Description of the image
  * @param author The author of the room
  * @param isRoom {Boolean} True if it is a room tile, false otherwise
  * @param roomId The room ID/name if isRoom is set to true
@@ -319,7 +320,7 @@ function createTile(imageUrl, title, description, author, isRoom, roomId){
     if(isRoom){
         tile.addEventListener("click", () => {
             //Join the room
-            connectToRoom(roomId, imageUrl);
+            connectToRoom(roomId, imageUrl, title, description, author);
         });
     }
     //If it is an image
@@ -390,7 +391,8 @@ function generateRoomLink(){
     else{
         //Sends a button link to the new room to the chat
         let messageLink = `<button class="btn btn-primary" onclick="connectToRoom('${room}', 
-                            '${image_url}')">Connect to room ${room}</button>`;
+                            '${image_url}'),'${image_title}','${image_desc}','${name}'">
+                            Connect to room ${room}</button>`;
         sendChatText(messageLink);
 
         //Redirects the current user
