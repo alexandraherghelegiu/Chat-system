@@ -88,7 +88,6 @@ function initCanvas(sckt, originalImageUrl, canvasUrl) {
         clearCanvas();
     });
 
-    // @todo here you want to capture the event on the socket when someone else is drawing on their canvas (socket.on...)
     // I suggest that you receive userId, canvasWidth, canvasHeight, x1, y21, x2, y2, color, thickness
     // and then you call
     //     let ctx = canvas[0].getContext('2d');
@@ -191,6 +190,9 @@ function drawOnCanvas(ctx, canvasWidth, canvasHeight, prevX, prevY, currX, currY
     ctx.closePath();
 }
 
+/**
+ * Downloads image with the current annotations
+ */
 function downloadDrawing(){
     canvas = document.getElementById('canvas')
     console.log(canvas.toDataURL("image/png"));
@@ -202,6 +204,10 @@ function downloadDrawing(){
 
 }
 
+/**
+ * Function called when canvas is initialized
+ * Listens for clicks on the colored boxed to change the drawing pen color
+ */
 function changeColor(){
     $('#pink-box').click(()=>{color='pink'});
     $('#blue-box').click(()=>{color='blue'});

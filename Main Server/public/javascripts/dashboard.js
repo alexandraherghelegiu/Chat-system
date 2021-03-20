@@ -60,13 +60,7 @@ function generateRoom() {
     document.getElementById('roomNo').value = 'R' + roomNo;
 }
 
-/**
- * called when the Send button is pressed. It gets the text to send from the interface
- * and sends the message via  socket
- */
-function sendChatText(text) {
-    socket.emit('chat', roomNo, name, text);
-}
+
 
 /**
  * stores a newly created room in MongoDB
@@ -102,46 +96,6 @@ function createRoom(roomNr, imageUrl, title, desc){
     connectToRoom(roomNo, imageUrl, title, desc, name);
 }
 
-/**
- * used to connect to a room. It gets the user name and room number from the
- * interface
- */
-function connectToRoom(roomNr, imageUrl, title, desc, author) {
-
-    roomNo = roomNr;
-    console.log('connecting to ' + roomNr);
-
-    //Checking the database
-    getRoomData(roomNo).then(result => {
-            if(!result){
-                //If it is a new room
-                storeRoomData({
-                    "roomid": roomNo,
-                    "author": author,
-                    "accessedBy": name,
-                    "imageUrl" : imageUrl,
-                    "imageTitle" : title,
-                    "imageDesc" : desc,
-                    "canvas": "",
-                    "messages": []
-                });
-
-                socket.emit('create or join', roomNo, name, imageUrl);
-                displayLoadedMessages([]);
-                hideLoginInterface(roomNo, name);
-                initCanvas(socket, imageUrl, "");
-            }
-
-            //If room already exists
-            else{
-                socket.emit('create or join', roomNo, name, result.imageUrl);
-                //Load data from indexedDB
-                displayLoadedMessages(result.messages);
-                hideLoginInterface(roomNo, name);
-                initCanvas(socket, result.imageUrl, result.canvas);
-            }
-    });
-}
 
 
 /**
@@ -173,38 +127,6 @@ function displayLoadedMessages(messageList){
     document.getElementById('chat_input').value = '';
 }
 
-function initSocket(){
-    //Joining a room
-    socket.on('joined', function(room, userId, image){
-            if(userId != name){
-                writeOnHistory('<b>' + userId + '</b>' + ' joined room ' + room);
-            }
-    });
-
-    //Sending chat in room
-    socket.on('chat', function (room, userId, chatText){
-        let who = userId;
-        if (userId === name) who = 'Me';
-        let canvasUrl = document.getElementById('canvas').toDataURL();
-
-        //Storing message in IndexedDB
-        getRoomFieldData(room, "messages").then(data => {
-            var newObj = {
-                date: Date(),
-                user: userId,
-                message: chatText
-            }
-            data.push(newObj);
-            updateField(room, "messages", data);
-        });
-        updateField(room, "canvas", canvasUrl);
-
-
-        writeOnHistory('<b>' + who + ':</b> ' + chatText);
-    });
-
-
-}
 
 /**
  * it appends the given html text to the history div
