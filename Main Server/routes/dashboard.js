@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
     res.render('dashboard', { name: name });
 });
 
-router.post('/', function(req, res, next) {
+router.get('/', function(req, res, next) {
     name = req.body.name;
     res.render('dashboard', { name: name });
 });
@@ -22,3 +22,4 @@ router.post("/processform", (req, res, next) => {
 });
 
 module.exports = router;
+

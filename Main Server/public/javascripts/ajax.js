@@ -1,7 +1,7 @@
 function sendAjaxQuery(url, data){
     $.ajax({
         url: url,
-        type: "POST",
+        type: "GET",
         data: data,
         contentType: 'application/json',
         //Error function
