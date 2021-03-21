@@ -1,6 +1,5 @@
-let roomNo = null;
-let name;
-let socket= io();
+var roomNo = null;
+var name;
 
 /**
  * called by <body onload>
@@ -17,6 +16,24 @@ function init() {
     //Initialise the name of the user
     name = window.localStorage.getItem("name");
 
+    //Initialise IndexedDB
+    initLocalDatabase()
+
+    //Initialise socket.io
+    initSocket();
+}
+
+/**
+ * called to generate a random room number
+ * This is a simplification. A real world implementation would ask the server to generate a unique room number
+ * so to make sure that the room number is not accidentally repeated across uses
+ */
+function generateRoom() {
+    roomNo = Math.round(Math.random() * 10000);
+    document.getElementById('roomNo').value = 'R' + roomNo;
+}
+
+function initLocalDatabase(){
     //Initialise IndexedDB
     if ('indexedDB' in window) {
         initIDB().then(() => {
@@ -45,22 +62,7 @@ function init() {
     else {
         console.log('This browser doesn\'t support IndexedDB');
     }
-
-    //Initialise socket.io
-    initSocket();
 }
-
-/**
- * called to generate a random room number
- * This is a simplification. A real world implementation would ask the server to generate a unique room number
- * so to make sure that the room number is not accidentally repeated across uses
- */
-function generateRoom() {
-    roomNo = Math.round(Math.random() * 10000);
-    document.getElementById('roomNo').value = 'R' + roomNo;
-}
-
-
 
 /**
  * stores a newly created room in MongoDB
