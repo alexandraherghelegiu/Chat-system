@@ -6,7 +6,7 @@
 
 var app = require('../app');
 var debug = require('debug')('week-3.c-socket.io-chat:server');
-var http = require('https');
+var http = require('http');
 var fs = require('fs');
 
 const key = fs.readFileSync('public/certificate/key.pem');
@@ -23,7 +23,8 @@ app.set('port', port);
  * Create HTTP server.
  */
 
-var server = http.createServer({key: key, cert: cert}, app);
+//var server = http.createServer({key: key, cert: cert}, app);
+var server = http.createServer(app);
 
 /**
  * Listen on provided port, on all network interfaces.

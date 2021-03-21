@@ -19,7 +19,7 @@ function enterSystem() {
     //Set local storage
     window.localStorage.setItem("name", name);
 
-    sendAjaxQuery('https://localhost:3000/dashboard', JSON.stringify(data));
+    sendAjaxQuery('http://localhost:3000/dashboard', JSON.stringify(data));
     event.preventDefault();
 }
 
