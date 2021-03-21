@@ -9,6 +9,7 @@ let urlsToCache = [
     '/javascripts/index.js',
     '/javascripts/indexed_database.js',
     '/javascripts/ajax.js',
+    '/javascripts/room.js'
 ];
 
 
@@ -42,8 +43,16 @@ self.addEventListener('fetch', function(event){
 
                         let responseToCache = response.clone();
                         caches.open(CACHE_NAME).then(function(cache){
-                            console.log(event.request);
-                            cache.put(event.request, responseToCache)
+                            let req = (event.request);
+                            let url = new URL(req.url);
+                            let path = url.pathname;
+                            //Service workers handling POST requests from socket.io
+                            if(event.request.method === "POST" && path == '/socket.io/'){
+                                console.log("handling socket.io posts");
+                            }else {
+                                //Caching requests
+                                cache.put(event.request, responseToCache);
+                            }
                         });
                         return response;
                     }
