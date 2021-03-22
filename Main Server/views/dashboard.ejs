@@ -24,7 +24,7 @@
                     <label for="roomNo" class="form-label"> Your room </label>
                     <div class="row mb-3">
                         <div class="col">
-                            <input type="text" id="roomNo" name="roomNo" class="form-control">
+                            <input type="text" id="roomNo" name="roomid" class="form-control">
                         </div>
                         <div class="col-auto">
                             <button id="roomNoGenerator" onclick="generateRoom()" class="btn btn-secondary">Generate Room</button>
@@ -33,7 +33,7 @@
                     <label for="image_url" class="form-label"> Image (URL) </label>
                     <div class="row mb-3">
                         <div class="col">
-                            <input type="text" id="image_url" name="image_url" class="form-control">
+                            <input type="text" id="image_url" name="imageUrl" class="form-control">
                         </div>
                         <div class="col-auto">
                             <input id="img_upload" type="file" accept="image/jpeg, image/png" onchange="uploadImg(img_upload.files[0], document.getElementById('image_url'))" style="display: none;">
@@ -50,17 +50,17 @@
                     <!-- Image title -->
                     <div class="mb-3">
                         <label class="form-label">Image title</label>
-                        <input id="img_title" name="img_title" class="form-control">
+                        <input id="img_title" name="imageTitle" class="form-control">
                     </div>
 
                     <!-- Image description -->
                     <div class="mb-3">
                         <label class="form-label">Image description</label>
-                        <textarea id="img_description" name="img_description" class="form-control" aria-label="Image description"></textarea>
+                        <textarea id="img_description" name="imageDesc" class="form-control" aria-label="Image description"></textarea>
                     </div>
 
 
-                    <button id="connect" onclick="createRoom(roomNo.value, image_url.value, img_title.value, img_description.value)" class="btn btn-primary">Connect</button>
+                    <button id="connect" onclick="sendFormData('enter-join-form')" class="btn btn-primary">Connect</button>
                 </form>
             </div>
         </div>
@@ -111,24 +111,24 @@
                     <div class="dropdown" >
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="create-room-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="fillRoomNo(roomNoDD)">Create room link</button>
                         <div class="dropdown-menu">
-                            <form class="px-4 py-3" onsubmit="return false;">
+                            <form id="dropdown-create-room" class="px-4 py-3" onsubmit="return false;">
                                 <div class="form-group">
                                     <label for="roomNoDD">Room Name</label>
-                                    <input type="text" class="form-control" id="roomNoDD" disabled>
+                                    <input type="text" class="form-control" id="roomNoDD" name="roomid" readonly>
                                 </div>
                                 <div class="form-group">
                                     <label for="new_image_url">Image Url</label>
-                                    <input type="text" class="form-control" id="new_image_url">
+                                    <input type="text" class="form-control" id="new_image_url" name="imageUrl">
                                 </div>
                                 <div class="form-group">
                                     <label for="new_img_title">Image Title</label>
-                                    <input type="text" class="form-control" id="new_img_title" name="img_title">
+                                    <input type="text" class="form-control" id="new_img_title" name="imageTitle">
                                 </div>
                                 <div class="form-group">
                                     <label for="new_img_title">Image Description</label>
-                                    <textarea type="text" class="form-control" id="new_img_desc" name="new_img_desc"></textarea>
+                                    <textarea type="text" class="form-control" id="new_img_desc" name="imageDesc"></textarea>
                                 </div>
-                                <button id="create_room_link" onclick="generateRoomLink()" class="btn btn-primary">Generate room link</button>
+                                <button id="create_room_link" onclick="generateRoomLink('dropdown-create-room')" class="btn btn-primary">Generate room link</button>
                             </form>
 
                         </div>

@@ -3,7 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="f32f66fa-046e-47f8-903b-db21fa5041a6" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main Server/public/javascripts/ajax.js" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/public/javascripts/ajax.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main Server/public/javascripts/dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/public/javascripts/dashboard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main Server/routes/dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/routes/dashboard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main Server/views/dashboard.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/views/dashboard.ejs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,13 +56,15 @@
     </key>
   </component>
   <component name="RunManager" selected="Node.js.Main Node">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -98,7 +103,8 @@
       <workItem from="1616121680523" duration="37000" />
       <workItem from="1616144346742" duration="374000" />
       <workItem from="1616144738952" duration="10242000" />
-      <workItem from="1616165225738" duration="7221000" />
+      <workItem from="1616165225738" duration="8717000" />
+      <workItem from="1616355179502" duration="13166000" />
     </task>
     <task id="LOCAL-00001" summary="ajax.js added with basic functionality">
       <created>1615239782665</created>
@@ -261,7 +267,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616171611955</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="fixed connectToRoom parameters">
+      <created>1616173045622</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1616173045622</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -303,6 +316,7 @@
     <MESSAGE value="Fixed canvas bugs, fixed room-generating form" />
     <MESSAGE value="IndexedDB now only lists rooms that have been accessedBy the specific person" />
     <MESSAGE value="createTile changed so it is suited for image library too + modal frame added" />
-    <option name="LAST_COMMIT_MESSAGE" value="createTile changed so it is suited for image library too + modal frame added" />
+    <MESSAGE value="fixed connectToRoom parameters" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed connectToRoom parameters" />
   </component>
 </project>
