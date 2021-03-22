@@ -185,18 +185,13 @@ function createTile(data, isRoom){
     let tile = document.createElement('div');
     tile.className = "col-12 col-sm-6 col-md-4 col-lg-2 card tile";
 
-    //Description in tooltip
-    tile.setAttribute("data-toggle", "tooltip");
-    tile.setAttribute("title", "Description: " + data.imageDesc);
-    $(tile).tooltip();
-
     //General fields
     let cardBody = document.createElement('div');
     cardBody.className = "card-body";
 
     let cardTitle = document.createElement('h5');
     cardTitle.className = "card-title";
-    cardTitle.innerHTML = "Title: " + data.imageTitle;
+
 
     let img = document.createElement('img');
     img.className = "card-img-top";
@@ -215,18 +210,23 @@ function createTile(data, isRoom){
         });
 
         //Additional field(s)
-        let cardRoom = document.createElement('p');
-        cardRoom.className = "card-text";
-        cardRoom.innerHTML = "Room name: " + data.roomid;
+        cardTitle.innerHTML = "Room: " + data.roomid;
 
-        cardBody.append(cardTitle, cardRoom);
+        cardBody.appendChild(cardTitle);
     }
     //If it is an image
     else{
+        //Description in tooltip
+        tile.setAttribute("data-toggle", "tooltip");
+        tile.setAttribute("title", "Description: " + data.imageDesc);
+        $(tile).tooltip();
+
         //Make it selectable
         tile.setAttribute('tabindex', '0');
 
         //Additional field(s)
+        cardTitle.innerHTML = "Title: " + data.imageTitle;
+
         let cardAuthor = document.createElement('p');
         cardAuthor.className = "card-text";
         cardAuthor.innerHTML = "Author: " + author;
@@ -427,4 +427,25 @@ function generateRoomLink(formID){
 
     //Toggle menu
     $('#create-room-dropdown').click();
+}
+
+/**
+ * Toggles the title and description fields in the form if
+ * the user wants to join to an existing room
+ */
+function toggleFormFields(){
+    let checkbox = $("#box-1");
+    let titleField = $("#img_title");
+    let descField = $("#img_description");
+
+    //Disable title and description fields
+    if(checkbox.is(":checked")){
+        titleField.prop("disabled", true);
+        descField.prop("disabled", true);
+    }
+    //Enable title and description fields
+    else{
+        titleField.prop("disabled", false);
+        descField.prop("disabled", false);
+    }
 }

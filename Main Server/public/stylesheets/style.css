@@ -52,6 +52,57 @@ a {
 }
 /*Login form end*/
 
+/*Checkbox*/
+#checkboxContainer{
+    margin: 10px 0 10px 10px;
+    border: 1px solid #007bff;
+    width: fit-content;
+    border-radius: 15px;
+    padding: 15px;
+}
+input[type="checkbox"] {
+    display: none;
+}
+
+input[type="checkbox"] + label {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+input[type="checkbox"] + label:last-child {
+    margin-bottom: 0;
+}
+
+input[type="checkbox"] + label:before {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: .6;
+    content: '';
+    border: 2px solid #007bff;
+    display: block;
+    width: 20px;
+    height: 20px;
+    -webkit-transition: all .12s, border-color .08s;
+    transition: all .12s, border-color .08s;
+}
+
+input[type="checkbox"]:checked + label:before {
+    border-radius: 0;
+    opacity: 1;
+    width: 10px;
+    top: -5px;
+    left: 5px;
+    border-top-color: transparent;
+    border-left-color: transparent;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+/*Checkbox end*/
+
 /*Enter-join form*/
 #enter-join-form{
     margin: 10px 0 10px 10px;
