@@ -370,9 +370,10 @@ function filterTiles(authorString){
  * @param file The image file
  */
 function uploadImg(file, target){
+    let targetElement = $("#"+target)
     var reader = new FileReader();
     reader.onloadend = function() {
-        target.value = reader.result;
+        targetElement.val(reader.result);
     }
     reader.readAsDataURL(file);
 }

@@ -3,8 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="f32f66fa-046e-47f8-903b-db21fa5041a6" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main Server/public/javascripts/camera.js" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/public/javascripts/camera.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main Server/public/javascripts/dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/public/javascripts/dashboard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main Server/public/stylesheets/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/public/stylesheets/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main Server/views/dashboard.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/views/dashboard.ejs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -44,7 +44,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Main Server" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../SoftwareReengineering/reengineering-toolkit" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
@@ -91,7 +91,8 @@
       <workItem from="1616144738952" duration="10242000" />
       <workItem from="1616165225738" duration="8717000" />
       <workItem from="1616355179502" duration="13313000" />
-      <workItem from="1616407377211" duration="3355000" />
+      <workItem from="1616407377211" duration="4883000" />
+      <workItem from="1616439735039" duration="2201000" />
     </task>
     <task id="LOCAL-00001" summary="ajax.js added with basic functionality">
       <created>1615239782665</created>
@@ -268,7 +269,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616375348981</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Added checkbox (join/create new room)">
+      <created>1616410995412</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1616410995412</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -312,6 +320,7 @@
     <MESSAGE value="createTile changed so it is suited for image library too + modal frame added" />
     <MESSAGE value="fixed connectToRoom parameters" />
     <MESSAGE value="Forms are now using Ajax, major refactoring in dashboard.js" />
-    <option name="LAST_COMMIT_MESSAGE" value="Forms are now using Ajax, major refactoring in dashboard.js" />
+    <MESSAGE value="Added checkbox (join/create new room)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added checkbox (join/create new room)" />
   </component>
 </project>
