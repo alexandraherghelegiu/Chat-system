@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
         headers: {'Content-Type': 'application/json'},
     })
         .then (res => res.json())
-        .then (data => console.log(data))
+        .then (data => res.send(data))
         .catch(err =>
             console.log(err))
 });

@@ -8,7 +8,6 @@ let socket= io();
  * plus the associated actions
  */
 function init() {
-    sendGetAllAjaxQueryToMongoDB('/getAllMongo');
 
     // it sets up the interface so that userId and room are selected
     document.getElementById('initial_form').style.display = 'block';
@@ -229,7 +228,7 @@ function createTile(data, isRoom){
 
         let cardAuthor = document.createElement('p');
         cardAuthor.className = "card-text";
-        cardAuthor.innerHTML = "Author: " + author;
+        cardAuthor.innerHTML = "Author: " + data.imageAuthor;
 
         cardBody.append(cardTitle, cardAuthor)
 
@@ -458,3 +457,23 @@ function logOut(){
     window.localStorage.clear();
     sendAjaxQuery('https://localhost:3000/');
 }
+
+
+function getMongoImages() {
+    sendGetAllAjaxQueryToMongoDB('/getAllMongo');
+}
+
+function displayMongoImages(data) {
+    let wrapper = document.getElementById('imageTileList');
+    wrapper.innerHTML = "";
+    wrapper.className = "container-fluid row";
+
+    for (let image of data) {
+        //display each image from MongoDB
+        console.log(image.imageUrl);
+        let tile = createTile(image, false);
+        wrapper.appendChild(tile);
+    }
+    console.log(data);
+}
+

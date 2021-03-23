@@ -75,10 +75,10 @@ exports.getAllImages = function (req, res) {
                         console.log("images in db length > 0");
                         imageToBase64(image.image_path).then(img=>{
                             let image_info = {
-                                image: img,
-                                img_author: image.image_author,
-                                img_title: image.image_title,
-                                img_description: image.image_description
+                                imageUrl: "data:image/jpeg;base64," + img,  // image in base64 format
+                                imageAuthor: image.image_author,
+                                imageTitle: image.image_title,
+                                imageDesc: image.image_description
                             };
                             info.push(image_info);
                             if (info.length === images.length){

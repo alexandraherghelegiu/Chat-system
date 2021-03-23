@@ -34,10 +34,12 @@ function sendGetAllAjaxQueryToMongoDB(url){
         url: url,
         type: "GET",
         contentType: 'application/json',
+        client_max_body_size: 100,
         //Error function
         error: err => console.log(err),
         //Success function
         success: response => {
+            displayMongoImages(response);
             // change to display results
             console.log("Get all request succeeded");
         }
