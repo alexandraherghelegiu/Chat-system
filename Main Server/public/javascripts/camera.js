@@ -1,6 +1,6 @@
 var videoStream;
 
-function setupCamera(){
+function setupCamera(inRoom){
     //document.getElementById('initial_form').style.display = 'none';
     document.getElementById('cameraInterface').style.display = 'block';
 
@@ -43,7 +43,8 @@ function setupCamera(){
         $('#preview').hide();
         $('#retake').show();
         $('#photoTaken').show();
-        $('#confirm').show();
+        if(inRoom) $('#confirmSmall').show();
+        else $('#confirm').show();
         e.preventDefault();
 
 
@@ -56,6 +57,7 @@ function setupCamera(){
         $('#photoTaken').hide();
         $('#retake').hide();
         $('#confirm').hide();
+        $('#confirmSmall').hide()
     })
 
 
@@ -102,9 +104,9 @@ function stopStream(stream) {
 }
 
 
-function uploadTakenImage(){
+function uploadTakenImage(target){
     let photo = $('#photoTaken').attr('src');
-    $('#image_url').val(photo);
+    $('#'+target).val(photo);
     //Stopping the stream
     stopStream(videoStream);
     $('#cameraInterface').hide();
