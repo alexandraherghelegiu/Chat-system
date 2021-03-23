@@ -10,10 +10,16 @@ let loadedImages;
  * plus the associated actions
  */
 function init() {
-
     // it sets up the interface so that userId and room are selected
     document.getElementById('initial_form').style.display = 'block';
     document.getElementById('chat_interface').style.display = 'none';
+
+    //Initialise small dropdown
+    $('#smallDropdown').on('hide.bs.dropdown', function (e) {
+        if (e.clickEvent) {
+            e.preventDefault();
+        }
+    });
 
     //Initialise the name of the user
     name = window.localStorage.getItem("name");
@@ -369,7 +375,7 @@ function fillRoomNo(inputField){
         newRoom = roomNo + "-2";
     }
     //Setting the value of the input field
-    inputField.value = newRoom;
+    $("#"+inputField).val(newRoom);
 }
 
 
