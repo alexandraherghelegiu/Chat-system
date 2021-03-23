@@ -39,6 +39,7 @@ function sendGetAllAjaxQueryToMongoDB(url){
         error: err => console.log(err),
         //Success function
         success: response => {
+            loadedImages = response;
             displayMongoImages(response);
             // change to display results
             console.log("Get all request succeeded");

@@ -46,7 +46,7 @@
                         </div>
                         <div class="col-auto text-center">
                             <input id="img_upload" type="file" accept="image/jpeg, image/png" onchange="uploadImg(img_upload.files[0], 'image_url')" style="display: none;">
-                            <button onclick="document.getElementById('img_upload').click()" class="btn btn-secondary">Upload</button>
+                            <button id="img_upload_btn" onclick="document.getElementById('img_upload').click()" class="btn btn-secondary">Upload</button>
                         </div>
                         <div class="col-auto text-center">
                             <button id="takePicture" data-toggle="modal" data-target="#cameraModal" onclick="setupCamera(false)" class="btn btn-secondary">Take Picture</button>
@@ -73,13 +73,6 @@
             </div>
         </div>
 
-
-
-<!--        &lt;!&ndash;   Filter     &ndash;&gt;-->
-<!--        <div id="filter-input-group">-->
-<!--            <label class="form-label">Filter:</label>-->
-<!--            <input class="form-control" id="authorFilter" name="authorFilter" onkeyup="filterTiles(authorFilter.value)">-->
-<!--        </div>-->
 
         <!--   Room tiles     -->
         <div id="roomTileList" class="row"></div>
@@ -225,11 +218,13 @@
                     </button>
                 </div>
                 <div class="modal-body">
+                    <!--   Filter     -->
+                    <div id="filter-input-group">
+                        <label class="form-label">Filter:</label>
+                        <input class="form-control" id="authorFilter" name="authorFilter" onkeyup="filterTiles(authorFilter.value)">
+                    </div>
+
                     <div id="imageTileList"></div>
-                </div>
-                <!-- Buttons -->
-                <div class="modal-footer">
-                    <button id="selectImage" class="btn btn-primary">Select image</button>
                 </div>
             </div>
         </div>

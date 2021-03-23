@@ -2,6 +2,8 @@ let roomNo = null;
 let name;
 let socket= io();
 
+let loadedImages;
+
 /**
  * called by <body onload>
  * it initialises the interface and the expected socket messages
@@ -104,7 +106,7 @@ function sendFormData(formID) {
     //Data to send
     let fullData = {...formData, ...extraData}
 
-    //TODO: add if statement for "joining existing room" (if not clicked then do the following)
+    // if image is new (not taken from MongoDB), then insert it in MongoDB
     if (!$("#img_title").prop("disabled")){
         //Check if image loaded or linked, only store in MongoDB if uploaded (if in base64 format)
         const base64regx = new RegExp("^data:image\\/(?:gif|png|jpeg|bmp|webp)(?:;charset=utf-8)?;" +
@@ -216,8 +218,15 @@ function createTile(data, isRoom){
 
         cardBody.appendChild(cardTitle);
     }
+
     //If it is an image
     else{
+        tile.setAttribute("data-dismiss", "modal");
+        tile.addEventListener("click", () => {
+            //Join the room
+            $("#image_url").val(img.src);
+        });
+
         //Description in tooltip
         tile.setAttribute("data-toggle", "tooltip");
         tile.setAttribute("title", "Description: " + data.imageDesc);
@@ -325,44 +334,9 @@ function hideLoginInterface(room, userId) {
 /**
  * Disconnects from a room by sending a request to /dashboard
  */
-function disconnectFromRoom(){
+function disconnectFromRoom() {
     //Load dashboard
     sendAjaxQuery('https://localhost:3000/dashboard', JSON.stringify({name: name}));
-}
-
-
-/**
- * Filters the tiles according to its parameter
- * @param authorString The author's name
- */
-function filterTiles(authorString){
-    // TODO: Need to filter images rather than rooms!
-
-    //Display all room data stored in the indexedDB
-    // getAllRoomData(name).then(result => {
-    //     if(result){
-    //         //Filter results
-    //         result = result.filter(e => e.author.toUpperCase().includes(authorString.toUpperCase()));
-    //
-    //         let wrapper = document.getElementById('roomTileList');
-    //         wrapper.className = "container-fluid row";
-    //         //Clear tiles
-    //         wrapper.innerHTML = "";
-    //
-    //         for(let room of result) {
-    //             //Checking whether annotations exist
-    //             let url;
-    //             if (room.canvas != "") url = room.canvas;
-    //             else url = room.imageUrl;
-    //
-    //             //Creating tile
-    //             let tile = createTile(url, room.imageTitle, room.imageDesc, room.author, true, room.roomid);
-    //
-    //             //Adding tile to wrapper
-    //             wrapper.appendChild(tile);
-    //         }
-    //     }
-    // });
 }
 
 
@@ -441,15 +415,21 @@ function toggleFormFields(){
     let titleField = $("#img_title");
     let descField = $("#img_description");
     let imgBrowseBtn = $("#pickImage");
+    let imgUploadBtn = $("#img_upload_btn");
+    let takePictureBtn = $("#takePicture");
 
     //Disable title and description fields
     if(checkbox.is(":checked")){
+        imgUploadBtn.prop("disabled", true);
+        takePictureBtn.prop("disabled", true);
         titleField.prop("disabled", true);
         descField.prop("disabled", true);
         imgBrowseBtn.prop("disabled", false);
     }
     //Enable title and description fields
     else{
+        imgUploadBtn.prop("disabled", false);
+        takePictureBtn.prop("disabled", false);
         imgBrowseBtn.prop("disabled", true);
         titleField.prop("disabled", false);
         descField.prop("disabled", false);
@@ -465,10 +445,19 @@ function logOut(){
 }
 
 
+/**
+ * called when user clicks on "select from uploaded images"
+ * sends query to server
+ */
 function getMongoImages() {
     sendGetAllAjaxQueryToMongoDB('/getAllMongo');
 }
 
+
+/**
+ * displays all images in database
+ * @param data retrieved from MongoDB
+ */
 function displayMongoImages(data) {
     let wrapper = document.getElementById('imageTileList');
     wrapper.innerHTML = "";
@@ -483,3 +472,12 @@ function displayMongoImages(data) {
     console.log(data);
 }
 
+
+/**
+ * Filters the tiles according to its parameter
+ * @param authorString The author's name
+ */
+function filterTiles(authorString){
+    let filteredImages = loadedImages.filter(e => e.imageAuthor.toUpperCase().includes(authorString.toUpperCase()));
+    displayMongoImages(filteredImages);
+}
