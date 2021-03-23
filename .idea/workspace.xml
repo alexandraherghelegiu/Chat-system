@@ -3,8 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="f32f66fa-046e-47f8-903b-db21fa5041a6" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main Server/public/javascripts/camera.js" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/public/javascripts/camera.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main Server/public/javascripts/dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/public/javascripts/dashboard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main Server/routes/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/routes/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main Server/views/dashboard.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/views/dashboard.ejs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -31,7 +31,7 @@
     </file-type-list>
   </component>
   <component name="ProjectId" id="1pUXHk9EhFs5Ij6xgmnOakcXjH8" />
-  <component name="ProjectLevelVcsManager">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
@@ -44,7 +44,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../SoftwareReengineering/reengineering-toolkit" />
+    <property name="last_opened_file_path" value="$USER_HOME$/SoftwareReengineering/reengineering-toolkit" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
