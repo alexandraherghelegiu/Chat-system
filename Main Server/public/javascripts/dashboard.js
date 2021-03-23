@@ -438,14 +438,17 @@ function toggleFormFields(){
     let checkbox = $("#box-1");
     let titleField = $("#img_title");
     let descField = $("#img_description");
+    let imgBrowseBtn = $("#pickImage");
 
     //Disable title and description fields
     if(checkbox.is(":checked")){
         titleField.prop("disabled", true);
         descField.prop("disabled", true);
+        imgBrowseBtn.prop("disabled", false);
     }
     //Enable title and description fields
     else{
+        imgBrowseBtn.prop("disabled", true);
         titleField.prop("disabled", false);
         descField.prop("disabled", false);
     }
