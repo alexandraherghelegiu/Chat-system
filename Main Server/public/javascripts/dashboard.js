@@ -46,6 +46,7 @@ function init() {
     initSocket();
 }
 
+
 /**
  * Initialises the socket
  */
@@ -74,8 +75,6 @@ function initSocket(){
             updateField(room, "messages", data);
         });
         updateField(room, "canvas", canvasUrl);
-
-
         writeOnHistory('<b>' + who + ':</b> ' + chatText);
     });
 }
@@ -102,7 +101,6 @@ function sendFormData(formID) {
         "canvas": "",
         "messages": []
     }
-
     //Data to send
     let fullData = {...formData, ...extraData}
 
@@ -122,7 +120,6 @@ function sendFormData(formID) {
             sendInsertAjaxQueryToMongoDB(url, JSON.stringify(mongoData));
         }
     }
-
     sendAjaxFormQuery('/dashboard/processform', JSON.stringify(fullData));
 }
 
@@ -139,7 +136,6 @@ function serialiseForm(form){
     for (index in formArray){
         data[formArray[index].name]= formArray[index].value;
     }
-
     return data;
 }
 
@@ -196,14 +192,12 @@ function createTile(data, isRoom){
     let cardTitle = document.createElement('h5');
     cardTitle.className = "card-title";
 
-
     let img = document.createElement('img');
     img.className = "card-img-top";
     //If annotations exist
     if(data.canvas) img.src = data.canvas;
     //No annotations
     else img.src = data.imageUrl;
-
 
     //If it is a room
     if(isRoom){
@@ -215,7 +209,6 @@ function createTile(data, isRoom){
 
         //Additional field(s)
         cardTitle.innerHTML = "Room: " + data.roomid;
-
         cardBody.appendChild(cardTitle);
     }
 
@@ -243,9 +236,7 @@ function createTile(data, isRoom){
         cardAuthor.innerHTML = "Author: " + data.imageAuthor;
 
         cardBody.append(cardTitle, cardAuthor)
-
     }
-
     //Add image and card body
     tile.append(img, cardBody);
     return tile;
@@ -291,11 +282,9 @@ function displayLoadedMessages(messageList){
         else{
             paragraph.innerHTML = '<b>' + m.user + ':</b> ' + m.message;
         }
-
         //Append to the history
         history.appendChild(paragraph);
     }
-
     //Scroll to the last element
     history.scrollTop = history.scrollHeight;
     document.getElementById('chat_input').value = '';
@@ -379,7 +368,6 @@ function fillRoomNo(inputField){
     else{
         newRoom = roomNo + "-2";
     }
-
     //Setting the value of the input field
     inputField.value = newRoom;
 }
@@ -396,7 +384,8 @@ function generateRoomLink(formID){
 
     //Sends a button link to the new room to the chat
     var stringifiedData = JSON.stringify(dropdownFormData);
-    let messageLink = "<button class='btn btn-primary' onclick='connectToRoomNew("+stringifiedData+")'>Connect to room "+dropdownFormData.roomid+"</button>";
+    let messageLink = "<button class='btn btn-primary' " +
+        "onclick='connectToRoomNew("+stringifiedData+")'>Connect to room "+dropdownFormData.roomid+"</button>";
     sendChatText(messageLink);
 
     //Redirects the current user
@@ -405,6 +394,7 @@ function generateRoomLink(formID){
     //Toggle menu
     $('#create-room-dropdown').click();
 }
+
 
 /**
  * Toggles the title and description fields in the form if
@@ -435,6 +425,7 @@ function toggleFormFields(){
         descField.prop("disabled", false);
     }
 }
+
 
 /**
  * Logs the current user out
