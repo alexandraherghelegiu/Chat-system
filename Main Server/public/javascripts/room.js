@@ -1,3 +1,5 @@
+let socket= io();
+
 function initSocket(){
     //Joining a room
     socket.on('joined', function(room, userId, image){
@@ -34,7 +36,7 @@ function initSocket(){
  * Takes the room, imageUrl, image title, desc and author as parameters
  */
 function connectToRoom(roomNr, imageUrl, title, desc, author) {
-    let roomNo = roomNr;
+    roomNo = roomNr;
 
     //Checking the local database if room already stored
     getRoomData(roomNo).then(result => {
@@ -55,6 +57,7 @@ function connectToRoom(roomNr, imageUrl, title, desc, author) {
             socket.emit('create or join', roomNo, name, imageUrl);
             displayLoadedMessages([]);
             hideLoginInterface(roomNo, name);
+            //Initializes room with image and blank canvas
             initCanvas(socket, imageUrl, "");
         }
 
@@ -64,6 +67,7 @@ function connectToRoom(roomNr, imageUrl, title, desc, author) {
             //Load data from indexedDB
             displayLoadedMessages(result.messages);
             hideLoginInterface(roomNo, name);
+            //Re-initalize canvas with new image and annotations
             initCanvas(socket, result.imageUrl, result.canvas);
         }
     });

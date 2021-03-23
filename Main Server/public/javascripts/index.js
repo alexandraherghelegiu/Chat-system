@@ -19,6 +19,17 @@ function enterSystem() {
     //Set local storage
     window.localStorage.setItem("name", name);
 
-    sendAjaxQuery('https://localhost:3000/dashboard', JSON.stringify(data));
+    sendAjaxQuery('http://localhost:3000/dashboard', JSON.stringify(data));
     event.preventDefault();
+}
+
+if ('serviceWorker' in navigator){
+    window.addEventListener('load', function(){
+        navigator.serviceWorker.register('/service-worker.js').then(function(registration){
+            //Registration successful
+            console.log("service worker registered successfully with scope "+ registration.scope);
+        }, function(err){
+            console.log("service worker registration error: " + err);
+        });
+    });
 }
