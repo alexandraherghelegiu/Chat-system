@@ -61,7 +61,7 @@ function initSocket(){
         let who = userId;
         if (userId === name) who = 'Me';
         let canvasUrl = document.getElementById('canvas').toDataURL();
-
+        console.log('received message ' + chatText);
         //Storing message in IndexedDB
         getRoomFieldData(room, "messages").then(data => {
             var newObj = {
@@ -258,6 +258,7 @@ function generateRoom() {
  */
 function sendChatText(text) {
     socket.emit('chat', roomNo, name, text);
+
 }
 
 
@@ -325,7 +326,7 @@ function hideLoginInterface(room, userId) {
  */
 function disconnectFromRoom(){
     //Load dashboard
-    sendAjaxQuery('https://localhost:3000/dashboard', JSON.stringify({name: name}));
+    sendAjaxQuery('http://localhost:3000/dashboard', {name: name});
 }
 
 

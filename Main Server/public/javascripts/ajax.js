@@ -3,12 +3,14 @@ function sendAjaxQuery(url, data){
         url: url,
         type: "GET",
         data: data,
-        contentType: 'application/json',
+        contentType: 'text/plain',
         //Error function
         error: err => console.log(err),
         //Success function
         success: response => {
             //Redirect
+            console.log(url);
+            //return response;
             location = url;
         }
     });
