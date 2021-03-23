@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f32f66fa-046e-47f8-903b-db21fa5041a6" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/bin_www.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/DB_server.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main Server/public/javascripts/camera.js" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/public/javascripts/camera.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main Server/public/javascripts/dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/public/javascripts/dashboard.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main Server/views/dashboard.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/views/dashboard.ejs" afterDir="false" />
     </list>
@@ -31,7 +31,7 @@
     </file-type-list>
   </component>
   <component name="ProjectId" id="1pUXHk9EhFs5Ij6xgmnOakcXjH8" />
-  <component name="ProjectLevelVcsManager">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
@@ -44,7 +44,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../SoftwareReengineering/reengineering-toolkit" />
+    <property name="last_opened_file_path" value="$USER_HOME$/SoftwareReengineering/reengineering-toolkit" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
@@ -55,9 +55,24 @@
     </key>
   </component>
   <component name="RunManager" selected="Node.js.Main Node">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Main Node" type="NodeJSConfigurationType" path-to-js-file="bin/www" working-dir="$PROJECT_DIR$/Main Server">
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Node.js.DB server" />
+      <item itemvalue="Node.js.Main Node" />
+    </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -276,7 +291,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616410995412</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="slight appearance changes on the dashboard page">
+      <created>1616520843319</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1616520843319</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -296,7 +318,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="ajax.js added with basic functionality" />
     <MESSAGE value="updateField is added to indexed_database" />
     <MESSAGE value="Messages are now stored in the IndexedDB" />
     <MESSAGE value="Upon joining a room it now checks for matching image url in the IndexedDB" />
@@ -321,6 +342,7 @@
     <MESSAGE value="fixed connectToRoom parameters" />
     <MESSAGE value="Forms are now using Ajax, major refactoring in dashboard.js" />
     <MESSAGE value="Added checkbox (join/create new room)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added checkbox (join/create new room)" />
+    <MESSAGE value="slight appearance changes on the dashboard page" />
+    <option name="LAST_COMMIT_MESSAGE" value="slight appearance changes on the dashboard page" />
   </component>
 </project>

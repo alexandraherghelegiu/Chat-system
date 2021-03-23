@@ -7,4 +7,9 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Spy System' });
 });
 
+/* POST home page */
+router.post('/', function(req, res, next) {
+  res.render('index', { title: 'Spy System'});
+});
+
 module.exports = router;
