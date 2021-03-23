@@ -20,12 +20,17 @@
 
         <div class="row">
             <div class="col">
+                <!--  Checkbox  -->
+                <div id="checkboxContainer">
+                    <input type="checkbox" id="box-1" onclick="toggleFormFields()">
+                    <label for="box-1" class="form-label">Joining an existing room</label>
+                </div>
                 <!--    Create/join room form    -->
                 <form id="enter-join-form" onsubmit="return false;">
                     <label for="roomNo" class="form-label"> Your room </label>
                     <div class="row mb-3">
                         <div class="col">
-                            <input type="text" id="roomNo" name="roomNo" class="form-control">
+                            <input type="text" id="roomNo" name="roomid" class="form-control">
                         </div>
                         <div class="col-auto">
                             <button id="roomNoGenerator" onclick="generateRoom()" class="btn btn-secondary">Generate Room</button>
@@ -34,14 +39,14 @@
                     <label for="image_url" class="form-label"> Image (URL) </label>
                     <div class="row mb-3">
                         <div class="col">
-                            <input type="text" id="image_url" name="image_url" class="form-control">
+                            <input type="text" id="image_url" name="imageUrl" class="form-control">
                         </div>
                         <div class="col-auto">
-                            <input id="img_upload" type="file" accept="image/jpeg, image/png" onchange="uploadImg(img_upload.files[0], document.getElementById('image_url'))" style="display: none;">
+                            <input id="img_upload" type="file" accept="image/jpeg, image/png" onchange="uploadImg(img_upload.files[0], 'image_url')" style="display: none;">
                             <button onclick="document.getElementById('img_upload').click()" class="btn btn-secondary">Upload</button>
                         </div>
                         <div class="col-auto">
-                            <button id="takePicture" data-toggle="modal" data-target="#cameraModal" onclick="setupCamera()" class="btn btn-secondary">Take Picture</button>
+                            <button id="takePicture" data-toggle="modal" data-target="#cameraModal" onclick="setupCamera(false)" class="btn btn-secondary">Take Picture</button>
                         </div>
                         <div class="col-auto">
                             <button id="pickImage" data-toggle="modal" data-target="#imageSelectorModal" onclick="" class="btn btn-secondary">Select from uploaded images</button>
@@ -51,17 +56,17 @@
                     <!-- Image title -->
                     <div class="mb-3">
                         <label class="form-label">Image title</label>
-                        <input id="img_title" name="img_title" class="form-control">
+                        <input id="img_title" name="imageTitle" class="form-control">
                     </div>
 
                     <!-- Image description -->
                     <div class="mb-3">
                         <label class="form-label">Image description</label>
-                        <textarea id="img_description" name="img_description" class="form-control" aria-label="Image description"></textarea>
+                        <textarea id="img_description" name="imageDesc" class="form-control" aria-label="Image description"></textarea>
                     </div>
 
 
-                    <button id="connect" onclick="createRoom(roomNo.value, image_url.value, img_title.value, img_description.value)" class="btn btn-primary">Connect</button>
+                    <button id="connect" onclick="sendFormData('enter-join-form')" class="btn btn-primary">Connect</button>
                 </form>
             </div>
         </div>
@@ -112,24 +117,33 @@
                     <div class="dropdown" >
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="create-room-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="fillRoomNo(roomNoDD)">Create room link</button>
                         <div class="dropdown-menu">
-                            <form class="px-4 py-3" onsubmit="return false;">
+                            <form id="dropdown-create-room" class="px-4 py-3" onsubmit="return false;">
                                 <div class="form-group">
                                     <label for="roomNoDD">Room Name</label>
-                                    <input type="text" class="form-control" id="roomNoDD" disabled>
+                                    <input type="text" class="form-control" id="roomNoDD" name="roomid" readonly>
                                 </div>
                                 <div class="form-group">
                                     <label for="new_image_url">Image Url</label>
-                                    <input type="text" class="form-control" id="new_image_url">
+                                    <input type="text" class="form-control mb-3" id="new_image_url" name="imageUrl">
+                                    <div class="row">
+                                        <div class="col-auto">
+                                            <button id="takePictureSmall" data-toggle="modal" data-target="#cameraModal" onclick="setupCamera(true)" class="btn btn-secondary">Take Picture</button>
+                                        </div>
+                                        <div class="col">
+                                            <input id="img_upload_small" type="file" accept="image/jpeg, image/png" onchange="uploadImg(img_upload_small.files[0], 'new_image_url')" style="display: none;">
+                                            <button onclick="document.getElementById('img_upload_small').click()" class="btn btn-secondary">Upload</button>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="new_img_title">Image Title</label>
-                                    <input type="text" class="form-control" id="new_img_title" name="img_title">
+                                    <input type="text" class="form-control" id="new_img_title" name="imageTitle">
                                 </div>
                                 <div class="form-group">
                                     <label for="new_img_title">Image Description</label>
-                                    <textarea type="text" class="form-control" id="new_img_desc" name="new_img_desc"></textarea>
+                                    <textarea type="text" class="form-control" id="new_img_desc" name="imageDesc"></textarea>
                                 </div>
-                                <button id="create_room_link" onclick="generateRoomLink()" class="btn btn-primary">Generate room link</button>
+                                <button id="create_room_link" onclick="generateRoomLink('dropdown-create-room')" class="btn btn-primary">Generate room link</button>
                             </form>
 
                         </div>
@@ -161,11 +175,11 @@
     <!-- ######################MODALS############################ -->
 
     <!--  Camera Modal  -->
-    <div class="modal fade" id="cameraModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="cameraModal" tabindex="-1" role="dialog" aria-labelledby="cameraModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Camera</h5>
+                    <h5 class="modal-title" id="cameraModalLongTitle">Camera</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="closeCamera()">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -194,7 +208,8 @@
                     <button id="shutter" class="btn btn-primary">Take photo</button>
 
                     <!--                                <div class="col">-->
-                    <button id="confirm" style="display: none" onclick="uploadTakenImage()" data-dismiss="modal" class="btn btn-primary">Confirm</button>
+                    <button id="confirm" style="display: none" onclick="uploadTakenImage('image_url')" data-dismiss="modal" class="btn btn-primary">Confirm</button>
+                    <button id="confirmSmall" style="display: none" onclick="uploadTakenImage('new_image_url')" data-dismiss="modal" class="btn btn-primary">Confirm</button>
                     <!--                                </div>-->
                     <!--                                <div class="col text-right">-->
                     <button id="retake" style="display: none" class="btn btn-secondary">Retake</button>

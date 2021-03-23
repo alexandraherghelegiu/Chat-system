@@ -43,3 +43,23 @@ function sendGetAllAjaxQueryToMongoDB(url){
         }
     });
 }
+
+/**
+ * Sends an AJAX query containing the form data
+ * @param url The target url
+ * @param data The data extracted from the form
+ */
+function sendAjaxFormQuery(url, data){
+    $.ajax({
+        url: url,
+        data: data,
+        contentType: "application/json",
+        type: "POST",
+        success: data => {
+            connectToRoomNew(data);
+        },
+        error: (xhr, status, error) => {
+            alert("Error: "+error.message);
+        }
+    })
+}
