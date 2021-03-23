@@ -450,3 +450,11 @@ function toggleFormFields(){
         descField.prop("disabled", false);
     }
 }
+
+/**
+ * Logs the current user out
+ */
+function logOut(){
+    window.localStorage.clear();
+    sendAjaxQuery('https://localhost:3000/');
+}
