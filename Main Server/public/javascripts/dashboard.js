@@ -104,6 +104,23 @@ function sendFormData(formID) {
     //Data to send
     let fullData = {...formData, ...extraData}
 
+    //TODO: add if statement for "joining existing room" (if not clicked then do the following)
+    if (!$("#img_title").prop("disabled")){
+        //Check if image loaded or linked, only store in MongoDB if uploaded (if in base64 format)
+        const base64regx = new RegExp("^data:image\\/(?:gif|png|jpeg|bmp|webp)(?:;charset=utf-8)?;" +
+            "base64,(?:[A-Za-z0-9]|[+/])+={0,2}");
+        if (base64regx.test(fullData.imageUrl)) {
+            let mongoData = {
+                "img_author": name,
+                "img_title": fullData.imageTitle,
+                "img_description": fullData.imageDesc,
+                "imageBlob": fullData.imageUrl
+            }
+            let url = 'https://localhost:3000/insertMongo';
+            sendInsertAjaxQueryToMongoDB(url, JSON.stringify(mongoData));
+        }
+    }
+
     sendAjaxFormQuery('/dashboard/processform', JSON.stringify(fullData));
 }
 
@@ -132,20 +149,6 @@ function serialiseForm(form){
 function connectToRoomNew(roomData) {
     var data = roomData;
     roomNo = roomData.roomid
-
-    //Check if image loaded or linked, only store in MongoDB if uploaded (if in base64 format)
-    const base64regx = new RegExp("^data:image\\/(?:gif|png|jpeg|bmp|webp)(?:;charset=utf-8)?;" +
-        "base64,(?:[A-Za-z0-9]|[+/])+={0,2}");
-    if (base64regx.test(data.imageUrl)){
-        let mongoData = {
-            "img_author": name,
-            "img_title": data.imageTitle,
-            "img_description": data.imageDesc,
-            "imageBlob" : data.imageUrl
-        }
-        let url = 'https://localhost:3000/insertMongo';
-        sendInsertAjaxQueryToMongoDB(url, JSON.stringify(mongoData));
-    }
 
     console.log('connecting to ' + data.roomid);
     //Checking the database
