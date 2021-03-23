@@ -14,8 +14,12 @@
 </head>
 <body onload="init()">
     <div id="initial_form" style="display: block">
-        <h1>Welcome, <%= name %> !</h1>
-        <p>Please insert the id of the Room you want to Join, if you do not have a room id, click Generate Room</p>
+        <!--  Banner  -->
+        <div class="jumbotron">
+            <h1 class="display-4">Welcome, <%= name %> !</h1>
+            <p>Please insert the ID of the Room you want to Join, if you do not have a room id, create a new one!</p>
+            <button class="btn btn-secondary" onclick="logOut()">Log out</button>
+        </div>
 
         <div class="row">
             <div class="col">
@@ -37,18 +41,18 @@
                     </div>
                     <label for="image_url" class="form-label"> Image (URL) </label>
                     <div class="row mb-3">
-                        <div class="col">
+                        <div class="col-lg col-sm-12">
                             <input type="text" id="image_url" name="imageUrl" class="form-control">
                         </div>
-                        <div class="col-auto">
+                        <div class="col-auto text-center">
                             <input id="img_upload" type="file" accept="image/jpeg, image/png" onchange="uploadImg(img_upload.files[0], 'image_url')" style="display: none;">
                             <button onclick="document.getElementById('img_upload').click()" class="btn btn-secondary">Upload</button>
                         </div>
-                        <div class="col-auto">
+                        <div class="col-auto text-center">
                             <button id="takePicture" data-toggle="modal" data-target="#cameraModal" onclick="setupCamera(false)" class="btn btn-secondary">Take Picture</button>
                         </div>
-                        <div class="col-auto">
-                            <button id="pickImage" data-toggle="modal" data-target="#imageSelectorModal" onclick="" class="btn btn-secondary">Select from uploaded images</button>
+                        <div class="col-auto text-center">
+                            <button id="pickImage" data-toggle="modal" data-target="#imageSelectorModal" onclick="" class="btn btn-secondary" disabled>Select from uploaded images</button>
                         </div>
                     </div>
 
@@ -64,7 +68,6 @@
                         <textarea id="img_description" name="imageDesc" class="form-control" aria-label="Image description"></textarea>
                     </div>
 
-
                     <button id="connect" onclick="sendFormData('enter-join-form')" class="btn btn-primary">Connect</button>
                 </form>
             </div>
@@ -72,15 +75,14 @@
 
 
 
-        <!--   Filter     -->
-        <div id="filter-input-group">
-            <label class="form-label">Filter:</label>
-            <input class="form-control" id="authorFilter" name="authorFilter" onkeyup="filterTiles(authorFilter.value)">
-        </div>
+<!--        &lt;!&ndash;   Filter     &ndash;&gt;-->
+<!--        <div id="filter-input-group">-->
+<!--            <label class="form-label">Filter:</label>-->
+<!--            <input class="form-control" id="authorFilter" name="authorFilter" onkeyup="filterTiles(authorFilter.value)">-->
+<!--        </div>-->
 
         <!--   Room tiles     -->
-        <div id="roomTileList" class="row">
-        </div>
+        <div id="roomTileList" class="row"></div>
     </div>
 
     <!-- #####################CHAT INTERFACE#################### -->
@@ -148,27 +150,21 @@
                         </div>
                     </div>
                 </div>
-                <!--    </div>-->
+
                 <div class="column flex-fill flex-column w-50%">
                     <div id="history" class="boxed scrolling " ></div>
                     <div id="input" class=" boxed bottom">
                         <form onsubmit="return false;" style="width: 100%">
                             <p>
-                                <label for="name"> chat: </label>
+                                <label for="chat_input"> chat: </label>
                                 <input type="text" id="chat_input" name="chat_input" >
                                 <button id="chat_send" onclick="sendChatText(chat_input.value)" class="btn btn-primary">Send</button>
-
                             </p>
                         </form>
                     </div>
                 </div>
-
             </div>
-
         </div>
-
-
-
     </div>
 
     <!-- ######################MODALS############################ -->

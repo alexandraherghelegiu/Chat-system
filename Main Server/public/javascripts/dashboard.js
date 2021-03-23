@@ -61,7 +61,7 @@ function initSocket(){
         let who = userId;
         if (userId === name) who = 'Me';
         let canvasUrl = document.getElementById('canvas').toDataURL();
-        console.log('received message ' + chatText);
+
         //Storing message in IndexedDB
         getRoomFieldData(room, "messages").then(data => {
             var newObj = {
@@ -258,7 +258,6 @@ function generateRoom() {
  */
 function sendChatText(text) {
     socket.emit('chat', roomNo, name, text);
-
 }
 
 
@@ -326,7 +325,7 @@ function hideLoginInterface(room, userId) {
  */
 function disconnectFromRoom(){
     //Load dashboard
-    sendAjaxQuery('http://localhost:3000/dashboard', {name: name});
+    sendAjaxQuery('https://localhost:3000/dashboard', JSON.stringify({name: name}));
 }
 
 
@@ -439,15 +438,26 @@ function toggleFormFields(){
     let checkbox = $("#box-1");
     let titleField = $("#img_title");
     let descField = $("#img_description");
+    let imgBrowseBtn = $("#pickImage");
 
     //Disable title and description fields
     if(checkbox.is(":checked")){
         titleField.prop("disabled", true);
         descField.prop("disabled", true);
+        imgBrowseBtn.prop("disabled", false);
     }
     //Enable title and description fields
     else{
+        imgBrowseBtn.prop("disabled", true);
         titleField.prop("disabled", false);
         descField.prop("disabled", false);
     }
+}
+
+/**
+ * Logs the current user out
+ */
+function logOut(){
+    window.localStorage.clear();
+    sendAjaxQuery('https://localhost:3000/');
 }
