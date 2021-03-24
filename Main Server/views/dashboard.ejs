@@ -11,6 +11,7 @@
     <script src="/javascripts/canvas.js"></script>
     <script src="/javascripts/camera.js"></script>
     <script src="/javascripts/ajax.js"></script>
+    <script src="/javascripts/room.js"></script>
 </head>
 <body onload="init()">
     <div id="initial_form" style="display: block">
@@ -46,13 +47,13 @@
                         </div>
                         <div class="col-auto text-center">
                             <input id="img_upload" type="file" accept="image/jpeg, image/png" onchange="uploadImg(img_upload.files[0], 'image_url')" style="display: none;">
-                            <button onclick="document.getElementById('img_upload').click()" class="btn btn-secondary">Upload</button>
+                            <button id="img_upload_btn" onclick="document.getElementById('img_upload').click()" class="btn btn-secondary">Upload</button>
                         </div>
                         <div class="col-auto text-center">
                             <button id="takePicture" data-toggle="modal" data-target="#cameraModal" onclick="setupCamera(false)" class="btn btn-secondary">Take Picture</button>
                         </div>
                         <div class="col-auto text-center">
-                            <button id="pickImage" data-toggle="modal" data-target="#imageSelectorModal" onclick="" class="btn btn-secondary" disabled>Select from uploaded images</button>
+                            <button id="pickImage" data-toggle="modal" data-target="#imageSelectorModal" onclick="getMongoImages()" class="btn btn-secondary" disabled>Select from uploaded images</button>
                         </div>
                     </div>
 
@@ -73,13 +74,6 @@
             </div>
         </div>
 
-
-
-<!--        &lt;!&ndash;   Filter     &ndash;&gt;-->
-<!--        <div id="filter-input-group">-->
-<!--            <label class="form-label">Filter:</label>-->
-<!--            <input class="form-control" id="authorFilter" name="authorFilter" onkeyup="filterTiles(authorFilter.value)">-->
-<!--        </div>-->
 
         <!--   Room tiles     -->
         <div id="roomTileList" class="row"></div>
@@ -115,9 +109,12 @@
                     <button id="download_button" onclick="downloadDrawing()" class="btn btn-secondary">Download</button>
                     <button id="canvas-clear" class="btn btn-secondary">Clear Canvas</button>
                     <br>
-                    <div class="dropdown" >
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="create-room-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="fillRoomNo(roomNoDD)">Create room link</button>
-                        <div class="dropdown-menu">
+                    <div id="smallDropdown" class="dropdown" >
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="create-room-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="fillRoomNo('roomNoDD')">Create room link</button>
+                        <div id="smallDropdownMenu" class="dropdown-menu">
+                            <button type="button" class="close mr-3" data-toggle="dropdown" data-target="#smallDropdown" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                             <form id="dropdown-create-room" class="px-4 py-3" onsubmit="return false;">
                                 <div class="form-group">
                                     <label for="roomNoDD">Room Name</label>
@@ -202,13 +199,9 @@
                 <div class="modal-footer">
                     <button id="shutter" class="btn btn-primary">Take photo</button>
 
-                    <!--                                <div class="col">-->
                     <button id="confirm" style="display: none" onclick="uploadTakenImage('image_url')" data-dismiss="modal" class="btn btn-primary">Confirm</button>
                     <button id="confirmSmall" style="display: none" onclick="uploadTakenImage('new_image_url')" data-dismiss="modal" class="btn btn-primary">Confirm</button>
-                    <!--                                </div>-->
-                    <!--                                <div class="col text-right">-->
                     <button id="retake" style="display: none" class="btn btn-secondary">Retake</button>
-                    <!--                                </div>-->
                 </div>
             </div>
         </div>
@@ -216,7 +209,7 @@
 
     <!--  Image Selector Modal  -->
     <div class="modal fade" id="imageSelectorModal" tabindex="-1" role="dialog" aria-labelledby="imageSelectorModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="large-modal-dialog modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="imageSelectorModalLongTitle">Image Selector</h5>
@@ -225,11 +218,13 @@
                     </button>
                 </div>
                 <div class="modal-body">
+                    <!--   Filter     -->
+                    <div id="filter-input-group">
+                        <label class="form-label">Filter:</label>
+                        <input class="form-control" id="authorFilter" name="authorFilter" onkeyup="filterTiles(authorFilter.value)">
+                    </div>
 
-                </div>
-                <!-- Buttons -->
-                <div class="modal-footer">
-                    <button id="selectImage" class="btn btn-primary">Select image</button>
+                    <div id="imageTileList"></div>
                 </div>
             </div>
         </div>

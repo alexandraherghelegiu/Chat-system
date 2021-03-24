@@ -167,3 +167,9 @@ input[type="checkbox"]:checked + label:before {
     background-color: black;
 }
 
+@media (min-width: 576px){
+    .large-modal-dialog {
+        max-width: 90% !important;
+    }
+}
+

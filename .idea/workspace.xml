@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f32f66fa-046e-47f8-903b-db21fa5041a6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/bin_www.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/DB_server.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main Server/public/javascripts/dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/public/javascripts/dashboard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main Server/views/dashboard.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/views/dashboard.ejs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,17 +53,6 @@
     </key>
   </component>
   <component name="RunManager" selected="Node.js.Main Node">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Main Node" type="NodeJSConfigurationType" path-to-js-file="bin/www" working-dir="$PROJECT_DIR$/Main Server">
       <method v="2" />
     </configuration>
@@ -108,6 +95,8 @@
       <workItem from="1616355179502" duration="13313000" />
       <workItem from="1616407377211" duration="4883000" />
       <workItem from="1616439735039" duration="2201000" />
+      <workItem from="1616541977729" duration="599000" />
+      <workItem from="1616611944504" duration="792000" />
     </task>
     <task id="LOCAL-00001" summary="ajax.js added with basic functionality">
       <created>1615239782665</created>
@@ -298,7 +287,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616520843319</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Image selector modal styling changed, small room form issue fixed">
+      <created>1616541697306</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1616541697306</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -318,7 +314,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="updateField is added to indexed_database" />
     <MESSAGE value="Messages are now stored in the IndexedDB" />
     <MESSAGE value="Upon joining a room it now checks for matching image url in the IndexedDB" />
     <MESSAGE value="Connect to room bugs fixed" />
@@ -343,6 +338,7 @@
     <MESSAGE value="Forms are now using Ajax, major refactoring in dashboard.js" />
     <MESSAGE value="Added checkbox (join/create new room)" />
     <MESSAGE value="slight appearance changes on the dashboard page" />
-    <option name="LAST_COMMIT_MESSAGE" value="slight appearance changes on the dashboard page" />
+    <MESSAGE value="Image selector modal styling changed, small room form issue fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="Image selector modal styling changed, small room form issue fixed" />
   </component>
 </project>

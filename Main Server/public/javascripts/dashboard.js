@@ -2,17 +2,24 @@ let roomNo = null;
 let name;
 let socket= io();
 
+let loadedImages;
+
 /**
  * called by <body onload>
  * it initialises the interface and the expected socket messages
  * plus the associated actions
  */
 function init() {
-    sendGetAllAjaxQueryToMongoDB('/getAllMongo');
-
     // it sets up the interface so that userId and room are selected
     document.getElementById('initial_form').style.display = 'block';
     document.getElementById('chat_interface').style.display = 'none';
+
+    //Initialise small dropdown
+    $('#smallDropdown').on('hide.bs.dropdown', function (e) {
+        if (e.clickEvent) {
+            e.preventDefault();
+        }
+    });
 
     //Initialise the name of the user
     name = window.localStorage.getItem("name");
@@ -45,6 +52,7 @@ function init() {
     initSocket();
 }
 
+
 /**
  * Initialises the socket
  */
@@ -73,8 +81,6 @@ function initSocket(){
             updateField(room, "messages", data);
         });
         updateField(room, "canvas", canvasUrl);
-
-
         writeOnHistory('<b>' + who + ':</b> ' + chatText);
     });
 }
@@ -101,10 +107,25 @@ function sendFormData(formID) {
         "canvas": "",
         "messages": []
     }
-
     //Data to send
     let fullData = {...formData, ...extraData}
 
+    // if image is new (not taken from MongoDB), then insert it in MongoDB
+    if (!$("#img_title").prop("disabled")){
+        //Check if image loaded or linked, only store in MongoDB if uploaded (if in base64 format)
+        const base64regx = new RegExp("^data:image\\/(?:gif|png|jpeg|bmp|webp)(?:;charset=utf-8)?;" +
+            "base64,(?:[A-Za-z0-9]|[+/])+={0,2}");
+        if (base64regx.test(fullData.imageUrl)) {
+            let mongoData = {
+                "img_author": name,
+                "img_title": fullData.imageTitle,
+                "img_description": fullData.imageDesc,
+                "imageBlob": fullData.imageUrl
+            }
+            let url = 'https://localhost:3000/insertMongo';
+            sendInsertAjaxQueryToMongoDB(url, JSON.stringify(mongoData));
+        }
+    }
     sendAjaxFormQuery('/dashboard/processform', JSON.stringify(fullData));
 }
 
@@ -121,7 +142,6 @@ function serialiseForm(form){
     for (index in formArray){
         data[formArray[index].name]= formArray[index].value;
     }
-
     return data;
 }
 
@@ -133,20 +153,6 @@ function serialiseForm(form){
 function connectToRoomNew(roomData) {
     var data = roomData;
     roomNo = roomData.roomid
-
-    //Check if image loaded or linked, only store in MongoDB if uploaded (if in base64 format)
-    const base64regx = new RegExp("^data:image\\/(?:gif|png|jpeg|bmp|webp)(?:;charset=utf-8)?;" +
-        "base64,(?:[A-Za-z0-9]|[+/])+={0,2}");
-    if (base64regx.test(data.imageUrl)){
-        let mongoData = {
-            "img_author": name,
-            "img_title": data.imageTitle,
-            "img_description": data.imageDesc,
-            "imageBlob" : data.imageUrl
-        }
-        let url = 'https://localhost:3000/insertMongo';
-        sendInsertAjaxQueryToMongoDB(url, JSON.stringify(mongoData));
-    }
 
     console.log('connecting to ' + data.roomid);
     //Checking the database
@@ -192,14 +198,12 @@ function createTile(data, isRoom){
     let cardTitle = document.createElement('h5');
     cardTitle.className = "card-title";
 
-
     let img = document.createElement('img');
     img.className = "card-img-top";
     //If annotations exist
     if(data.canvas) img.src = data.canvas;
     //No annotations
     else img.src = data.imageUrl;
-
 
     //If it is a room
     if(isRoom){
@@ -211,11 +215,17 @@ function createTile(data, isRoom){
 
         //Additional field(s)
         cardTitle.innerHTML = "Room: " + data.roomid;
-
         cardBody.appendChild(cardTitle);
     }
+
     //If it is an image
     else{
+        tile.setAttribute("data-dismiss", "modal");
+        tile.addEventListener("click", () => {
+            //Join the room
+            $("#image_url").val(img.src);
+        });
+
         //Description in tooltip
         tile.setAttribute("data-toggle", "tooltip");
         tile.setAttribute("title", "Description: " + data.imageDesc);
@@ -229,12 +239,10 @@ function createTile(data, isRoom){
 
         let cardAuthor = document.createElement('p');
         cardAuthor.className = "card-text";
-        cardAuthor.innerHTML = "Author: " + author;
+        cardAuthor.innerHTML = "Author: " + data.imageAuthor;
 
         cardBody.append(cardTitle, cardAuthor)
-
     }
-
     //Add image and card body
     tile.append(img, cardBody);
     return tile;
@@ -280,11 +288,9 @@ function displayLoadedMessages(messageList){
         else{
             paragraph.innerHTML = '<b>' + m.user + ':</b> ' + m.message;
         }
-
         //Append to the history
         history.appendChild(paragraph);
     }
-
     //Scroll to the last element
     history.scrollTop = history.scrollHeight;
     document.getElementById('chat_input').value = '';
@@ -323,44 +329,9 @@ function hideLoginInterface(room, userId) {
 /**
  * Disconnects from a room by sending a request to /dashboard
  */
-function disconnectFromRoom(){
+function disconnectFromRoom() {
     //Load dashboard
-    sendAjaxQuery('http://localhost:3000/dashboard', {name: name});
-}
-
-
-/**
- * Filters the tiles according to its parameter
- * @param authorString The author's name
- */
-function filterTiles(authorString){
-    // TODO: Need to filter images rather than rooms!
-
-    //Display all room data stored in the indexedDB
-    // getAllRoomData(name).then(result => {
-    //     if(result){
-    //         //Filter results
-    //         result = result.filter(e => e.author.toUpperCase().includes(authorString.toUpperCase()));
-    //
-    //         let wrapper = document.getElementById('roomTileList');
-    //         wrapper.className = "container-fluid row";
-    //         //Clear tiles
-    //         wrapper.innerHTML = "";
-    //
-    //         for(let room of result) {
-    //             //Checking whether annotations exist
-    //             let url;
-    //             if (room.canvas != "") url = room.canvas;
-    //             else url = room.imageUrl;
-    //
-    //             //Creating tile
-    //             let tile = createTile(url, room.imageTitle, room.imageDesc, room.author, true, room.roomid);
-    //
-    //             //Adding tile to wrapper
-    //             wrapper.appendChild(tile);
-    //         }
-    //     }
-    // });
+    sendAjaxQuery('http://localhost:3000/dashboard', JSON.stringify({name: name}));
 }
 
 
@@ -403,9 +374,8 @@ function fillRoomNo(inputField){
     else{
         newRoom = roomNo + "-2";
     }
-
     //Setting the value of the input field
-    inputField.value = newRoom;
+    $("#"+inputField).val(newRoom);
 }
 
 
@@ -420,7 +390,8 @@ function generateRoomLink(formID){
 
     //Sends a button link to the new room to the chat
     var stringifiedData = JSON.stringify(dropdownFormData);
-    let messageLink = "<button class='btn btn-primary' onclick='connectToRoomNew("+stringifiedData+")'>Connect to room "+dropdownFormData.roomid+"</button>";
+    let messageLink = "<button class='btn btn-primary' " +
+        "onclick='connectToRoomNew("+stringifiedData+")'>Connect to room "+dropdownFormData.roomid+"</button>";
     sendChatText(messageLink);
 
     //Redirects the current user
@@ -429,6 +400,7 @@ function generateRoomLink(formID){
     //Toggle menu
     $('#create-room-dropdown').click();
 }
+
 
 /**
  * Toggles the title and description fields in the form if
@@ -439,20 +411,30 @@ function toggleFormFields(){
     let titleField = $("#img_title");
     let descField = $("#img_description");
     let imgBrowseBtn = $("#pickImage");
+    let imgUploadBtn = $("#img_upload_btn");
+    let takePictureBtn = $("#takePicture");
+    let generateRoomBtn = $("#roomNoGenerator");
 
     //Disable title and description fields
     if(checkbox.is(":checked")){
+        generateRoomBtn.prop("disabled", true);
+        imgUploadBtn.prop("disabled", true);
+        takePictureBtn.prop("disabled", true);
         titleField.prop("disabled", true);
         descField.prop("disabled", true);
         imgBrowseBtn.prop("disabled", false);
     }
     //Enable title and description fields
     else{
+        generateRoomBtn.prop("disabled", false);
+        imgUploadBtn.prop("disabled", false);
+        takePictureBtn.prop("disabled", false);
         imgBrowseBtn.prop("disabled", true);
         titleField.prop("disabled", false);
         descField.prop("disabled", false);
     }
 }
+
 
 /**
  * Logs the current user out
@@ -460,4 +442,42 @@ function toggleFormFields(){
 function logOut(){
     window.localStorage.clear();
     sendAjaxQuery('https://localhost:3000/');
+}
+
+
+/**
+ * called when user clicks on "select from uploaded images"
+ * sends query to server
+ */
+function getMongoImages() {
+    sendGetAllAjaxQueryToMongoDB('/getAllMongo');
+}
+
+
+/**
+ * displays all images in database
+ * @param data retrieved from MongoDB
+ */
+function displayMongoImages(data) {
+    let wrapper = document.getElementById('imageTileList');
+    wrapper.innerHTML = "";
+    wrapper.className = "container-fluid row";
+
+    for (let image of data) {
+        //display each image from MongoDB
+        console.log(image.imageUrl);
+        let tile = createTile(image, false);
+        wrapper.appendChild(tile);
+    }
+    console.log(data);
+}
+
+
+/**
+ * Filters the tiles according to its parameter
+ * @param authorString The author's name
+ */
+function filterTiles(authorString){
+    let filteredImages = loadedImages.filter(e => e.imageAuthor.toUpperCase().includes(authorString.toUpperCase()));
+    displayMongoImages(filteredImages);
 }
