@@ -413,9 +413,11 @@ function toggleFormFields(){
     let imgBrowseBtn = $("#pickImage");
     let imgUploadBtn = $("#img_upload_btn");
     let takePictureBtn = $("#takePicture");
+    let generateRoomBtn = $("#roomNoGenerator");
 
     //Disable title and description fields
     if(checkbox.is(":checked")){
+        generateRoomBtn.prop("disabled", true);
         imgUploadBtn.prop("disabled", true);
         takePictureBtn.prop("disabled", true);
         titleField.prop("disabled", true);
@@ -424,6 +426,7 @@ function toggleFormFields(){
     }
     //Enable title and description fields
     else{
+        generateRoomBtn.prop("disabled", false);
         imgUploadBtn.prop("disabled", false);
         takePictureBtn.prop("disabled", false);
         imgBrowseBtn.prop("disabled", true);
