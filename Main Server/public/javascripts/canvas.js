@@ -11,8 +11,8 @@ var color = 'red', thickness = 4;
  * @param sckt the open socket to register events on
  * @param imageUrl the image url to download
  */
-function initCanvas(sckt, originalImageUrl, canvasUrl) {
-    socket = sckt;
+function initCanvas(socket, originalImageUrl, canvasUrl) {
+
     changeColor();
 
     let flag = false,

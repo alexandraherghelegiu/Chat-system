@@ -1,7 +1,6 @@
 let roomNo = null;
 let name;
-let socket= io();
-
+let socket = io({'force new connection': false});
 let loadedImages;
 
 /**
@@ -23,8 +22,10 @@ function init() {
 
     //Initialise the name of the user
     name = window.localStorage.getItem("name");
-    console.log(name);
+
+    //setting name directly from local storage
     setName(name);
+
     //Initialise IndexedDB
     if ('indexedDB' in window) {
         initIDB().then(() => {
@@ -58,7 +59,7 @@ function init() {
  * Initialises the socket
  */
 function initSocket(){
-    //Joining a room
+    //Listening for joined room confirmation
     socket.on('joined', function(room, userId, image){
         if(userId != name){
             writeOnHistory('<b>' + userId + '</b>' + ' joined room ' + room);
@@ -67,10 +68,10 @@ function initSocket(){
 
     //Listening for chat in the room
     socket.on('chat', function (room, userId, chatText){
+        console.log('message !');
         let who = userId;
         if (userId === name) who = 'Me';
         let canvasUrl = document.getElementById('canvas').toDataURL();
-        console.log('message! '+chatText);
         //Storing message in IndexedDB
         getRoomFieldData(room, "messages").then(data => {
             var newObj = {
@@ -84,8 +85,22 @@ function initSocket(){
         updateField(room, "canvas", canvasUrl);
         writeOnHistory('<b>' + who + ':</b> ' + chatText);
     });
+
+
+
 }
 
+//Listening for network errors
+socket.on('connect_error', (error) => {
+    console.log("you are offline my friend");
+    statusOffline();
+})
+
+socket.on('connect', () => {
+    console.log("you are online my geezah");
+    statusOnline();
+    socket.emit('create or join', roomNo, name, '');
+})
 
 /**
  * Sends the form data to the server
@@ -267,6 +282,7 @@ function generateRoom() {
  */
 function sendChatText(text) {
     socket.emit('chat', roomNo, name, text);
+    console.log('sending to room ' + roomNo + ' from ' + name + ' through socket ' + socket.id);
 }
 
 
@@ -483,8 +499,33 @@ function filterTiles(authorString){
     displayMongoImages(filteredImages);
 }
 
-
+/**
+ * Called at init to fill the user names correctly.
+ */
 function setName(n){
     $('#nameTitle').text('Welcome, ' + n);
     $('#who_you_are').text(n);
+}
+
+/**
+ * Called when user is online
+ */
+function statusOnline(){
+    let chatInput =  $('#chat_input');
+    let sendButton = $('#chat_send');
+    //user can write on the input bar only if online
+    chatInput.prop('disabled', false)
+    sendButton.prop('disabled', false)
+
+}
+
+/**
+ * Called when user is offline
+ */
+function statusOffline(){
+    let chatInput =  $('#chat_input');
+    let sendButton = $('#chat_send');
+    chatInput.prop('disabled', true)
+    sendButton.prop('disabled', true)
+
 }

@@ -13,7 +13,6 @@ exports.init = function(io) {
 
       socket.on('chat', function(room, userId, chatText){
         io.to(room).emit('chat', room, userId, chatText);
-        console.log('forwarding message to room ' +room + ' from ' + userId);
       });
 
       socket.on('draw', function(room, userId, cw, ch, x1, y1, x2, y2, color, thick){
@@ -27,6 +26,10 @@ exports.init = function(io) {
       socket.on('logging-out', function(room) {
         socket.leave(room);
         console.log('disconnecting from room');
+      })
+
+      socket.on('reconnect', function(){
+        console.log('reconnecting');
       })
     } catch (e) {
       console.log(e);

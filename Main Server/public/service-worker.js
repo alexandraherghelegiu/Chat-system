@@ -29,9 +29,7 @@ self.addEventListener('fetch', function(event){
         caches.match(event.request)
             .then(function(response){
                 //if there's something in the cache
-                let url = new URL(event.request.url);
-                let path = url.pathname;
-                console.log(path);
+                console.log(event.request.url);
                 if (response)
                     return response;
                 return fetch(event.request).then(
