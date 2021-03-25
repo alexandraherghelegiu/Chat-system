@@ -254,7 +254,7 @@ function hideLoginInterface(room, userId) {
  */
 function disconnectFromRoom() {
     //Load dashboard
-    sendAjaxQuery('http://localhost:3000/dashboard', JSON.stringify({name: name}));
+    sendAjaxQuery('http://localhost:3000/dashboard', ({name: name}));
 }
 
 
