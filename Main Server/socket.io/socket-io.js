@@ -13,7 +13,7 @@ exports.init = function(io) {
 
       socket.on('chat', function(room, userId, chatText){
         io.to(room).emit('chat', room, userId, chatText);
-        console.log('forwaring message from room' +room);
+        console.log('forwarding message to room ' +room + ' from ' + userId);
       });
 
       socket.on('draw', function(room, userId, cw, ch, x1, y1, x2, y2, color, thick){

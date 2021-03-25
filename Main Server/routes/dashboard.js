@@ -5,9 +5,7 @@ var name;
 
 router.get('/', function(req, res, next) {
     let body = req.query;
-    if(body.name)
-        name = body.name;
-    console.log(name);
+    name = body.name;
     res.render('dashboard', { name: name });
 });
 

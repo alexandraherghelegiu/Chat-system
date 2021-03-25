@@ -23,7 +23,8 @@ function init() {
 
     //Initialise the name of the user
     name = window.localStorage.getItem("name");
-
+    console.log(name);
+    setName(name);
     //Initialise IndexedDB
     if ('indexedDB' in window) {
         initIDB().then(() => {
@@ -64,12 +65,12 @@ function initSocket(){
         }
     });
 
-    //Sending chat in room
+    //Listening for chat in the room
     socket.on('chat', function (room, userId, chatText){
         let who = userId;
         if (userId === name) who = 'Me';
         let canvasUrl = document.getElementById('canvas').toDataURL();
-
+        console.log('message! '+chatText);
         //Storing message in IndexedDB
         getRoomFieldData(room, "messages").then(data => {
             var newObj = {
@@ -441,7 +442,7 @@ function toggleFormFields(){
  */
 function logOut(){
     window.localStorage.clear();
-    sendAjaxQuery('https://localhost:3000/');
+    sendAjaxQuery('http://localhost:3000/');
 }
 
 
@@ -480,4 +481,10 @@ function displayMongoImages(data) {
 function filterTiles(authorString){
     let filteredImages = loadedImages.filter(e => e.imageAuthor.toUpperCase().includes(authorString.toUpperCase()));
     displayMongoImages(filteredImages);
+}
+
+
+function setName(n){
+    $('#nameTitle').text('Welcome, ' + n);
+    $('#who_you_are').text(n);
 }

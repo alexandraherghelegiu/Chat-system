@@ -9,8 +9,6 @@ function sendAjaxQuery(url, data){
         //Success function
         success: response => {
             //Redirect
-            console.log(url);
-            //return response;
             location = url;
         }
     });

@@ -11,13 +11,12 @@
     <script src="/javascripts/canvas.js"></script>
     <script src="/javascripts/camera.js"></script>
     <script src="/javascripts/ajax.js"></script>
-    <script src="/javascripts/room.js"></script>
 </head>
 <body onload="init()">
     <div id="initial_form" style="display: block">
         <!--  Banner  -->
         <div class="jumbotron">
-            <h1 class="display-4">Welcome, <%= name %> !</h1>
+            <h1 id="nameTitle" class="display-4">Welcome, </h1>
             <p>Please insert the ID of the Room you want to Join, if you do not have a room id, create a new one!</p>
             <button class="btn btn-secondary" onclick="logOut()">Log out</button>
         </div>
@@ -82,7 +81,7 @@
     <!-- #####################CHAT INTERFACE#################### -->
     <div id="chat_interface" style="display: none;">
         <div>
-            <div id="who_you_are" style="display: inline" style="height: 10vh"> <%= name %></div>, you are in room: <div id="in_room" style="display: inline"></div>
+            <div id="who_you_are" style="display: inline" style="height: 10vh"></div>, you are in room: <div id="in_room" style="display: inline"></div>
             <button id="leave_room" onclick="disconnectFromRoom()" class="btn btn-primary">Leave Room</button>
         </div>
 
