@@ -97,6 +97,7 @@ function statusOnline(){
     //user can write on the input bar only if online
     chatInput.prop('disabled', false)
     sendButton.prop('disabled', false)
+    $('#connect').prop('disabled', false);
     $('#offlineIcon').hide();
 
 }
@@ -107,8 +108,9 @@ function statusOnline(){
 function statusOffline(){
     let chatInput =  $('#chat_input');
     let sendButton = $('#chat_send');
-    chatInput.prop('disabled', true)
-    sendButton.prop('disabled', true)
+    chatInput.prop('disabled', true);
+    sendButton.prop('disabled', true);
     $('#offlineIcon').show();
+    $('#connect').prop('disabled', true);
 
 }
