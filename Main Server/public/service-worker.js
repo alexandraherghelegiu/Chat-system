@@ -3,6 +3,7 @@ let urlsToCache = [
     '/',
     '/stylesheets/bootstrap.css',
     '/stylesheets/style.css',
+    '/javascripts/room.js',
     '/javascripts/dashboard.js',
     '/javascripts/camera.js',
     '/javascripts/canvas.js',
@@ -29,7 +30,6 @@ self.addEventListener('fetch', function(event){
         caches.match(event.request)
             .then(function(response){
                 //if there's something in the cache
-                console.log(event.request.url);
                 if (response)
                     return response;
                 return fetch(event.request).then(
