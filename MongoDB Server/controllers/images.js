@@ -12,24 +12,24 @@ exports.insert = function (req, res) {
     }
     console.log(imageData);
     try {
-        // save image in private directory
+        // make private directory for storing images
         let targetDirectory = '../private/images/';
         if (!fs.existsSync(targetDirectory)) {
             fs.mkdirSync(targetDirectory);
         }
-        console.log('saving file ' + targetDirectory);
+
         // strip off the data: url prefix to get just the base64-encoded bytes
         let imageBlob = imageData.imageBlob.replace(/^data:image\/\w+;base64,/, "");
         let buf = new Buffer(imageBlob, 'base64');
-
+        // add image to private folder based on its base64 representation
         fs.writeFile(targetDirectory + imageData.img_title + '.jpeg', buf, function(err, result) {
             if(err) console.log('error', err);
         });
 
-        // get the file path
+        // get the file path of the image in order to store it
         let filepath = targetDirectory + imageData.img_title + ".jpeg";
 
-        // create database entry for the new chat room
+        // create database entry for the new Image
         let image = new Image({
             image_path: filepath,
             image_author: imageData.img_author,
@@ -38,14 +38,11 @@ exports.insert = function (req, res) {
         });
         console.log('received: ' + image);
 
-        // save the chat room in the database
+        // save the Image in the database
         image.save(function (err, results) {
             if (err)
                 res.status(500).send('Invalid data!');
             else {
-                //res.writeHead(200, {"Content-Type:": "application/json"});
-                console.log("-------");
-                console.log(JSON.stringify(image));
                 res.send(JSON.stringify(image));
             }
         });
@@ -64,15 +61,16 @@ exports.getAllImages = function (req, res) {
         res.status(403).send('No data sent!')
     }
     try {
+        // get all images with their path, author, title and description from MongoDB
         Image.find({},
             'image_path image_author image_title image_description',
             function (err, images) {
                 if (err)
                     res.status(500).send('Invalid data!');
-                let info = [];
-                if (images.length > 0) {
+                let info = [];  // initialize list to send as response
+                if (images.length > 0) {  // if database NOT empty
                     for (let image of images) {
-                        console.log("images in db length > 0");
+                        // convert image file into base64 format
                         imageToBase64(image.image_path).then(img=>{
                             let image_info = {
                                 imageUrl: "data:image/jpeg;base64," + img,  // image in base64 format
@@ -80,7 +78,9 @@ exports.getAllImages = function (req, res) {
                                 imageTitle: image.image_title,
                                 imageDesc: image.image_description
                             };
+                            // add this image info to the response list 'info'
                             info.push(image_info);
+                            // once all the images have been pushed to 'info', send 'info' as response
                             if (info.length === images.length){
                                 res.setHeader('Content-Type', 'application/json');
                                 res.send(JSON.stringify(info));
@@ -89,11 +89,11 @@ exports.getAllImages = function (req, res) {
                             .catch(err=>console.log(err));
                     }
                 }
-                // what if database is empty:
+                // if database is empty:
                 else{
-                    console.log("MongoDB is empty");
+                    console.log("MongoDB is empty");  // let the console know
                     res.setHeader('Content-Type', 'application/json');
-                    res.send(JSON.stringify(info));
+                    res.send(JSON.stringify(info));  // and just send an empty response
                 }
             });
     } catch (e) {
