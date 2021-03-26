@@ -7,6 +7,7 @@
 - Both can be started with the command `node bin/www` from the respective folder
 
 #What’s working:
+
 **IndexedDB: (Daniel)**
 * Rooms are stored in the IndexedDB upon the current user joins to them
 * They are accessible both online and offline
