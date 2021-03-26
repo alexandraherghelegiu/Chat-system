@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="22e6bb7e-73de-4a45-91c9-e0fab661c5b9" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/.." value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="ProjectId" id="1pvRpfXr0FAEa74rnKw2dqxJspx" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/bin/www" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\albip\Documents\University\Year3\COM3504Web\assignment\Main Server\public" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="NodeJSConfigurationType" path-to-js-file="$PROJECT_DIR$/bin/www">
+      <method v="2" />
+    </configuration>
+    <configuration name="www" type="NodeJSConfigurationType" nameIsGenerated="true" path-to-js-file="bin/www" working-dir="$PROJECT_DIR$">
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="22e6bb7e-73de-4a45-91c9-e0fab661c5b9" name="Default Changelist" comment="" />
+      <created>1616061762700</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1616061762700</updated>
+      <workItem from="1616061764819" duration="19372000" />
+      <workItem from="1616107747362" duration="1568000" />
+      <workItem from="1616152722060" duration="4574000" />
+      <workItem from="1616245115455" duration="1688000" />
+      <workItem from="1616258252853" duration="3322000" />
+      <workItem from="1616274095261" duration="528000" />
+      <workItem from="1616330527545" duration="11427000" />
+      <workItem from="1616491030113" duration="8146000" />
+      <workItem from="1616510288158" duration="17391000" />
+      <workItem from="1616587055187" duration="142000" />
+      <workItem from="1616589035587" duration="21485000" />
+      <workItem from="1616679517644" duration="2828000" />
+      <workItem from="1616682720874" duration="5155000" />
+    </task>
+    <task id="LOCAL-00001" summary="deleted a part of code hat blocked socketio through sw, service worker working fully (seems at least)">
+      <created>1616525773488</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1616525773489</updated>
+    </task>
+    <task id="LOCAL-00002" summary="merged with main">
+      <created>1616526282262</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1616526282262</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Now correctly title name changes according to username">
+      <created>1616665853535</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1616665853535</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Fixed bug where chat needed refreshing after going offline">
+      <created>1616678326716</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1616678326716</updated>
+    </task>
+    <task id="LOCAL-00005" summary="put room stuff in room.js, added some comments, added icon to show you're offline">
+      <created>1616682049988</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1616682049988</updated>
+    </task>
+    <task id="LOCAL-00006" summary="fixed ajax request, don't stringify data as server can't parse it correctly otherwise.">
+      <created>1616682320271</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1616682320271</updated>
+    </task>
+    <task id="LOCAL-00007" summary="merged with main">
+      <created>1616683741614</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1616683741614</updated>
+    </task>
+    <task id="LOCAL-00008" summary="readme file updated">
+      <created>1616692411211</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1616692411211</updated>
+    </task>
+    <task id="LOCAL-00009" summary="moved readme file to root project folder">
+      <created>1616692532618</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1616692532618</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="merged swerviceworker into main branch" />
+    <MESSAGE value="now server expects get request when joining room (use .query instead of .body for future reference), this way user can access dashboard offline" />
+    <MESSAGE value="deleted a part of code hat blocked socketio through sw, service worker working fully (seems at least)" />
+    <MESSAGE value="Now correctly title name changes according to username" />
+    <MESSAGE value="Fixed bug where chat needed refreshing after going offline" />
+    <MESSAGE value="put room stuff in room.js, added some comments, added icon to show you're offline" />
+    <MESSAGE value="fixed ajax request, don't stringify data as server can't parse it correctly otherwise." />
+    <MESSAGE value="merged with main" />
+    <MESSAGE value="readme file updated" />
+    <MESSAGE value="moved readme file to root project folder" />
+    <option name="LAST_COMMIT_MESSAGE" value="moved readme file to root project folder" />
+  </component>
+</project>

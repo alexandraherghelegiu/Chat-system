@@ -13,9 +13,9 @@ exports.insert = function (req, res) {
     console.log(imageData);
     try {
         // make private directory for storing images
-        let targetDirectory = '../private/images/';
+        let targetDirectory = './private/images/';
         if (!fs.existsSync(targetDirectory)) {
-            fs.mkdirSync(targetDirectory);
+            fs.mkdirSync(targetDirectory,{recursive:true});
         }
 
         // strip off the data: url prefix to get just the base64-encoded bytes

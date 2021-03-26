@@ -11,6 +11,7 @@ let urlsToCache = [
     '/javascripts/indexed_database.js',
     '/javascripts/ajax.js',
     '/javascripts/utils.js',
+    '/javascripts/jquery.min.js'
 ];
 
 
@@ -29,27 +30,26 @@ self.addEventListener('fetch', function(event){
     //event raised
     event.respondWith(
         caches.match(event.request)
-            .then(function(response){
+            .then(function(cachedResponse){
                 //if there's something in the cache
-                if (response)
-                    return response;
                 return fetch(event.request).then(
                     function(response){
-                        if(!response || response.status !== 200 || response.type !== 'basic'){
-                            return response
+                        if(!response || response.status !== 200 || response.type !== 'basic') {
+                            return cachedResponse;
                         }
-
                         let responseToCache = response.clone();
                         caches.open(CACHE_NAME).then(function(cache){
-                            cache.put(event.request, responseToCache);
+                            return cache.put(event.request, responseToCache);
                         }).catch(function(err){
                             console.log('error opening cache ' + err);
                         });
                         return response;
                     }
                 ).catch(function(err){
-                    console.log(err);
+                    //Returning result from cache
+                    return cachedResponse;
                 });
+
             })
     )
 });
