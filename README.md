@@ -7,6 +7,12 @@
 - Make sure MongoDB (mongod.exe) is running
 - Both can be started with the command `node bin/www` from the respective folder
 
+## Tasks Allocation
+- Member 1 (Alberto Pia): socket.io, service worker, the chat/annotation interface
+- Member 2 (Alexandra Herghelegiu): nodeJS server (excluding socket.io), MongoDB
+- Member 3 (Daniel Perendi): IndexedDb, Ajax communication, Swagger documentation
+
+
 ## What’s working:
 
 **IndexedDB: (Daniel)**
