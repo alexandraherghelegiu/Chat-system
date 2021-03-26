@@ -1,4 +1,4 @@
-#Installation:
+## Installation:
 
 - Node.js must be installed on the computer
 - Install packages on both servers by using “npm install”
@@ -7,7 +7,7 @@
 - Make sure MongoDB (mongod.exe) is running
 - Both can be started with the command `node bin/www` from the respective folder
 
-#What’s working:
+## What’s working:
 
 **IndexedDB: (Daniel)**
 * Rooms are stored in the IndexedDB upon the current user joins to them
@@ -55,7 +55,7 @@
 * User can generate a room within the chat for chat members to join
 
 
-#What needs to be done:
+## What needs to be done:
 * Chat interface:
     - Chat interface could do with a restyling and made look better, it currently doesn’t look good on mobile
 * Swagger Documentation
