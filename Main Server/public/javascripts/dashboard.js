@@ -54,6 +54,7 @@ function init() {
     initSocket();
 }
 
+
 /**
  * Sends the form data to the server
  * @param formID The ID of the form
@@ -112,6 +113,7 @@ function serialiseForm(form){
     }
     return data;
 }
+
 
 /**
  * Creates a tile(card) HTML element
