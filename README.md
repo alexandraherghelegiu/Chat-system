@@ -4,6 +4,7 @@
 - Install packages on both servers by using “npm install”
 - The Main Server listens on http://localhost:3000
 - The MongoDB Server listens on http://localhost:3001
+- Make sure MongoDB (mongod.exe) is running
 - Both can be started with the command `node bin/www` from the respective folder
 
 #What’s working:
