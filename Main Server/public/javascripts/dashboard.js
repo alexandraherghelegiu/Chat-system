@@ -92,7 +92,7 @@ function sendFormData(formID) {
                 "img_description": fullData.imageDesc,
                 "imageBlob": fullData.imageUrl
             }
-            let url = 'http://localhost:3000/insertMongo';
+            let url = '/mongodb/insertImage';
             sendInsertAjaxQueryToMongoDB(url, JSON.stringify(mongoData));
         }
     }
@@ -218,7 +218,7 @@ function logOut(){
  * sends query to server
  */
 function getMongoImages() {
-    sendGetAllAjaxQueryToMongoDB('/getAllMongo');
+    sendGetAllAjaxQueryToMongoDB('/mongodb/getAll');
 }
 
 
