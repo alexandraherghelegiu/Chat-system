@@ -42,7 +42,6 @@ function initSocket(){
         //when going reconnecting need to resubscribe to the room
         socket.emit('create or join', roomNo, name, '');
     })
-
 }
 
 
@@ -80,6 +79,35 @@ function connectToRoomNew(roomData) {
     });
 }
 
+
+/**
+ * Displays the loaded messages on the history
+ * @param messageList List of message objects
+ */
+function displayLoadedMessages(messageList){
+    let history = document.getElementById('history');
+    //Clear history
+    history.innerHTML = "";
+
+    for(let m of messageList){
+        let paragraph = document.createElement('p');
+
+        //If user the current user
+        if(m.user.trim() === name.trim()){
+            paragraph.innerHTML = '<b>Me:</b> ' + m.message;
+        }
+        else{
+            paragraph.innerHTML = '<b>' + m.user + ':</b> ' + m.message;
+        }
+        //Append to the history
+        history.appendChild(paragraph);
+    }
+    //Scroll to the last element
+    history.scrollTop = history.scrollHeight;
+    document.getElementById('chat_input').value = '';
+}
+
+
 /**
  * called when the Send button is pressed. It gets the text to send from the interface
  * and sends the message via  socket
@@ -87,6 +115,7 @@ function connectToRoomNew(roomData) {
 function sendChatText(text) {
     socket.emit('chat', roomNo, name, text);
 }
+
 
 /**
  * Called when user is online
@@ -99,8 +128,8 @@ function statusOnline(){
     sendButton.prop('disabled', false)
     $('#connect').prop('disabled', false);
     $('#offlineIcon').hide();
-
 }
+
 
 /**
  * Called when user goes offline
@@ -112,5 +141,4 @@ function statusOffline(){
     sendButton.prop('disabled', true);
     $('#offlineIcon').show();
     $('#connect').prop('disabled', true);
-
 }

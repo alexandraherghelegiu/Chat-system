@@ -9,7 +9,8 @@ let urlsToCache = [
     '/javascripts/canvas.js',
     '/javascripts/index.js',
     '/javascripts/indexed_database.js',
-    '/javascripts/ajax.js'
+    '/javascripts/ajax.js',
+    '/javascripts/utils.js',
 ];
 
 

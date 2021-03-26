@@ -3,6 +3,7 @@ let name;
 let socket = io({'force new connection': false});
 let loadedImages;
 
+
 /**
  * called by <body onload>
  * it initialises the interface and the expected socket messages
@@ -54,6 +55,7 @@ function init() {
     initSocket();
 }
 
+
 /**
  * Sends the form data to the server
  * @param formID The ID of the form
@@ -99,89 +101,6 @@ function sendFormData(formID) {
 
 
 /**
- * Extracts data from a given form
- * @param form {HTMLElement} The form element
- * @returns {{}} The data as an object
- */
-function serialiseForm(form){
-    var formArray = $(form).serializeArray();
-    var data = {};
-
-    for (index in formArray){
-        data[formArray[index].name]= formArray[index].value;
-    }
-    return data;
-}
-
-/**
- * Creates a tile(card) HTML element
- * @param data The image or room data
- * @param isRoom {Boolean} True if room, false if image
- * @returns {HTMLDivElement}
- */
-function createTile(data, isRoom){
-    let tile = document.createElement('div');
-    tile.className = "col-12 col-sm-6 col-md-4 col-lg-2 card tile";
-
-    //General fields
-    let cardBody = document.createElement('div');
-    cardBody.className = "card-body";
-
-    let cardTitle = document.createElement('h5');
-    cardTitle.className = "card-title";
-
-    let img = document.createElement('img');
-    img.className = "card-img-top";
-    //If annotations exist
-    if(data.canvas) img.src = data.canvas;
-    //No annotations
-    else img.src = data.imageUrl;
-
-    //If it is a room
-    if(isRoom){
-        //Event listener
-        tile.addEventListener("click", () => {
-            //Join the room
-            connectToRoomNew(data);
-        });
-
-        //Additional field(s)
-        cardTitle.innerHTML = "Room: " + data.roomid;
-        cardBody.appendChild(cardTitle);
-    }
-
-    //If it is an image
-    else{
-        tile.setAttribute("data-dismiss", "modal");
-        tile.addEventListener("click", () => {
-            //Join the room
-            $("#image_url").val(img.src);
-        });
-
-        //Description in tooltip
-        tile.setAttribute("data-toggle", "tooltip");
-        tile.setAttribute("title", "Description: " + data.imageDesc);
-        $(tile).tooltip();
-
-        //Make it selectable
-        tile.setAttribute('tabindex', '0');
-
-        //Additional field(s)
-        cardTitle.innerHTML = "Title: " + data.imageTitle;
-
-        let cardAuthor = document.createElement('p');
-        cardAuthor.className = "card-text";
-        cardAuthor.innerHTML = "Author: " + data.imageAuthor;
-
-        cardBody.append(cardTitle, cardAuthor)
-    }
-    //Add image and card body
-    tile.append(img, cardBody);
-    return tile;
-}
-
-
-/**
  * called to generate a random room number
  * This is a simplification. A real world implementation would ask the server to generate a unique room number
  * so to make sure that the room number is not accidentally repeated across uses
@@ -189,34 +108,6 @@ function createTile(data, isRoom){
 function generateRoom() {
     roomNo = Math.round(Math.random() * 10000);
     document.getElementById('roomNo').value = 'R' + roomNo;
-}
-
-
-/**
- * Displays the loaded messages on the history
- * @param messageList List of message objects
- */
-function displayLoadedMessages(messageList){
-    let history = document.getElementById('history');
-    //Clear history
-    history.innerHTML = "";
-
-    for(let m of messageList){
-        let paragraph = document.createElement('p');
-
-        //If user the current user
-        if(m.user.trim() === name.trim()){
-            paragraph.innerHTML = '<b>Me:</b> ' + m.message;
-        }
-        else{
-            paragraph.innerHTML = '<b>' + m.user + ':</b> ' + m.message;
-        }
-        //Append to the history
-        history.appendChild(paragraph);
-    }
-    //Scroll to the last element
-    history.scrollTop = history.scrollHeight;
-    document.getElementById('chat_input').value = '';
 }
 
 
@@ -234,18 +125,6 @@ function writeOnHistory(text) {
     // scroll to the last element
     history.scrollTop = history.scrollHeight;
     document.getElementById('chat_input').value = '';
-}
-
-
-/**
- * it hides the initial form and shows the chat
- * @param room the selected room
- * @param userId the user name
- */
-function hideLoginInterface(room, userId) {
-    document.getElementById('initial_form').style.display = 'none';
-    document.getElementById('chat_interface').style.display = 'block';
-    document.getElementById('in_room').innerHTML= ' '+room;
 }
 
 
@@ -326,40 +205,6 @@ function generateRoomLink(formID){
 
 
 /**
- * Toggles the title and description fields in the form if
- * the user wants to join to an existing room
- */
-function toggleFormFields(){
-    let checkbox = $("#box-1");
-    let titleField = $("#img_title");
-    let descField = $("#img_description");
-    let imgBrowseBtn = $("#pickImage");
-    let imgUploadBtn = $("#img_upload_btn");
-    let takePictureBtn = $("#takePicture");
-    let generateRoomBtn = $("#roomNoGenerator");
-
-    //Disable title and description fields
-    if(checkbox.is(":checked")){
-        generateRoomBtn.prop("disabled", true);
-        imgUploadBtn.prop("disabled", true);
-        takePictureBtn.prop("disabled", true);
-        titleField.prop("disabled", true);
-        descField.prop("disabled", true);
-        imgBrowseBtn.prop("disabled", false);
-    }
-    //Enable title and description fields
-    else{
-        generateRoomBtn.prop("disabled", false);
-        imgUploadBtn.prop("disabled", false);
-        takePictureBtn.prop("disabled", false);
-        imgBrowseBtn.prop("disabled", true);
-        titleField.prop("disabled", false);
-        descField.prop("disabled", false);
-    }
-}
-
-
-/**
  * Logs the current user out
  */
 function logOut(){
@@ -405,6 +250,7 @@ function filterTiles(authorString){
     displayMongoImages(filteredImages);
 }
 
+
 /**
  * Called at init to fill the user names correctly.
  */
@@ -412,4 +258,3 @@ function setName(n){
     $('#nameTitle').text('Welcome, ' + n);
     $('#who_you_are').text(n);
 }
-
