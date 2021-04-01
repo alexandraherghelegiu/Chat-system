@@ -2,13 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f32f66fa-046e-47f8-903b-db21fa5041a6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Main Server/public/javascripts/utils.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Main Server/swagger/swaggerDocumentation.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main Server/public/javascripts/dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/public/javascripts/dashboard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main Server/public/javascripts/room.js" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/public/javascripts/room.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main Server/public/service-worker.js" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/public/service-worker.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main Server/views/dashboard.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/views/dashboard.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main Server/views/index.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/views/index.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main Server/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main Server/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main Server/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,6 +17,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JavaScript File" />
+        <option value="Json OpenAPI version 3" />
       </list>
     </option>
   </component>
@@ -43,6 +42,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="Json OpenAPI version 3" value="Json OpenAPI version 3" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -116,6 +116,7 @@
       <workItem from="1616689713660" duration="3500000" />
       <workItem from="1616756890640" duration="397000" />
       <workItem from="1616764705110" duration="3693000" />
+      <workItem from="1617298822842" duration="1993000" />
     </task>
     <task id="LOCAL-00001" summary="ajax.js added with basic functionality">
       <created>1615239782665</created>

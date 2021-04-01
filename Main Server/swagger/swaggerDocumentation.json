@@ -1,0 +1,73 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "Chat System",
+    "description": "The main server of the chat-system",
+    "contact": {
+      "name": "Daniel Matyas Perendi",
+      "email": "dmperendi1@sheffield.ac.uk"
+    },
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Main local development server"
+    },
+    {
+      "url": "http://localhost:3001",
+      "description": "MongoDB local server"
+    }
+  ],
+  "paths": {
+    "/processform": {
+      "post": {
+        "tags": [
+          "Processing form data"
+        ],
+        "description": "Processing the data submitted from a form",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/roomData"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "roomid": {
+        "type": "string",
+        "description": "The room ID/Name",
+        "example": "R2222"
+      },
+      "author": {
+        "type": "string",
+        "description": "The author of the image",
+        "example": "Robert"
+      },
+      "imageUrl": {
+        "type": "string",
+        "description": "The URL of the image or the image in Base64 format"
+      },
+      "roomData": {
+        "type": "object",
+        "properties": {
+          "roomid": {
+            "$ref": "#/components/schemas/roomid"
+          },
+          "author": {
+            "$ref": "#/components/schemas/author"
+          },
+          "imageUrl": {
+            "$ref": "#/components/schemas/imageUrl"
+          }
+        }
+      }
+    }
+  }
+}
