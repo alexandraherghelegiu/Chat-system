@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f32f66fa-046e-47f8-903b-db21fa5041a6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Main Server/swagger/swaggerDocumentation.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main Server/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main Server/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main Server/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main Server/public/service-worker.js" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/public/service-worker.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

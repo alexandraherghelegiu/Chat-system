@@ -29,28 +29,44 @@ self.addEventListener('install', function(event){
 self.addEventListener('fetch', function(event){
     //event raised
     event.respondWith(
-        caches.match(event.request)
-            .then(function(cachedResponse){
-                //if there's something in the cache
-                return fetch(event.request).then(
-                    function(response){
-                        if(!response || response.status !== 200 || response.type !== 'basic') {
-                            return cachedResponse;
-                        }
-                        let responseToCache = response.clone();
+        (async () => {
+            const cachedResp = await caches.match(event.request);
+
+            //If cached record exists
+            if(cachedResp){
+                //Try connecting
+                try{
+                    const fetchResp = await fetch(event.request);
+
+                    if(!fetchResp || fetchResp.status !== 200 ) {
+                        return cachedResponse;
+                    }
+                    if(fetchResp){
+                        let responseToCache = fetchResp.clone();
                         caches.open(CACHE_NAME).then(function(cache){
                             return cache.put(event.request, responseToCache);
                         }).catch(function(err){
                             console.log('error opening cache ' + err);
                         });
-                        return response;
+                        return fetchResp;
                     }
-                ).catch(function(err){
-                    //Returning result from cache
-                    return cachedResponse;
-                });
+                }
+                catch (e) {
+                    return cachedResp
+                }
+            }
+            //If no records in cache
+            else{
+                //Try connecting
+                try {
+                    const fetchResp = await fetch(event.request);
+                    return fetchResp;
+                }
+                catch (e) {
+                    console.log("No record found in cache and fetch failed: "+e);
+                }
 
-            })
-    )
+            }
+        })());
 });
 
