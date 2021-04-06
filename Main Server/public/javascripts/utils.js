@@ -37,7 +37,7 @@ function createTile(data, isRoom){
     //If annotations exist
     if(data.canvas) img.src = data.canvas;
     //No annotations
-    else img.src = data.imageUrl;
+    else img.src = data.imageSrc;
 
     //If it is a room
     if(isRoom){
@@ -48,7 +48,7 @@ function createTile(data, isRoom){
         });
 
         //Additional field(s)
-        cardTitle.innerHTML = "Room: " + data.roomid;
+        cardTitle.innerHTML = "Room: " + data.roomID;
         cardBody.appendChild(cardTitle);
     }
 
@@ -62,7 +62,7 @@ function createTile(data, isRoom){
 
         //Description in tooltip
         tile.setAttribute("data-toggle", "tooltip");
-        tile.setAttribute("title", "Description: " + data.imageDesc);
+        tile.setAttribute("title", "Description: " + data.imageDescription);
         $(tile).tooltip();
 
         //Make it selectable
@@ -73,7 +73,7 @@ function createTile(data, isRoom){
 
         let cardAuthor = document.createElement('p');
         cardAuthor.className = "card-text";
-        cardAuthor.innerHTML = "Author: " + data.imageAuthor;
+        cardAuthor.innerHTML = "Author: " + data.author;
 
         cardBody.append(cardTitle, cardAuthor)
     }

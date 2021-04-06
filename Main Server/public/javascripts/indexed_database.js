@@ -16,7 +16,7 @@ async function initIDB(){
             upgrade(upgradeDb, oldVersion, newVersion) {
                 if (!upgradeDb.objectStoreNames.contains(STORE_NAME)) {
                     let chatIDB = upgradeDb.createObjectStore(STORE_NAME);
-                    chatIDB.createIndex('rooms', 'roomid', {unique: false, multiEntry: true});
+                    chatIDB.createIndex('rooms', 'roomID', {unique: false, multiEntry: true});
                 }
             }
         });
@@ -38,14 +38,14 @@ async function storeRoomData(data){
             let tx = await db.transaction(STORE_NAME, 'readwrite');
             let store = await tx.objectStore(STORE_NAME);
 
-            await store.put(data, data.roomid);
+            await store.put(data, data.roomID);
             await  tx.complete;
         } catch(error) {
             console.log("Error in storing data: "+ error);
-            localStorage.setItem(data.roomid, JSON.stringify(data));
+            localStorage.setItem(data.roomID, JSON.stringify(data));
         };
     }
-    else localStorage.setItem(data.roomid, JSON.stringify(data));
+    else localStorage.setItem(data.roomID, JSON.stringify(data));
 }
 window.storeRoomData= storeRoomData;
 

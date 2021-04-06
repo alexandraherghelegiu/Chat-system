@@ -4,6 +4,7 @@ const fs = require('fs');
 
 // insert an image with all its details
 // and export it so that it can be used outside the module
+// TODO create a unique id for each image -> uniqueID.jpeg
 exports.insert = function (req, res) {
     console.log("insert function called in Mongo server");
     let imageData = req.body;
@@ -19,22 +20,22 @@ exports.insert = function (req, res) {
         }
 
         // strip off the data: url prefix to get just the base64-encoded bytes
-        let imageBlob = imageData.imageBlob.replace(/^data:image\/\w+;base64,/, "");
+        let imageBlob = imageData.imageSrc.replace(/^data:image\/\w+;base64,/, "");
         let buf = new Buffer(imageBlob, 'base64');
         // add image to private folder based on its base64 representation
-        fs.writeFile(targetDirectory + imageData.img_title + '.jpeg', buf, function(err, result) {
+        fs.writeFile(targetDirectory + imageData.imageTitle + '.jpeg', buf, function(err, result) {
             if(err) console.log('error', err);
         });
 
         // get the file path of the image in order to store it
-        let filepath = targetDirectory + imageData.img_title + ".jpeg";
+        let filepath = targetDirectory + imageData.imageTitle + ".jpeg";
 
         // create database entry for the new Image
         let image = new Image({
-            image_path: filepath,
-            image_author: imageData.img_author,
-            image_title: imageData.img_title,
-            image_description: imageData.img_description,
+            imagePath: filepath,
+            author: imageData.author,
+            imageTitle: imageData.imageTitle,
+            imageDescription: imageData.imageDescription,
         });
         console.log('received: ' + image);
 
@@ -63,7 +64,7 @@ exports.getAllImages = function (req, res) {
     try {
         // get all images with their path, author, title and description from MongoDB
         Image.find({},
-            'image_path image_author image_title image_description',
+            'imagePath author imageTitle imageDescription',
             function (err, images) {
                 if (err)
                     res.status(500).send('Invalid data!');
@@ -71,12 +72,12 @@ exports.getAllImages = function (req, res) {
                 if (images.length > 0) {  // if database NOT empty
                     for (let image of images) {
                         // convert image file into base64 format
-                        imageToBase64(image.image_path).then(img=>{
+                        imageToBase64(image.imagePath).then(img=>{
                             let image_info = {
-                                imageUrl: "data:image/jpeg;base64," + img,  // image in base64 format
-                                imageAuthor: image.image_author,
-                                imageTitle: image.image_title,
-                                imageDesc: image.image_description
+                                imageSrc: "data:image/jpeg;base64," + img,  // image in base64 format
+                                author: image.author,
+                                imageTitle: image.imageTitle,
+                                imageDescription: image.imageDescription
                             };
                             // add this image info to the response list 'info'
                             info.push(image_info);

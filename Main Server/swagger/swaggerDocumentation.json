@@ -13,14 +13,26 @@
     {
       "url": "http://localhost:3000",
       "description": "Main local development server"
-    },
-    {
-      "url": "http://localhost:3001",
-      "description": "MongoDB local server"
     }
   ],
   "paths": {
-    "/processform": {
+    "/" : {
+      "get": {
+        "tags": [
+          "Loading the home page"
+        ],
+        "description": "Loads the home page"
+      }
+    },
+    "/dashboard": {
+      "get": {
+        "tags": [
+          "Loading the dashboard page"
+        ],
+        "description": "Loads the dashboard page"
+      }
+    },
+    "/dashboard/processform": {
       "post": {
         "tags": [
           "Processing form data"
@@ -36,11 +48,36 @@
           }
         }
       }
+    },
+    "/mongodb/getAll": {
+      "get": {
+        "tags": [
+          "Gets all the data from MongoDB"
+        ],
+        "description": "Sends a fetch request to the MongoDB server requesting all the available data in the database"
+      }
+    },
+    "/mongodb/insertImage": {
+      "post": {
+        "tags": [
+          "Insert image into MongoDB"
+        ],
+        "description": "Inserts an image object into MongoDB",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/roomData"
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
-      "roomid": {
+      "roomID": {
         "type": "string",
         "description": "The room ID/Name",
         "example": "R2222"
@@ -50,21 +87,79 @@
         "description": "The author of the image",
         "example": "Robert"
       },
-      "imageUrl": {
+      "imageSrc": {
         "type": "string",
         "description": "The URL of the image or the image in Base64 format"
+      },
+      "accessedBy": {
+        "type": "string",
+        "description": "The user who accessed the specific room from the computer",
+        "example": "Robert"
+      },
+      "canvas": {
+        "type": "string",
+        "description": "Base64 representation of the saved annotations, empty by default"
+      },
+      "imageTitle": {
+        "type": "string",
+        "description": "The title of the image",
+        "example": "A landscape"
+      },
+      "imageDescription": {
+        "type": "string",
+        "description": "The description of the image",
+        "example": "This picture shows a green field with two hills"
+      },
+      "messages": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "date": {
+              "type": "string",
+              "description": "The timestamp of the message",
+              "example": "Sat Apr 03 2021 15:50:42 GMT+0100 (British Summer Time)"
+            },
+            "user": {
+              "type": "string",
+              "description": "The user who sent the message",
+              "example": "Robert"
+            },
+            "message": {
+              "type": "string",
+              "description": "The content of the message",
+              "example": "This is an example message"
+            }
+          }
+        },
+        "description": "The array of messages saved locally, empty by default"
       },
       "roomData": {
         "type": "object",
         "properties": {
-          "roomid": {
-            "$ref": "#/components/schemas/roomid"
+          "roomID": {
+            "$ref": "#/components/schemas/roomID"
           },
           "author": {
             "$ref": "#/components/schemas/author"
           },
-          "imageUrl": {
-            "$ref": "#/components/schemas/imageUrl"
+          "imageSrc": {
+            "$ref": "#/components/schemas/imageSrc"
+          },
+          "accessedBy": {
+            "$ref": "#/components/schemas/accessedBy"
+          },
+          "canvas": {
+            "$ref": "#/components/schemas/canvas"
+          },
+          "imageTitle": {
+            "$ref": "#/components/schemas/imageTitle"
+          },
+          "imageDescription": {
+            "$ref": "#/components/schemas/imageDescription"
+          },
+          "messages": {
+            "$ref": "#/components/schemas/messages"
           }
         }
       }

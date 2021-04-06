@@ -66,7 +66,7 @@ function sendFormData(formID) {
     let formData = serialiseForm(form);
 
     //Check for missing url/roomid
-    if(!formData.roomid || !formData.imageUrl){
+    if(!formData.roomID || !formData.imageSrc){
         alert("Room name and Image are required!");
         return;
     }
@@ -85,12 +85,12 @@ function sendFormData(formID) {
         //Check if image loaded or linked, only store in MongoDB if uploaded (if in base64 format)
         const base64regx = new RegExp("^data:image\\/(?:gif|png|jpeg|bmp|webp)(?:;charset=utf-8)?;" +
             "base64,(?:[A-Za-z0-9]|[+/])+={0,2}");
-        if (base64regx.test(fullData.imageUrl)) {
+        if (base64regx.test(fullData.imageSrc)) {
             let mongoData = {
-                "img_author": name,
-                "img_title": fullData.imageTitle,
-                "img_description": fullData.imageDesc,
-                "imageBlob": fullData.imageUrl
+                "author": name,
+                "imageTitle": fullData.imageTitle,
+                "imageDescription": fullData.imageDescription,
+                "imageSrc": fullData.imageSrc
             }
             let url = '/mongodb/insertImage';
             sendInsertAjaxQueryToMongoDB(url, JSON.stringify(mongoData));
@@ -193,7 +193,7 @@ function generateRoomLink(formID){
     //Sends a button link to the new room to the chat
     var stringifiedData = JSON.stringify(dropdownFormData);
     let messageLink = "<button class='btn btn-primary' " +
-        "onclick='connectToRoomNew("+stringifiedData+")'>Connect to room "+dropdownFormData.roomid+"</button>";
+        "onclick='connectToRoomNew("+stringifiedData+")'>Connect to room "+dropdownFormData.roomID+"</button>";
     sendChatText(messageLink);
 
     //Redirects the current user
@@ -233,7 +233,7 @@ function displayMongoImages(data) {
 
     for (let image of data) {
         //display each image from MongoDB
-        console.log(image.imageUrl);
+        console.log(image.imageSrc);
         let tile = createTile(image, false);
         wrapper.appendChild(tile);
     }
@@ -246,7 +246,7 @@ function displayMongoImages(data) {
  * @param authorString The author's name
  */
 function filterTiles(authorString){
-    let filteredImages = loadedImages.filter(e => e.imageAuthor.toUpperCase().includes(authorString.toUpperCase()));
+    let filteredImages = loadedImages.filter(e => e.author.toUpperCase().includes(authorString.toUpperCase()));
     displayMongoImages(filteredImages);
 }
 

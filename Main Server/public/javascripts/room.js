@@ -51,7 +51,7 @@ function initSocket(){
  */
 function connectToRoomNew(roomData) {
     var data = roomData;
-    roomNo = roomData.roomid
+    roomNo = roomData.roomID
 
     //Checking the database
     getRoomData(roomNo).then(result => {
@@ -60,21 +60,21 @@ function connectToRoomNew(roomData) {
             //Store the data in indexedDB
             storeRoomData(data);
             //Open socket and display chat
-            socket.emit('create or join', roomNo, data.accessedBy, data.imageUrl);
+            socket.emit('create or join', roomNo, data.accessedBy, data.imageSrc);
             displayLoadedMessages([]);
             hideLoginInterface(roomNo, data.accessedBy);
-            initCanvas(socket, data.imageUrl, "");
+            initCanvas(socket, data.imageSrc, "");
         }
 
         //If room already exists
         else{
             //Open socket
-            socket.emit('create or join', result.roomid, result.accessedBy, result.imageUrl);
+            socket.emit('create or join', result.roomID, result.accessedBy, result.imageSrc);
             //Load data from indexedDB
             displayLoadedMessages(result.messages);
             //Display chat
-            hideLoginInterface(result.roomid, result.accessedBy);
-            initCanvas(socket, result.imageUrl, result.canvas);
+            hideLoginInterface(result.roomID, result.accessedBy);
+            initCanvas(socket, result.imageSrc, result.canvas);
         }
     });
 }

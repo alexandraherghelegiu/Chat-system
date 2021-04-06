@@ -8,8 +8,9 @@ var color = 'red', thickness = 4;
 /**
  * it inits the image canvas to draw on. It sets up the events to respond to (click, mouse on, etc.)
  * it is also the place where the data should be sent  via socket.io
- * @param sckt the open socket to register events on
- * @param imageUrl the image url to download
+ * @param socket the open socket to register events on
+ * @param originalImageUrl the original image source
+ * @param canvasUrl the canvas in base64 format
  */
 function initCanvas(socket, originalImageUrl, canvasUrl) {
 
