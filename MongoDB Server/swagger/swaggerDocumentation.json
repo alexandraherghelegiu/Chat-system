@@ -1,0 +1,101 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "MongoDB API",
+    "description": "The server belonging to the chat-system's MongoDB",
+    "contact": {
+      "name": "Daniel Matyas Perendi",
+      "email": "dmperendi1@sheffield.ac.uk"
+    },
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3001",
+      "description": "MongoDB local development server"
+    }
+  ],
+  "paths": {
+    "/getAllImages": {
+      "get": {
+        "tags": [
+          "Get all images from MongoDB"
+        ],
+        "description": "Retrieves all the stored images from MongoDB",
+        "responses": {
+          "200": {
+            "description": "An array of image objects",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                      "$ref": "#/components/schemas/imageData"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/insert": {
+      "post": {
+        "tags": [
+          "Insert image into MongoDB"
+        ],
+        "description": "Inserts an image object into MongoDB",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/imageData"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "author": {
+        "type": "string",
+        "description": "The author of the image",
+        "example": "Robert"
+      },
+      "imageSrc": {
+        "type": "string",
+        "description": "The URL of the image or the image in Base64 format",
+        "example": "https://upload.wikimedia.org/wikipedia/commons/3/35/Neckertal_20150527-6384.jpg"
+      },
+      "imageTitle": {
+        "type": "string",
+        "description": "The title of the image",
+        "example": "A landscape"
+      },
+      "imageDescription": {
+        "type": "string",
+        "description": "The description of the image",
+        "example": "This picture shows a green field with two hills"
+      },
+      "imageData": {
+        "type": "object",
+        "properties": {
+          "author": {
+            "$ref": "#/components/schemas/author"
+          },
+          "imageTitle": {
+            "$ref": "#/components/schemas/imageTitle"
+          },
+          "imageDescription": {
+            "$ref": "#/components/schemas/imageDescription"
+          },
+          "imageSrc": {
+            "$ref": "#/components/schemas/imageSrc"
+          }
+        }
+      }
+    }
+  }
+}

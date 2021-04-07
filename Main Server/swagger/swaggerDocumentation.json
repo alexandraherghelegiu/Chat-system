@@ -54,7 +54,22 @@
         "tags": [
           "Gets all the data from MongoDB"
         ],
-        "description": "Sends a fetch request to the MongoDB server requesting all the available data in the database"
+        "summary": "Sends a fetch request to the MongoDB server requesting all the available data in the database",
+        "responses": {
+          "200": {
+            "description": "An array of all the stored image objects",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/imageData"
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/mongodb/insertImage": {
@@ -67,7 +82,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/roomData"
+                "$ref": "#/components/schemas/imageData"
               }
             }
           }
@@ -89,7 +104,8 @@
       },
       "imageSrc": {
         "type": "string",
-        "description": "The URL of the image or the image in Base64 format"
+        "description": "The URL of the image or the image in Base64 format",
+        "example": "https://upload.wikimedia.org/wikipedia/commons/3/35/Neckertal_20150527-6384.jpg"
       },
       "accessedBy": {
         "type": "string",
@@ -160,6 +176,23 @@
           },
           "messages": {
             "$ref": "#/components/schemas/messages"
+          }
+        }
+      },
+      "imageData": {
+        "type": "object",
+        "properties": {
+          "author": {
+            "$ref": "#/components/schemas/author"
+          },
+          "imageTitle": {
+            "$ref": "#/components/schemas/imageTitle"
+          },
+          "imageDescription": {
+            "$ref": "#/components/schemas/imageDescription"
+          },
+          "imageSrc": {
+            "$ref": "#/components/schemas/imageSrc"
           }
         }
       }

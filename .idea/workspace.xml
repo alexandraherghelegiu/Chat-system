@@ -2,18 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f32f66fa-046e-47f8-903b-db21fa5041a6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/MongoDB Server/private/images/Second image.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MongoDB Server/private/images/Test image.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MongoDB Server/swagger/swaggerDocumentation.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main Server/public/javascripts/canvas.js" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/public/javascripts/canvas.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main Server/public/javascripts/dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/public/javascripts/dashboard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main Server/public/javascripts/indexed_database.js" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/public/javascripts/indexed_database.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main Server/public/javascripts/room.js" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/public/javascripts/room.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main Server/public/javascripts/utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/public/javascripts/utils.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main Server/swagger/swaggerDocumentation.json" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/swagger/swaggerDocumentation.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main Server/views/dashboard.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/views/dashboard.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MongoDB Server/controllers/images.js" beforeDir="false" afterPath="$PROJECT_DIR$/MongoDB Server/controllers/images.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MongoDB Server/models/images.js" beforeDir="false" afterPath="$PROJECT_DIR$/MongoDB Server/models/images.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MongoDB Server/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/MongoDB Server/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MongoDB Server/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/MongoDB Server/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MongoDB Server/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/MongoDB Server/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,17 +59,6 @@
     </key>
   </component>
   <component name="RunManager" selected="Node.js.Main Node">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Main Node" type="NodeJSConfigurationType" path-to-js-file="bin/www" working-dir="$PROJECT_DIR$/Main Server">
       <method v="2" />
     </configuration>
@@ -125,7 +108,8 @@
       <workItem from="1616764705110" duration="3693000" />
       <workItem from="1617298822842" duration="1993000" />
       <workItem from="1617459087855" duration="2836000" />
-      <workItem from="1617700580299" duration="2556000" />
+      <workItem from="1617700580299" duration="6599000" />
+      <workItem from="1617794569152" duration="1294000" />
     </task>
     <task id="LOCAL-00001" summary="ajax.js added with basic functionality">
       <created>1615239782665</created>
@@ -330,7 +314,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616613690317</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="Changed all occurences of old field names to generalised ones.">
+      <created>1617704626127</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1617704626127</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -350,7 +341,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Upon joining a room it now checks for matching image url in the IndexedDB" />
     <MESSAGE value="Connect to room bugs fixed" />
     <MESSAGE value="Added tiles for all the rooms stored in the indexeddb" />
     <MESSAGE value="Solved routing issue, solved socket.io issue" />
@@ -375,6 +365,7 @@
     <MESSAGE value="slight appearance changes on the dashboard page" />
     <MESSAGE value="Image selector modal styling changed, small room form issue fixed" />
     <MESSAGE value="Generate room button is disabled now when user joins a room" />
-    <option name="LAST_COMMIT_MESSAGE" value="Generate room button is disabled now when user joins a room" />
+    <MESSAGE value="Changed all occurences of old field names to generalised ones." />
+    <option name="LAST_COMMIT_MESSAGE" value="Changed all occurences of old field names to generalised ones." />
   </component>
 </project>
