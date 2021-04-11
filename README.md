@@ -28,6 +28,11 @@
 * The data submitted from the forms are transferred via Ajax requests.
 * The communication with MongoDB also happens with the help of Ajax.
 
+**Swagger documentation: (Daniel)**
+* The documentation is available for both servers.
+* http://localhost:3000/api-docs for the Main server.
+* http://localhost:3001/api-docs for the MongoDB server
+
 **NodeJS server: (Alexandra)**
 * Index + dashboard pages
 * Client can send request to get all images from MongoDB or to insert image in MongoDB to Main Server
@@ -64,4 +69,4 @@
 ## What needs to be done:
 * Chat interface:
     - Chat interface could do with a restyling and made look better, it currently doesn’t look good on mobile
-* Swagger Documentation
+
