@@ -60,7 +60,15 @@ self.addEventListener('fetch', function(event){
                 //Try connecting
                 try {
                     const fetchResp = await fetch(event.request);
-                    return fetchResp;
+                    if(fetchResp){
+                        let responseToCache = fetchResp.clone();
+                        caches.open(CACHE_NAME).then(function(cache){
+                            return cache.put(event.request, responseToCache);
+                        }).catch(function(err){
+                            console.log('error opening cache ' + err);
+                        });
+                        return fetchResp;
+                    }
                 }
                 catch (e) {
                     console.log("No record found in cache and fetch failed: "+e);
