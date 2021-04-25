@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f32f66fa-046e-47f8-903b-db21fa5041a6" name="Default Changelist" comment="">
+    <list default="true" id="f32f66fa-046e-47f8-903b-db21fa5041a6" name="Default Changelist" comment="Annotations and messages are now saved both online and offline">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main Server/public/javascripts/canvas.js" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/public/javascripts/canvas.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main Server/public/javascripts/room.js" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/public/javascripts/room.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main Server/public/javascripts/utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/public/javascripts/utils.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main Server/public/service-worker.js" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/public/service-worker.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main Server/views/dashboard.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/views/dashboard.ejs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,7 +48,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/SoftwareReengineering/reengineering-toolkit" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
@@ -337,7 +341,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Connect to room bugs fixed" />
     <MESSAGE value="Added tiles for all the rooms stored in the indexeddb" />
     <MESSAGE value="Solved routing issue, solved socket.io issue" />
     <MESSAGE value="Chat messages are now loaded from IndexedDB" />
@@ -362,6 +365,7 @@
     <MESSAGE value="Image selector modal styling changed, small room form issue fixed" />
     <MESSAGE value="Generate room button is disabled now when user joins a room" />
     <MESSAGE value="Changed all occurences of old field names to generalised ones." />
-    <option name="LAST_COMMIT_MESSAGE" value="Changed all occurences of old field names to generalised ones." />
+    <MESSAGE value="Annotations and messages are now saved both online and offline" />
+    <option name="LAST_COMMIT_MESSAGE" value="Annotations and messages are now saved both online and offline" />
   </component>
 </project>

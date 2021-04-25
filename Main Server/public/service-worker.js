@@ -73,7 +73,6 @@ self.addEventListener('fetch', function(event){
                 catch (e) {
                     console.log("No record found in cache and fetch failed: "+e);
                 }
-
             }
         })());
 });
