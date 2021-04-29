@@ -49,16 +49,23 @@ function initCanvas(socket, originalImageUrl, canvasUrl) {
         // if the flag is up, the movement of the mouse draws on the canvas
         if (e.type === 'mousemove') {
             if (flag) {
-                drawOnCanvas(ctx, canvas.width, canvas.height, prevX, prevY, currX, currY, color, thickness);
-                // room, userId, canvas.width, canvas.height, prevX, prevY, currX, currY, color, thickness
-                socket.emit('draw', roomNo, name, canvas.width, canvas.height, prevX, prevY, currX, currY, color, thickness);
+                if(offline){
+                    //Draw on canvas
+                    drawOnCanvas(ctx, canvas.width, canvas.height, prevX, prevY, currX, currY, color, thickness);
 
+                    //Update indexedDB
+                    let canvasUrl = cvx.toDataURL();
+                    updateField(roomNo, "canvas", canvasUrl);
+                }
+                else{
+                    socket.emit('draw', roomNo, name, canvas.width, canvas.height, prevX, prevY, currX, currY, color, thickness);
+                }
             }
         }
     });
 
-    // this is code left in case you need to  provide a button clearing the canvas (it is suggested that you implement it)
-    
+    //Clearing the canvas (Only available when online,
+    //because we don't want to get rid of "mutual" annotations
     $('#canvas-clear').on('click', function(){
         socket.emit('clear', roomNo, userId);
     });

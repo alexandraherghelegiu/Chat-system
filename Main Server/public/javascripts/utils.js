@@ -117,14 +117,12 @@ function toggleFormFields(){
         takePictureBtn.prop("disabled", true);
         titleField.prop("disabled", true);
         descField.prop("disabled", true);
-        imgBrowseBtn.prop("disabled", false);
     }
     //Enable title and description fields
     else{
         generateRoomBtn.prop("disabled", false);
         imgUploadBtn.prop("disabled", false);
         takePictureBtn.prop("disabled", false);
-        imgBrowseBtn.prop("disabled", true);
         titleField.prop("disabled", false);
         descField.prop("disabled", false);
     }

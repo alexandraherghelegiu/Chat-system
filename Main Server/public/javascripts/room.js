@@ -1,3 +1,5 @@
+var offline = false;
+
 /**
  * Initialises the socket
  */
@@ -14,21 +16,8 @@ function initSocket(){
 
     //Listening for chat in the room
     socket.on('chat', function (room, userId, chatText){
-        let who = userId;
-        if (userId === name) who = 'Me';
-        let canvasUrl = document.getElementById('canvas').toDataURL();
-        //Storing message in IndexedDB
-        getRoomFieldData(room, "messages").then(data => {
-            var newObj = {
-                date: Date(),
-                user: userId,
-                message: chatText
-            }
-            data.push(newObj);
-            updateField(room, "messages", data);
-        });
-        updateField(room, "canvas", canvasUrl);
-        writeOnHistory('<b>' + who + ':</b> ' + chatText);
+        //Send message
+        sendAndSaveMessage(room, userId, chatText);
     });
 
     //Listening for network errors
@@ -116,7 +105,15 @@ function displayLoadedMessages(messageList){
  * and sends the message via  socket
  */
 function sendChatText(text) {
-    socket.emit('chat', roomNo, name, text);
+    //Check connection status
+    if(offline){
+        //Send message offline
+        sendAndSaveMessage(roomNo, name, text);
+    }
+    else{
+        //Emit to socket.io
+        socket.emit('chat', roomNo, name, text);
+    }
 }
 
 
@@ -124,13 +121,10 @@ function sendChatText(text) {
  * Called when user is online
  */
 function statusOnline(){
-    let chatInput =  $('#chat_input');
-    let sendButton = $('#chat_send');
-    //user can write on the input bar only if online
-    chatInput.prop('disabled', false)
-    sendButton.prop('disabled', false)
-    $('#connect').prop('disabled', false);
+    offline = false;
+    $('#create-room-dropdown').prop('disabled', false);
     $('#offlineIcon').hide();
+    $('#connect').prop('disabled', false);
 }
 
 
@@ -138,10 +132,33 @@ function statusOnline(){
  * Called when user goes offline
  */
 function statusOffline(){
-    let chatInput =  $('#chat_input');
-    let sendButton = $('#chat_send');
-    chatInput.prop('disabled', true);
-    sendButton.prop('disabled', true);
+    offline = true;
+    $('#create-room-dropdown').prop('disabled', true);
     $('#offlineIcon').show();
     $('#connect').prop('disabled', true);
+}
+
+
+/**
+ * Sends a chat message, then saves it in indexedDB
+ * @param room The ID of the room
+ * @param user The name of the user
+ * @param message The message content
+ */
+function sendAndSaveMessage(room, user, message){
+    //Write on chat
+    let who = user;
+    if (user === name) who = 'Me';
+    writeOnHistory('<b>' + who + ':</b> ' + message);
+
+    //Storing message in IndexedDB
+    getRoomFieldData(room, "messages").then(data => {
+        var newObj = {
+            date: Date(),
+            user: user,
+            message: message
+        }
+        data.push(newObj);
+        updateField(room, "messages", data);
+    });
 }
