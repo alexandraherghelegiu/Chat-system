@@ -26,55 +26,54 @@ self.addEventListener('install', function(event){
     )
 });
 
-self.addEventListener('fetch', function(event){
+self.addEventListener('fetch', function(event) {
+
     //event raised
     event.respondWith(
         (async () => {
             const cachedResp = await caches.match(event.request);
-
+            console.log(event.request)
             //If cached record exists
-            if(cachedResp){
+            if (cachedResp) {
                 //Try connecting
-                try{
+                try {
                     const fetchResp = await fetch(event.request);
 
-                    if(!fetchResp || fetchResp.status !== 200 ) {
+                    if (!fetchResp || fetchResp.status !== 200) {
                         return cachedResponse;
                     }
-                    if(fetchResp){
+                    if (fetchResp) {
                         let responseToCache = fetchResp.clone();
-                        caches.open(CACHE_NAME).then(function(cache){
+                        caches.open(CACHE_NAME).then(function (cache) {
                             return cache.put(event.request, responseToCache);
-                        }).catch(function(err){
+                        }).catch(function (err) {
                             console.log('error opening cache ' + err);
                         });
                         return fetchResp;
                     }
-                }
-                catch (e) {
+                } catch (e) {
                     return cachedResp
                 }
             }
             //If no records in cache
-            else{
+            else {
                 //Try connecting
                 try {
                     const fetchResp = await fetch(event.request);
-                    if(fetchResp){
+                    if (fetchResp) {
                         let responseToCache = fetchResp.clone();
-                        caches.open(CACHE_NAME).then(function(cache){
+                        caches.open(CACHE_NAME).then(function (cache) {
                             return cache.put(event.request, responseToCache);
-                        }).catch(function(err){
+                        }).catch(function (err) {
                             console.log('error opening cache ' + err);
                         });
                         return fetchResp;
                     }
-                }
-                catch (e) {
-                    console.log("No record found in cache and fetch failed: "+e);
+                } catch (e) {
+                    console.log("No record found in cache and fetch failed: " + e);
                 }
 
             }
         })());
-});
 
+});

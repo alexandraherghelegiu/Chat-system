@@ -6,7 +6,10 @@ function initSocket(){
     socket.on('joined', function(room, userId, image){
         if(userId != name){
             writeOnHistory('<b>' + userId + '</b>' + ' joined room ' + room);
+        }else{
+            writeOnHistory('You\'ve entered room ' + room)
         }
+
     });
 
     //Listening for chat in the room

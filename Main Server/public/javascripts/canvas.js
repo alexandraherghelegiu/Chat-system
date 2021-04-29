@@ -23,7 +23,9 @@ function initCanvas(socket, originalImageUrl, canvasUrl) {
     let img = document.getElementById('image');
     let ctx = cvx.getContext('2d');
     img.crossOrigin = "anonymous";
-
+    console.log(cvx.height, cvx.width);
+    console.log(ctx.height, ctx.width);
+    console.log(img.height, img.width);
     //Load annotations if they exist
     if(canvasUrl != ""){
         img.src = canvasUrl;
@@ -154,7 +156,6 @@ function drawImageScaled(img, canvas, ctx) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     let x = (canvas.width / 2) - (img.width / 2) * scale;
     let y = (canvas.height / 2) - (img.height / 2) * scale;
-
     ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
 }
 
