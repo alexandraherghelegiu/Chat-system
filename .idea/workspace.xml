@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f32f66fa-046e-47f8-903b-db21fa5041a6" name="Default Changelist" comment="Annotations and messages are now saved both online and offline">
+    <list default="true" id="f32f66fa-046e-47f8-903b-db21fa5041a6" name="Default Changelist" comment="Changed Readme">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main Server/public/javascripts/canvas.js" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/public/javascripts/canvas.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main Server/public/javascripts/room.js" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/public/javascripts/room.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main Server/public/javascripts/utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/public/javascripts/utils.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main Server/public/service-worker.js" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/public/service-worker.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main Server/views/dashboard.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/views/dashboard.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main Server/routes/mongodb.js" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/routes/mongodb.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main Server/swagger/swaggerDocumentation.json" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/swagger/swaggerDocumentation.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MongoDB Server/swagger/swaggerDocumentation.json" beforeDir="false" afterPath="$PROJECT_DIR$/MongoDB Server/swagger/swaggerDocumentation.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,7 +46,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Week 9.a Lab Class Exercise 1" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
@@ -58,7 +56,7 @@
       <recent name="D:\IntelliJ_Projects\Chat-system\public\certificate" />
     </key>
   </component>
-  <component name="RunManager" selected="Node.js.Main Node">
+  <component name="RunManager" selected="Node.js.DB server">
     <configuration name="Main Node" type="NodeJSConfigurationType" path-to-js-file="bin/www" working-dir="$PROJECT_DIR$/Main Server">
       <method v="2" />
     </configuration>
@@ -110,6 +108,8 @@
       <workItem from="1617459087855" duration="2836000" />
       <workItem from="1617700580299" duration="6599000" />
       <workItem from="1617794569152" duration="1294000" />
+      <workItem from="1619769580362" duration="2312000" />
+      <workItem from="1619946733114" duration="2513000" />
     </task>
     <task id="LOCAL-00001" summary="ajax.js added with basic functionality">
       <created>1615239782665</created>

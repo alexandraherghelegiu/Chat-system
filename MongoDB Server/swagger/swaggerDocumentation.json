@@ -24,7 +24,7 @@
         "description": "Retrieves all the stored images from MongoDB",
         "responses": {
           "200": {
-            "description": "An array of image objects",
+            "description": "Successful operation, returns an array of image objects",
             "content": {
               "application/json": {
                 "schema": {
@@ -35,6 +35,12 @@
                 }
               }
             }
+          },
+          "403" : {
+            "description": "No data sent!"
+          },
+          "500": {
+            "description": "Invalid data!"
           }
         }
       }
@@ -52,6 +58,17 @@
                 "$ref": "#/components/schemas/imageData"
               }
             }
+          }
+        },
+        "responses": {
+          "403" : {
+            "description": "No data sent!"
+          },
+          "500": {
+            "description": "Invalid data!"
+          },
+          "200": {
+            "description": "Successful operation!"
           }
         }
       }

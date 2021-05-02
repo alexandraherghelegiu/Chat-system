@@ -21,7 +21,12 @@
         "tags": [
           "Loading the home page"
         ],
-        "description": "Loads the home page"
+        "description": "Loads the home page",
+        "responses": {
+          "default": {
+            "description": "Successful operation"
+          }
+        }
       }
     },
     "/dashboard": {
@@ -29,7 +34,12 @@
         "tags": [
           "Loading the dashboard page"
         ],
-        "description": "Loads the dashboard page"
+        "description": "Loads the dashboard page",
+        "responses": {
+          "default": {
+            "description": "Successful operation"
+          }
+        }
       }
     },
     "/dashboard/processform": {
@@ -45,6 +55,11 @@
                 "$ref": "#/components/schemas/roomData"
               }
             }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation"
           }
         }
       }
@@ -68,6 +83,9 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "MongoDB server not available"
           }
         }
       }
@@ -85,6 +103,14 @@
                 "$ref": "#/components/schemas/imageData"
               }
             }
+          }
+        },
+        "responses": {
+          "503": {
+            "description": "MongoDB server not available"
+          },
+          "200": {
+            "description": "Successful operation"
           }
         }
       }

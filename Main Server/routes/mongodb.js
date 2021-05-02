@@ -24,7 +24,7 @@ router.post('/insertImage', function(req, res, next) {
         headers: {'Content-Type': 'application/json'},
     })
         .then (res => res.text())
-        .then (data=> console.log(data))
+        // .then (data=> console.log(data))
         .catch(err =>
             console.log(err))
 });
