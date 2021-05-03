@@ -14,6 +14,9 @@
     <script src="/javascripts/ajax.js"></script>
     <script type="module" src="/javascripts/annotations.js"></script>
     <script type="module" src="/javascripts/utils.js"></script>
+    <!--  Google Knowledge Graph Widget -->
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/knowledge/kgsearch/widget/1.0/widget.min.css">
+    <script type="text/javascript" src="https://www.gstatic.com/knowledge/kgsearch/widget/1.0/widget.min.js"></script>
 </head>
 <body onload="init()">
     <div id="initial_form" style="display: block">
@@ -158,7 +161,7 @@
                                     <button id="canvas-clear" class="btn btn-secondary">Clear Canvas</button>
                                 </div>
                                 <div class="col text-center">
-                                    <button id="annotationToggle" data-toggle="modal" data-target="#kgModal" onclick="annotationCanvasInit()" class="btn btn-secondary">Add Annotations</button>
+                                    <button id="annotationToggle" data-toggle="modal" data-target="#kgModal" class="btn btn-secondary">Add Annotations</button>
                                 </div>
                             </div>
                         </div>
@@ -309,10 +312,31 @@
                             </div>
                             <div class="col">
                                 <!-- KG searchbar -->
+                                <div id="kgSearch" style="display: none;">
+                                    <div id='kgSearchWidget'>
+                                        <label class="form-label" for="kgSearchInput">Search for: </label>
+                                        <input class="form-control" type="text" id="kgSearchInput">
+                                    </div>
+                                    <div>
+                                        <div id="kgResultPanel" style="display: none;">
+                                            <h3 id="resultName"></h3>
+                                            <h4 id="resultId"></h4>
+                                            <div id="resultDescription"></div>
+                                            <div>
+                                                <a id="resultUrl" target="_blank">
+                                                    Link to Webpage
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-
+                </div>
+                <!-- Buttons -->
+                <div class="modal-footer">
+                    <button id="addAnnotationButton" class="btn btn-primary" disabled>Add annotation</button>
                 </div>
             </div>
         </div>

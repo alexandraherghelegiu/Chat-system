@@ -167,6 +167,12 @@ input[type="checkbox"]:checked + label:before {
     background-color: black;
 }
 
+/* KG result */
+#kgResultPanel {
+    margin-top: 10px;
+    padding: 10px;
+}
+
 @media (min-width: 576px){
     .large-modal-dialog {
         max-width: 90% !important;

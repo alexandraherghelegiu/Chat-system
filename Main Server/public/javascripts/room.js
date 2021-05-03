@@ -56,6 +56,8 @@ function connectToRoomNew(roomData) {
             displayLoadedMessages([]);
             hideLoginInterface(roomNo, data.accessedBy);
             initCanvas(socket, data.imageSrc, "");
+            //Initialise annotation modal
+            annotationCanvasInit();
         }
 
         //If room already exists
@@ -67,6 +69,8 @@ function connectToRoomNew(roomData) {
             //Display chat
             hideLoginInterface(result.roomID, result.accessedBy);
             initCanvas(socket, result.imageSrc, result.canvas);
+            //Initialise annotation modal
+            annotationCanvasInit();
         }
     });
 }
