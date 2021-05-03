@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f32f66fa-046e-47f8-903b-db21fa5041a6" name="Default Changelist" comment="Documentation changes">
-      <change afterPath="$PROJECT_DIR$/Main Server/public/javascripts/annotations.js" afterDir="false" />
+    <list default="true" id="f32f66fa-046e-47f8-903b-db21fa5041a6" name="Default Changelist" comment="Added KG annotation modal, started on annotations.js">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main Server/public/javascripts/canvas.js" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/public/javascripts/canvas.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main Server/public/service-worker.js" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/public/service-worker.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main Server/views/dashboard.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/views/dashboard.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main Server/public/javascripts/annotations.js" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/public/javascripts/annotations.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,7 +119,7 @@
       <workItem from="1617794569152" duration="1294000" />
       <workItem from="1619769580362" duration="2312000" />
       <workItem from="1619946733114" duration="2630000" />
-      <workItem from="1620032736586" duration="5521000" />
+      <workItem from="1620032736586" duration="6636000" />
     </task>
     <task id="LOCAL-00001" summary="ajax.js added with basic functionality">
       <created>1615239782665</created>
@@ -341,7 +338,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619949361949</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="Added KG annotation modal, started on annotations.js">
+      <created>1620038461766</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1620038461766</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -361,7 +365,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Solved routing issue, solved socket.io issue" />
     <MESSAGE value="Chat messages are now loaded from IndexedDB" />
     <MESSAGE value="Loading/saving image works!" />
     <MESSAGE value="Minor bugs fixed with image loading" />
@@ -386,6 +389,7 @@
     <MESSAGE value="Changed all occurences of old field names to generalised ones." />
     <MESSAGE value="Annotations and messages are now saved both online and offline" />
     <MESSAGE value="Documentation changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Documentation changes" />
+    <MESSAGE value="Added KG annotation modal, started on annotations.js" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added KG annotation modal, started on annotations.js" />
   </component>
 </project>
