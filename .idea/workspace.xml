@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f32f66fa-046e-47f8-903b-db21fa5041a6" name="Default Changelist" comment="Added drawing rectangles functionality">
+    <list default="true" id="f32f66fa-046e-47f8-903b-db21fa5041a6" name="Default Changelist" comment="Added KG widget">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main Server/public/javascripts/annotations.js" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/public/javascripts/annotations.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main Server/public/javascripts/canvas.js" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/public/javascripts/canvas.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main Server/public/javascripts/indexed_database.js" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/public/javascripts/indexed_database.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main Server/public/javascripts/room.js" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/public/javascripts/room.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main Server/public/stylesheets/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/public/stylesheets/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main Server/views/dashboard.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/views/dashboard.ejs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -58,13 +59,15 @@
     </key>
   </component>
   <component name="RunManager" selected="Node.js.Main Node">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -122,7 +125,8 @@
       <workItem from="1617794569152" duration="1294000" />
       <workItem from="1619769580362" duration="2312000" />
       <workItem from="1619946733114" duration="2630000" />
-      <workItem from="1620032736586" duration="11157000" />
+      <workItem from="1620032736586" duration="11364000" />
+      <workItem from="1620052243366" duration="9023000" />
     </task>
     <task id="LOCAL-00001" summary="ajax.js added with basic functionality">
       <created>1615239782665</created>
@@ -355,7 +359,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620039949256</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="Added KG widget">
+      <created>1620044166762</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1620044166762</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -375,7 +386,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Loading/saving image works!" />
     <MESSAGE value="Minor bugs fixed with image loading" />
     <MESSAGE value="Leave room error fixed with ajax request" />
     <MESSAGE value="Bootstrap added, certificate files moved, some styling added" />
@@ -400,6 +410,7 @@
     <MESSAGE value="Documentation changes" />
     <MESSAGE value="Added KG annotation modal, started on annotations.js" />
     <MESSAGE value="Added drawing rectangles functionality" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added drawing rectangles functionality" />
+    <MESSAGE value="Added KG widget" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added KG widget" />
   </component>
 </project>

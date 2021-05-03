@@ -129,6 +129,8 @@ function statusOnline(){
     $('#create-room-dropdown').prop('disabled', false);
     $('#offlineIcon').hide();
     $('#connect').prop('disabled', false);
+    $('#annotationToggle').prop('disabled', false);
+    $('#canvas-clear').prop('disabled', false);
 }
 
 
@@ -140,6 +142,8 @@ function statusOffline(){
     $('#create-room-dropdown').prop('disabled', true);
     $('#offlineIcon').show();
     $('#connect').prop('disabled', true);
+    $('#annotationToggle').prop('disabled', true);
+    $('#canvas-clear').prop('disabled', true);
 }
 
 

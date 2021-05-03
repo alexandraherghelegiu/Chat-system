@@ -1,6 +1,7 @@
 var isDrawing = false;
 var startX;
 var startY;
+var listenersAdded = false;
 
 //Knowledge graph requirements
 const service_url = 'https://kgsearch.googleapis.com/v1/entities:search';
@@ -8,15 +9,19 @@ const apiKey= 'AIzaSyAG7w627q-djB4gTTahssufwNOImRqdYKM';
 
 //KG result object
 var resultObj;
+var colour;
+
+//Canvas
+var annotationCanvas = document.getElementById("annotationCanvas");
+var annotationCtx = annotationCanvas.getContext("2d");
 
 
 /**
  * Initilaises the annotation canvas
  */
 function annotationCanvasInit(){
-    //Load current canvas
-    let annotationCanvas = document.getElementById("annotationCanvas");
-    let annotationCtx = annotationCanvas.getContext("2d");
+    //Generate colour
+    colour = "#" + Math.floor(Math.random()*16777215).toString(16);
 
     getRoomData(roomNo).then(room => {
         //Image to draw on canvas
@@ -50,11 +55,14 @@ function annotationCanvasInit(){
             }, 10);
         });
 
-        //Add listeners
-        addListeners(img, annotationCanvas, annotationCtx);
+        //Add listeners if they haven't been added yet
+        if(listenersAdded != true){
+            addListeners(img, annotationCanvas, annotationCtx);
+            listenersAdded = true;
+        }
+
     });
     $("#kgSearch").hide();
-
 }
 window.annotationCanvasInit = annotationCanvasInit;
 
@@ -78,6 +86,8 @@ function addListeners(image, canvas, ctx){
             isDrawing = false;
             ctx.beginPath();
             ctx.rect(startX, startY, mouseX - startX, mouseY - startY);
+            ctx.strokeStyle = colour;
+            ctx.lineWidth = 3;
             ctx.stroke();
             canvas.style.cursor = "default";
 
@@ -110,6 +120,8 @@ function addListeners(image, canvas, ctx){
             drawImageScaled(image, canvas, ctx);
             ctx.beginPath();
             ctx.rect(startX, startY, mouseX - startX, mouseY - startY);
+            ctx.strokeStyle = colour;
+            ctx.lineWidth = 3;
             ctx.stroke();
         }
     }
@@ -160,6 +172,7 @@ function widgetInit(){
 function selectItem(event){
     //The result object
     resultObj = {
+        colour: colour,
         name: event.row.name,
         id: event.row.id,
         description: event.row.rc,
@@ -173,7 +186,8 @@ function selectItem(event){
     document.getElementById('kgResultPanel').style.display= 'block';
 
     //Pick different colours for different annotations
-    document.getElementById('kgResultPanel').style.border= '1px solid black';
+    let borderString = '3px solid '+colour;
+    document.getElementById('kgResultPanel').style.border= borderString;
     document.getElementById('addAnnotationButton').disabled = false;
 }
 
@@ -181,17 +195,37 @@ function selectItem(event){
 /**
  * Cleanup function for closing the modal window
  */
-function closeAnnotationModal() {
+function clearAnnotationModal() {
     isDrawing = false;
     resultObj = undefined;
+    document.getElementById('addAnnotationButton').disabled = true;
+    document.getElementById('kgResultPanel').style.display= 'none';
+    document.getElementById('kgSearchInput').value= '';
+
+    //Reinitialise canvas
+    annotationCanvasInit();
 }
-window.closeAnnotationModal = closeAnnotationModal;
+window.clearAnnotationModal = clearAnnotationModal;
 
 
-
+/**
+ * Saves the annotation to the IndexedDB
+ */
 function saveAnnotation(){
     //Save canvas as new canvas for the room
+    let canvasUrl = annotationCanvas.toDataURL();
+    updateField(roomNo, "canvas", canvasUrl);
+
     //Set room's canvas src for the newly saved one
+    getRoomData(roomNo).then(room => {
+        initCanvas(socket, room.imageSrc, canvasUrl);
+    })
+
     //Save annotation in indexedDB (colour, name, description)
+    addNewAnnotation(roomNo, resultObj);
+
+    //Clear annotation modal
+    clearAnnotationModal();
+    $("#kgModal").modal("hide");
 }
 window.saveAnnotation = saveAnnotation;

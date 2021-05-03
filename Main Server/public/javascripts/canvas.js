@@ -75,7 +75,7 @@ function initCanvas(socket, originalImageUrl, canvasUrl) {
      * updates indexedDB
      */
     function clearCanvas() {
-        //Clear canvas
+        //Clear canvases
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         //Create new image with original url
@@ -91,6 +91,10 @@ function initCanvas(socket, originalImageUrl, canvasUrl) {
             //Update indexedDB
             let clearCanvasUrl = clearedCanvas.toDataURL();
             updateField(roomNo, "canvas", clearCanvasUrl);
+
+            //Clear all annotations for the room
+            clearAnnotations(roomNo);
+            clearAnnotationModal();
         };
     };
 

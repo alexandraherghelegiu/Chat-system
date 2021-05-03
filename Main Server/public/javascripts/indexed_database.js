@@ -5,6 +5,7 @@ import * as idb from '/javascripts/idb/index.js';
 let db;
 const INDEXED_DB_NAME = "chats_db";
 const STORE_NAME = "store_chats";
+const KG_ANNOTATION_STORE = "store_annotations";
 
 /**
  * Initialise indexedDB
@@ -17,6 +18,10 @@ async function initIDB(){
                 if (!upgradeDb.objectStoreNames.contains(STORE_NAME)) {
                     let chatIDB = upgradeDb.createObjectStore(STORE_NAME);
                     chatIDB.createIndex('rooms', 'roomID', {unique: false, multiEntry: true});
+                }
+                if(!upgradeDb.objectStoreNames.contains(KG_ANNOTATION_STORE)){
+                    let kgIDB = upgradeDb.createObjectStore(KG_ANNOTATION_STORE);
+                    kgIDB.createIndex('annotations', "roomID", {unique: false, multiEntry: true});
                 }
             }
         });
@@ -39,7 +44,7 @@ async function storeRoomData(data){
             let store = await tx.objectStore(STORE_NAME);
 
             await store.put(data, data.roomID);
-            await  tx.complete;
+            await tx.complete;
         } catch(error) {
             console.log("Error in storing data: "+ error);
             localStorage.setItem(data.roomID, JSON.stringify(data));
@@ -175,7 +180,7 @@ async function updateField(roomid, field, newValue) {
 
             //Update idb
             store.put(roomObj, roomid);
-            tx.complete;
+            await tx.complete;
         }
         catch (error){
             console.log(error);
@@ -183,3 +188,65 @@ async function updateField(roomid, field, newValue) {
     }
 }
 window.updateField = updateField;
+
+
+/**
+ * Adds a new annotation object to IndexedDB
+ * @param roomid the room id
+ * @param annotationObject the annotation object
+ * @returns {Promise<void>}
+ */
+async function addNewAnnotation(roomid, annotationObject){
+    if(!db){
+        initIDB();
+    }
+
+    if(db){
+        try{
+            let tx = await db.transaction(KG_ANNOTATION_STORE, 'readwrite');
+            let store = await tx.objectStore(KG_ANNOTATION_STORE);
+            let index = await store.index('annotations');
+
+            const storedObj = await index.get(IDBKeyRange.only(roomid));
+            //If it's a new object in the store
+            if(!storedObj){
+                await store.put({roomID: roomid, annotations: [annotationObject]}, roomid);
+            }
+            //Update if it already exists
+            else{
+                storedObj["annotations"].push(annotationObject);
+                await store.put(storedObj, roomid);
+            }
+            //Complete transaction
+            await tx.complete;
+        }
+        catch(error) {
+            console.log("Error in storing data: "+ error);
+        };
+    }
+}
+window.addNewAnnotation = addNewAnnotation;
+
+
+/**
+ * Clears all annotations from IndexedDB
+ * @param roomid the room id
+ */
+async function clearAnnotations(roomid){
+    if(!db){
+        initIDB();
+    }
+    if(db){
+        try{
+            let tx = await db.transaction(KG_ANNOTATION_STORE, 'readwrite');
+            let store = await tx.objectStore(KG_ANNOTATION_STORE);
+
+            store.delete(roomid);
+            await tx.complete;
+        }
+        catch (error) {
+            console.log("Error in deleting data: "+ error);
+        }
+    }
+}
+window.clearAnnotations = clearAnnotations;
