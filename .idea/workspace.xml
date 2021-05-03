@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f32f66fa-046e-47f8-903b-db21fa5041a6" name="Default Changelist" comment="Added KG widget">
+    <list default="true" id="f32f66fa-046e-47f8-903b-db21fa5041a6" name="Default Changelist" comment="Annotation interface works perfectly now!">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main Server/public/javascripts/annotations.js" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/public/javascripts/annotations.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main Server/public/javascripts/canvas.js" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/public/javascripts/canvas.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main Server/public/javascripts/indexed_database.js" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/public/javascripts/indexed_database.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main Server/public/javascripts/room.js" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/public/javascripts/room.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main Server/public/javascripts/utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/public/javascripts/utils.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main Server/views/dashboard.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/views/dashboard.ejs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -59,19 +60,6 @@
     </key>
   </component>
   <component name="RunManager" selected="Node.js.Main Node">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Main Node" type="NodeJSConfigurationType" path-to-js-file="bin/www" working-dir="$PROJECT_DIR$/Main Server">
       <method v="2" />
     </configuration>
@@ -126,7 +114,8 @@
       <workItem from="1619769580362" duration="2312000" />
       <workItem from="1619946733114" duration="2630000" />
       <workItem from="1620032736586" duration="11364000" />
-      <workItem from="1620052243366" duration="9023000" />
+      <workItem from="1620052243366" duration="9209000" />
+      <workItem from="1620065242710" duration="3142000" />
     </task>
     <task id="LOCAL-00001" summary="ajax.js added with basic functionality">
       <created>1615239782665</created>
@@ -366,7 +355,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620044166762</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="Annotation interface works perfectly now!">
+      <created>1620061646276</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1620061646276</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -386,7 +382,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Minor bugs fixed with image loading" />
     <MESSAGE value="Leave room error fixed with ajax request" />
     <MESSAGE value="Bootstrap added, certificate files moved, some styling added" />
     <MESSAGE value="Filter added, dashboard.js reorganised slightly" />
@@ -411,6 +406,7 @@
     <MESSAGE value="Added KG annotation modal, started on annotations.js" />
     <MESSAGE value="Added drawing rectangles functionality" />
     <MESSAGE value="Added KG widget" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added KG widget" />
+    <MESSAGE value="Annotation interface works perfectly now!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Annotation interface works perfectly now!" />
   </component>
 </project>

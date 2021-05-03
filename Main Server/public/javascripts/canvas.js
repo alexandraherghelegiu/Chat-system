@@ -95,6 +95,9 @@ function initCanvas(socket, originalImageUrl, canvasUrl) {
             //Clear all annotations for the room
             clearAnnotations(roomNo);
             clearAnnotationModal();
+
+            //Refresh annotations
+            refreshAnnotations(roomNo);
         };
     };
 

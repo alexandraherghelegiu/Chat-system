@@ -95,39 +95,6 @@ window.getAllRoomData= getAllRoomData;
 
 
 /**
- * Returns the value of the specified field from a room
- * @param roomid The roomNo/roomName
- * @param field The field we are retrieving
- * @returns {Promise<*>}
- */
-async function getRoomFieldData(roomid, field) {
-    if(!db){
-        initIDB();
-    }
-
-    if(db){
-        try{
-            let tx = await db.transaction(STORE_NAME, 'readwrite');
-            let store = await tx.objectStore(STORE_NAME);
-            let index = await store.index('rooms');
-
-            //Get field value
-            const roomObj = await index.get(IDBKeyRange.only(roomid));
-
-            //If object found, return it
-            if(roomObj){
-                return roomObj[field];
-            }
-
-        }
-        catch (error){
-            console.log("Error in retrieving data: "+error);
-        }
-    }
-}
-window.getRoomFieldData= getRoomFieldData;
-
-/**
  * Gets the room object associated with the supplied id from the IndexedDB
  * @param roomid The room id
  * @returns {Promise<*>}
@@ -226,6 +193,38 @@ async function addNewAnnotation(roomid, annotationObject){
     }
 }
 window.addNewAnnotation = addNewAnnotation;
+
+
+/**
+ * Returns the annotations for a specific room
+ * @param roomid The roomNo/roomName
+ * @returns {Promise<*>}
+ */
+async function getAnnotations(roomid) {
+    if(!db){
+        initIDB();
+    }
+
+    if(db){
+        try{
+            let tx = await db.transaction(KG_ANNOTATION_STORE, 'readwrite');
+            let store = await tx.objectStore(KG_ANNOTATION_STORE);
+            let index = await store.index('annotations');
+
+            //Get field value
+            const roomObj = await index.get(IDBKeyRange.only(roomid));
+
+            //If object found, return it
+            if(roomObj){
+                return roomObj["annotations"];
+            }
+        }
+        catch (error){
+            console.log("Error in retrieving data: "+error);
+        }
+    }
+}
+window.getAnnotations= getAnnotations;
 
 
 /**

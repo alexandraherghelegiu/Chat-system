@@ -85,6 +85,71 @@ window.createTile = createTile;
 
 
 /**
+ * Creates an annotation tile
+ * @param annotationObject
+ */
+function createAnnotationTile(annotationObject){
+    //The tile
+    let tile = document.createElement("div");
+    let borderString = "3px solid "+annotationObject.colour;
+    tile.style.border = borderString;
+    tile.className = "w-100 mb-1 p-1";
+
+    //Name
+    let name = document.createElement("h3");
+    name.innerHTML = annotationObject.name;
+
+    //ID
+    let id = document.createElement("h4");
+    id.innerHTML = "id: "+annotationObject.id;
+
+    //Description
+    let description = document.createElement("div");
+    description.innerHTML = annotationObject.description;
+
+    //Link
+    let link = document.createElement("a");
+    link.target = "_blank";
+    link.href = annotationObject.url;
+    link.innerHTML = "Link to Webpage";
+
+    tile.append(name, id, description, link);
+    return tile;
+}
+window.createAnnotationTile = createAnnotationTile;
+
+
+/**
+ * Refreshes the list of annotations in the room
+ * @param roomNr the room id
+ */
+function refreshAnnotations(roomNr){
+    let container = document.getElementById("annotationList");
+    //Reset
+    container.innerHTML = "";
+
+    //Get annotations
+    getAnnotations(roomNr).then(annotationList => {
+        if(annotationList){
+            //Show panel
+            container.style.display = "block";
+
+            //Adding tiles to the container
+            for(let a of annotationList){
+                let tile = createAnnotationTile(a);
+                container.appendChild(tile);
+            }
+        }
+        else{
+            //Hide panel
+            container.style.display = "none";
+        }
+    });
+}
+window.refreshAnnotations = refreshAnnotations;
+
+
+/**
  * it hides the initial form and shows the chat
  * @param room the selected room
  * @param userId the user name

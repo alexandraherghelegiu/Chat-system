@@ -227,5 +227,8 @@ function saveAnnotation(){
     //Clear annotation modal
     clearAnnotationModal();
     $("#kgModal").modal("hide");
+
+    //Refresh annotations
+    refreshAnnotations(roomNo);
 }
 window.saveAnnotation = saveAnnotation;

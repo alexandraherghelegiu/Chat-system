@@ -73,6 +73,9 @@ function connectToRoomNew(roomData) {
             annotationCanvasInit();
         }
     });
+
+    //Refresh annotations
+    refreshAnnotations(roomNo);
 }
 
 
