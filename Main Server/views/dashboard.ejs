@@ -12,6 +12,7 @@
     <script src="/javascripts/canvas.js"></script>
     <script src="/javascripts/camera.js"></script>
     <script src="/javascripts/ajax.js"></script>
+    <script type="module" src="/javascripts/annotations.js"></script>
     <script type="module" src="/javascripts/utils.js"></script>
 </head>
 <body onload="init()">
@@ -105,8 +106,9 @@
                             <canvas id="canvas"></canvas><br>
                         </div>
 
+                        <div class="container">
                         <div class="row">
-                            <div id="smallDropdown" class="dropdown col">
+                            <div id="smallDropdown" class="dropdown col text-center">
                                 <button class="btn btn-secondary dropdown-toggle" type="button" id="color-palette-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Choose from color palette
                                 </button>
@@ -140,17 +142,30 @@
                                 </ul>
                             </div>
 
-                            <button id="download_button" onclick="downloadDrawing()" class="btn btn-secondary col">Download</button>
+                            <div class="col text-center">
+                                <button id="download_button" onclick="downloadDrawing()" class="btn btn-secondary">Download</button>
+                            </div>
 
+
+                        </div>
                         </div>
                         <br>
 
+                        <!--  Second button row  -->
+                        <div class="container">
+                            <div class="row">
+                                <div class="col text-center">
+                                    <button id="canvas-clear" class="btn btn-secondary">Clear Canvas</button>
+                                </div>
+                                <div class="col text-center">
+                                    <button id="annotationToggle" data-toggle="modal" data-target="#kgModal" onclick="annotationCanvasInit()" class="btn btn-secondary">Add Annotations</button>
+                                </div>
+                            </div>
+                        </div>
 
-
-                        <button id="canvas-clear" class="btn btn-secondary">Clear Canvas</button>
                         <br>
-                        <div id="smallDropdown" class="dropdown" >
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="create-room-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="fillRoomNo('roomNoDD')">Create room link</button>
+                        <div id="smallDropdown" class="dropdown m-auto" >
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="create-room-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="fillRoomNo('roomNoDD')">Create new room link</button>
                             <div id="smallDropdownMenu" class="dropdown-menu">
                                 <button type="button" class="close mr-3" data-toggle="dropdown" data-target="#smallDropdown" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
@@ -183,12 +198,10 @@
                                     </div>
                                     <button id="create_room_link" onclick="generateRoomLink('dropdown-create-room')" class="btn btn-primary">Generate room link</button>
                                 </form>
-
                             </div>
                         </div>
-
+                        <br>
                     </div>
-
                 </div>
 
                 <div class="col-md-6">
@@ -271,6 +284,35 @@
                     </div>
 
                     <div id="imageTileList"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--  Google KG annotation modal  -->
+    <div class="modal fade" id="kgModal" tabindex="-1" role="dialog" aria-labelledby="kgModalCenterTitle" aria-hidden="true">
+        <div class="large-modal-dialog modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="kgModalLongTitle">Knowledge Graph Annotations</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <img class="w-100" id="annotationImage" style="display: none;"/>
+                                <canvas id="annotationCanvas">Your browser doesn't support canvases</canvas>
+                            </div>
+                            <div class="col">
+                                <!-- KG searchbar -->
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>

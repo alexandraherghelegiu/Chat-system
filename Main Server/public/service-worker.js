@@ -7,6 +7,7 @@ let urlsToCache = [
     '/javascripts/dashboard.js',
     '/javascripts/camera.js',
     '/javascripts/canvas.js',
+    '/javascripts/annotations.js',
     '/javascripts/index.js',
     '/javascripts/indexed_database.js',
     '/javascripts/ajax.js',

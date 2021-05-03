@@ -121,32 +121,44 @@ function initCanvas(socket, originalImageUrl, canvasUrl) {
         let poll = setInterval(function () {
             if (img.naturalHeight) {
                 clearInterval(poll);
-
-                //To ensure client width and height
-                img.style.display = "block";
-
-                // resize the canvas
-                let ratioX=1;
-                let ratioY=1;
-                // if the screen is smaller than the img size we have to reduce the image to fit
-                if (img.clientWidth>window.innerWidth)
-                    ratioX=window.innerWidth/img.clientWidth;
-                if (img.clientHeight> window.innerHeight)
-                    ratioY= img.clientHeight/window.innerHeight;
-                let ratio= Math.min(ratioX, ratioY);
-                // resize the canvas to fit the screen and the image
-                cvx.width  = canvas.width = img.clientWidth*ratio;
-                cvx.height  = canvas.height = img.clientHeight*ratio;
+                //Resize the canvas
+                resizeCanvas(img, canvas, cvx);
 
                 // draw the image onto the canvas
                 drawImageScaled(img, canvas, ctx);
-
-                // hide the image element as it is not needed
-                img.style.display = 'none';
             }
         }, 10);
     });
+}
 
+
+/**
+ * Resizes the canvas according to the image's dimensions
+ * @param img the image
+ * @param canvas the canvas element
+ * @param context the canvas' context
+ */
+function resizeCanvas(image, canvasElement, context){
+    //To ensure client width and height
+    image.style.display = "block";
+
+    // resize the canvas
+    let ratioX=1;
+    let ratioY=1;
+    // if the screen is smaller than the img size we have to reduce the image to fit
+    if (image.clientWidth>window.innerWidth)
+        ratioX=window.innerWidth/image.clientWidth;
+    if (image.clientHeight> window.innerHeight)
+        ratioY= image.clientHeight/window.innerHeight;
+    let ratio= Math.min(ratioX, ratioY);
+    console.log(image.clientWidth, image.clientHeight);
+
+    // resize the canvas to fit the screen and the image
+    context.width  = canvasElement.width = image.clientWidth*ratio;
+    context.height  = canvasElement.height = image.clientHeight*ratio;
+
+    // hide the image element as it is not needed
+    image.style.display = 'none';
 }
 
 /**
