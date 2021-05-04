@@ -15,7 +15,7 @@ var color = 'red', thickness = 4;
 function initCanvas(socket, originalImageUrl, canvasUrl) {
 
     changeColor();
-
+    console.log(window.pageXOffset);
     let flag = false,
         prevX, prevY, currX, currY = 0;
     let canvas = $('#canvas');
@@ -38,8 +38,8 @@ function initCanvas(socket, originalImageUrl, canvasUrl) {
     canvas.on('mousemove mousedown mouseup mouseout', function (e) {
         prevX = currX;
         prevY = currY;
-        currX = e.clientX - canvas.position().left;
-        currY = e.clientY - canvas.position().top;
+        currX = getMousePos(cvx, e).x;
+        currY = getMousePos(cvx, e).y;
         if (e.type === 'mousedown') {
             flag = true;
         }
@@ -246,4 +246,18 @@ function changeColor(){
     $('#black-box').click(()=>{color='black'});
     $('#yellow-box').click(()=>{color='yellow'});
 
+}
+
+/**
+ * Gets the real mouse position on a canvas
+ * @param canvas the canvas element
+ * @param evt the event
+ * @returns {{x: number, y: number}}
+ */
+function getMousePos(canvas, evt) {
+    var rect = canvas.getBoundingClientRect();
+    return {
+        x: evt.clientX - rect.left,
+        y: evt.clientY - rect.top
+    };
 }
