@@ -34,6 +34,23 @@ function initSocket(){
         //when going reconnecting need to resubscribe to the room
         socket.emit('create or join', roomNo, name, '');
     })
+
+    //Listening for annotations
+    socket.on('kg-new', (roomNo, user, resultObj) => {
+        if(user !== name){
+            getRoomData(roomNo).then(room => {
+                initCanvas(socket, room.imageSrc, "");
+            })
+            console.log(resultObj)
+            addNewAnnotation(roomNo, resultObj).then(
+                () => {
+                    refreshAnnotations(roomNo)
+                }
+            );
+        }
+
+    })
+
 }
 
 
@@ -173,3 +190,5 @@ function sendAndSaveMessage(room, user, message){
         updateField(room, "messages", data);
     });
 }
+
+

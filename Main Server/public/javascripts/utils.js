@@ -89,9 +89,10 @@ window.createTile = createTile;
  * @param annotationObject
  */
 function createAnnotationTile(annotationObject){
+     console.log(annotationObject)
     //The tile
     let tile = document.createElement("div");
-    let borderString = "3px solid "+annotationObject.colour;
+    let borderString = "3px solid "+annotationObject.color;
     tile.style.border = borderString;
     tile.className = "w-100 mb-1 p-1";
 
@@ -130,10 +131,11 @@ function refreshAnnotations(roomNr){
 
     //Get annotations
     getAnnotations(roomNr).then(annotationList => {
+
         if(annotationList){
             //Show panel
             container.style.display = "block";
-
+            console.log("Annotation list: ", annotationList)
             //Adding tiles to the container
             for(let a of annotationList){
                 let tile = createAnnotationTile(a);
