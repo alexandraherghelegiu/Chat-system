@@ -179,14 +179,14 @@ function sendAndSaveMessage(room, user, message){
     writeOnHistory('<b>' + who + ':</b> ' + message);
 
     //Storing message in IndexedDB
-    getRoomFieldData(room, "messages").then(data => {
+    getRoomData(room).then(data => {
         var newObj = {
             date: Date(),
             user: user,
             message: message
         }
-        data.push(newObj);
-        updateField(room, "messages", data);
+        data.messages.push(newObj);
+        updateField(room, "messages", data.messages);
     });
 }
 

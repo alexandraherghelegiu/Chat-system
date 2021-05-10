@@ -12,18 +12,13 @@ a {
   width: 100%;
   padding:10px;
 }
-.bottom {
-  position: absolute;
-  bottom: 10px;
-  width: 90%;
-}
+
 .scrolling {
     overflow-y: scroll;
     overflow-wrap: break-word;
     max-height: 80vh;
-    max-width: 30vw;
-
 }
+
 .outsideWrapper{
     width:256px; height:256px;
     margin:20px 60px;
@@ -129,6 +124,18 @@ input[type="checkbox"]:checked + label:before {
 }
 /*Tiles basic styling end*/
 
+/*Chat styling*/
+#chat_input{
+    width: 70%;
+}
+
+#chat_send{
+    width: auto;
+}
+
+#dropdown-create-room{
+    width: 25vw;
+}
 
 .square{
     cursor: pointer;
@@ -172,10 +179,17 @@ input[type="checkbox"]:checked + label:before {
     margin-top: 10px;
     padding: 10px;
 }
+/*Chat styling end*/
 
 @media (min-width: 576px){
     .large-modal-dialog {
         max-width: 90% !important;
+    }
+}
+
+@media (max-width: 1100px) {
+    #dropdown-create-room{
+        width: 70vw;
     }
 }
 
