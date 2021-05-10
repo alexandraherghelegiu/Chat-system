@@ -223,8 +223,8 @@ function saveAnnotation(){
 
     //Save annotation in indexedDB (colour, name, description)
     addNewAnnotation(roomNo, resultObj);
-    console.log("Save annotation: ", resultObj)
-    socket.emit('kg-annotation', roomNo, name, resultObj);
+    //sending through socket io
+    socket.emit('kg-annotation', roomNo, name, resultObj, canvasUrl);
 
     //Clear annotation modal
     clearAnnotationModal();
@@ -233,9 +233,6 @@ function saveAnnotation(){
     //Refresh annotations
     refreshAnnotations(roomNo);
 
-    //sending through socket io
-
-    socket.emit('kg-annotation', roomNo, name, resultObj);
 }
 
 

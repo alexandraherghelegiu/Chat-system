@@ -36,17 +36,16 @@ function initSocket(){
     })
 
     //Listening for annotations
-    socket.on('kg-new', (roomNo, user, resultObj) => {
+    socket.on('kg-new', (roomNo, user, resultObj, canvasUrl) => {
+        console.log(user, name);
         if(user !== name){
+            updateField(roomNo, "canvas", canvasUrl);
             getRoomData(roomNo).then(room => {
-                initCanvas(socket, room.imageSrc, "");
+                initCanvas(socket, room.imageSrc, canvasUrl);
             })
-            console.log(resultObj)
-            addNewAnnotation(roomNo, resultObj).then(
-                () => {
-                    refreshAnnotations(roomNo)
-                }
-            );
+            addNewAnnotation(roomNo, resultObj);
+            refreshAnnotations(roomNo);
+
         }
 
     })

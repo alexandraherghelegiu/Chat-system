@@ -32,9 +32,8 @@ exports.init = function(io) {
         console.log('reconnecting');
       })
 
-      socket.on('kg-annotation', function(room, user, resultObj){
-        console.log(resultObj)
-        io.to(room).emit('kg-new', room, user, resultObj);
+      socket.on('kg-annotation', function(room, user, resultObj, canvasUrl){
+        io.to(room).emit('kg-new', room, user, resultObj, canvasUrl);
       })
     } catch (e) {
       console.log(e);
