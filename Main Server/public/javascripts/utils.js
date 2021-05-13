@@ -92,7 +92,7 @@ function createAnnotationTile(annotationObject){
      console.log(annotationObject)
     //The tile
     let tile = document.createElement("div");
-    let borderString = "3px solid "+annotationObject.color;
+    let borderString = "3px solid "+annotationObject.colour;
     tile.style.border = borderString;
     tile.className = "w-100 mb-1 p-1";
 
