@@ -1,10 +1,10 @@
 const Image = require('../models/images');
 const imageToBase64 = require('image-to-base64');
 const fs = require('fs');
+var uniqid = require('uniqid');
 
 // insert an image with all its details
 // and export it so that it can be used outside the module
-// TODO create a unique id for each image -> uniqueID.jpeg
 exports.insert = function (req, res) {
     console.log("insert function called in Mongo server");
     let imageData = req.body;
@@ -16,19 +16,23 @@ exports.insert = function (req, res) {
         // make private directory for storing images
         let targetDirectory = './private/images/';
         if (!fs.existsSync(targetDirectory)) {
-            fs.mkdirSync(targetDirectory,{recursive:true});
+            fs.mkdirSync(targetDirectory, {recursive: true});
         }
 
         // strip off the data: url prefix to get just the base64-encoded bytes
         let imageBlob = imageData.imageSrc.replace(/^data:image\/\w+;base64,/, "");
         let buf = new Buffer(imageBlob, 'base64');
+        // generate unique id suffix to add to image title
+        let imageFileName = uniqid(imageData.imageTitle + '-');
+        // get the file path of the image in order to store it
+        let filepath = targetDirectory + imageFileName + ".jpeg";
         // add image to private folder based on its base64 representation
-        fs.writeFile(targetDirectory + imageData.imageTitle + '.jpeg', buf, function(err, result) {
-            if(err) console.log('error', err);
+        fs.writeFile(filepath, buf, function (err, result) {
+            if (err) console.log('error', err);
         });
 
         // get the file path of the image in order to store it
-        let filepath = targetDirectory + imageData.imageTitle + ".jpeg";
+        //let filepath = targetDirectory + imageFileName + ".jpeg";
 
         // create database entry for the new Image
         let image = new Image({
