@@ -17,7 +17,7 @@ var annotationCtx = annotationCanvas.getContext("2d");
 
 
 /**
- * Initilaises the annotation canvas
+ * Initialises the annotation canvas
  */
 function annotationCanvasInit(){
     //Generate colour
@@ -42,11 +42,10 @@ function annotationCanvasInit(){
                 if(img.naturalHeight){
                     clearInterval(poll);
 
-                    annotationCtx.width = annotationCanvas.width = img.width;
-                    annotationCtx.height = annotationCanvas.height = img.height;
-
-                    // //Resize canvas
-                    // resizeCanvas(img, annotationCanvas, annotationCtx);
+                    //Synchronising canvas width with the room's canvas
+                    let roomCanvas = document.getElementById("canvas");
+                    annotationCtx.width = annotationCanvas.width = roomCanvas.clientWidth;
+                    annotationCtx.height = annotationCanvas.height = roomCanvas.clientHeight;
 
                     //Draw image on canvas
                     drawImageScaled(img, annotationCanvas, annotationCtx);

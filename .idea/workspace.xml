@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f32f66fa-046e-47f8-903b-db21fa5041a6" name="Default Changelist" comment="Added icons, fixed dropdown bugs, fixed indexeddb bug">
+    <list default="true" id="f32f66fa-046e-47f8-903b-db21fa5041a6" name="Default Changelist" comment="Fixed annotation canvas size bug">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main Server/public/javascripts/annotations.js" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/public/javascripts/annotations.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main Server/views/dashboard.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/views/dashboard.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,7 +117,9 @@
       <workItem from="1620556338303" duration="17000" />
       <workItem from="1620661948568" duration="4134000" />
       <workItem from="1620732895976" duration="12000" />
-      <workItem from="1620910848661" duration="334000" />
+      <workItem from="1620910848661" duration="470000" />
+      <workItem from="1621066140481" duration="335000" />
+      <workItem from="1621503627936" duration="4544000" />
     </task>
     <task id="LOCAL-00001" summary="ajax.js added with basic functionality">
       <created>1615239782665</created>
@@ -375,7 +380,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620666041743</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="Colour bug fixed">
+      <created>1620911314611</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1620911314611</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -395,8 +407,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Filter added, dashboard.js reorganised slightly" />
-    <MESSAGE value="quick bugfix" />
     <MESSAGE value="offline message loading added" />
     <MESSAGE value="Image upload functionality added" />
     <MESSAGE value="changed uploadImg to take another parameter" />
@@ -420,6 +430,8 @@
     <MESSAGE value="Annotation interface works perfectly now!" />
     <MESSAGE value="Annotations are now displayed as a list underneath the canvas" />
     <MESSAGE value="Added icons, fixed dropdown bugs, fixed indexeddb bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added icons, fixed dropdown bugs, fixed indexeddb bug" />
+    <MESSAGE value="Colour bug fixed" />
+    <MESSAGE value="Fixed annotation canvas size bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed annotation canvas size bug" />
   </component>
 </project>

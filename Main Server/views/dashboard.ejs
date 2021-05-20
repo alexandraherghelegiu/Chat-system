@@ -167,7 +167,7 @@
                                     <button id="canvas-clear" class="btn btn-secondary">Clear Canvas</button>
                                 </div>
                                 <div class="col text-center">
-                                    <button id="annotationToggle" data-toggle="modal" data-target="#kgModal" class="btn btn-secondary">Add Annotations</button>
+                                    <button id="annotationToggle" data-toggle="modal" data-target="#kgModal" class="btn btn-secondary" onclick="annotationCanvasInit()">Add Annotations</button>
                                 </div>
                             </div>
                         </div>
@@ -313,7 +313,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col">
-                                <img class="w-100" id="annotationImage" style="display: none;"/>
+                                <img class="w-100" id="annotationImage"/>
                                 <canvas id="annotationCanvas">Your browser doesn't support canvases</canvas>
                             </div>
                             <div class="col">
