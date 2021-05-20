@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f32f66fa-046e-47f8-903b-db21fa5041a6" name="Default Changelist" comment="Fixed annotation canvas size bug">
+    <list default="true" id="f32f66fa-046e-47f8-903b-db21fa5041a6" name="Default Changelist" comment="Fixed annotation canvas size bug, updated README">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main Server/public/javascripts/annotations.js" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/public/javascripts/annotations.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main Server/views/dashboard.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Main Server/views/dashboard.ejs" afterDir="false" />
@@ -119,7 +119,7 @@
       <workItem from="1620732895976" duration="12000" />
       <workItem from="1620910848661" duration="470000" />
       <workItem from="1621066140481" duration="335000" />
-      <workItem from="1621503627936" duration="4544000" />
+      <workItem from="1621503627936" duration="4846000" />
     </task>
     <task id="LOCAL-00001" summary="ajax.js added with basic functionality">
       <created>1615239782665</created>
@@ -387,7 +387,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620911314611</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="Fixed annotation canvas size bug, updated README">
+      <created>1621508673575</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1621508673575</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -407,7 +414,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="offline message loading added" />
     <MESSAGE value="Image upload functionality added" />
     <MESSAGE value="changed uploadImg to take another parameter" />
     <MESSAGE value="Added room-linking functionality, fixed canvas issues" />
@@ -432,6 +438,7 @@
     <MESSAGE value="Added icons, fixed dropdown bugs, fixed indexeddb bug" />
     <MESSAGE value="Colour bug fixed" />
     <MESSAGE value="Fixed annotation canvas size bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed annotation canvas size bug" />
+    <MESSAGE value="Fixed annotation canvas size bug, updated README" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed annotation canvas size bug, updated README" />
   </component>
 </project>

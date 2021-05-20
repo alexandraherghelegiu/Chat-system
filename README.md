@@ -22,6 +22,7 @@
 * Annotations and chat messages are both loaded when the user rejoins a room
 * All the rooms previously joined to by the user are displayed on the dashboard, from where they can reconnect to any of them by clicking on the specific “tile”.
 * New rooms can be created while being part of another room, which will be saved in IndexedDB and this process also sends a link to the initial room to provide an easy connection option to the other participants.
+* New annotations can be added from Google's Knowledge Graph by clicking on the "Add Annotations" button in a room. A modal window will come up, where we can click on the image and draw a rectangle to add an annotation. These Knowledge Graph annotations are stored in the IndexedDB.
 
 **Ajax: (Daniel)**
 * Ajax communication is used between pages.
@@ -64,9 +65,4 @@
 * User can select different colours to draw with on the canvas
 * User can download image locally including annotations
 * User can generate a room within the chat for chat members to join
-
-
-## What needs to be done:
-* Chat interface:
-    - Chat interface could do with a restyling and made look better, it currently doesn’t look good on mobile
 
