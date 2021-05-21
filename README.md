@@ -13,7 +13,7 @@
 - Member 3 (Daniel Perendi): IndexedDb, Ajax communication, Swagger documentation
 
 
-## What’s working:
+## Components:
 
 **IndexedDB: (Daniel)**
 * Rooms are stored in the IndexedDB upon the current user joins to them
